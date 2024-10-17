@@ -1,0 +1,36 @@
+﻿@model List<Victim>
+
+@{
+    ViewData["Title"] = "Disaster Reports";
+}
+
+<h1>Disaster Reports</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Disaster Type</th>
+                <th>Date</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var report in Model)
+            {
+                <tr>
+                    <td>@report.Id</td>
+                    <td>@report.Name</td>
+                    <td>@report.Disaster.DateReported.ToShortDateString()</td>
+                    @* <td>@report.Description</td> *@
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No reports found.</p>
+}

@@ -1,0 +1,50 @@
+﻿﻿@{
+    ViewData["Title"] = "Reports";
+}
+
+<div class=" mt-5">
+
+    <!-- Tabs for different report categories -->
+    <ul class="nav nav-tabs" id="reportTabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="disaster-tab" data-toggle="tab" href="#disaster" role="tab" aria-controls="disaster" aria-selected="true">Disaster Reports</a>
+        </li>
+        </li>
+    </ul>
+
+    <!-- Tab content -->
+    <div class="tab-content mt-3">
+        <!-- Disaster Reports -->
+        <div class="tab-pane fade show active" id="disaster" role="tabpanel" aria-labelledby="disaster-tab">
+            <form method="post" action="@Url.Action("GenerateDisasterReport", "Report")">
+                <div class="form-group">
+                    <label for="disasterType">Disaster Type:</label>
+                    <select class="form-control" id="disasterType" name="disasterType">
+                        <option value="All">All</option>
+                        <option value="Earthquake">Earthquake</option>
+                        <option value="Flood">Flood</option>
+                        <option value="Fire">Fire</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" class="form-control" id="startDate" name="startDate">
+                </div>
+                <div class="form-group">
+                    <label for="endDate">End Date:</label>
+                    <input type="date" class="form-control" id="endDate" name="endDate">
+                </div>
+                <button type="submit" class="btn btn-primary">Generate Report</button>
+            </form>
+        </div>
+
+      
+    </div>
+
+    <!-- Export Options -->
+    <div class="mt-4">
+        <button class="btn btn-success">Export to PDF</button>
+        <button class="btn btn-info">Export to Excel</button>
+        <button class="btn btn-warning">Export to CSV</button>
+    </div>
+</div>
