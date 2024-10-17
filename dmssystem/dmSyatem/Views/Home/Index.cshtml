@@ -1,0 +1,113 @@
+﻿@model Victim
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victim Information Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Tab Styles */
+        .tabs {
+            display: flex;
+            cursor: pointer;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-bottom: 2px solid #ddd;
+        }
+
+            .tabs li {
+                flex: 1;
+                text-align: center;
+                padding: 10px;
+                background-color: #f1f1f1;
+                border: 1px solid #ddd;
+                border-bottom: none;
+                margin-right: 5px;
+            }
+
+                .tabs li.active {
+                    background-color: #fff;
+                    border-color: #ddd #ddd #fff;
+                    font-weight: bold;
+                }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-top: none;
+        }
+
+            .tab-content.active {
+                display: block;
+            }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1>Victim Information</h1>
+
+        <!-- Tab Navigation -->
+        <ul class="tabs">
+            <li class="tab-link" data-tab="tab-1">Victim</li>
+            <li class="tab-link" data-tab="tab-2">Disaster</li>
+            <li class="tab-link" data-tab="tab-3">Location</li>
+            <li class="tab-link" data-tab="tab-4">Image</li>
+        </ul>
+
+        <!-- Victim Information (Partial View) -->
+        <div id="tab-1" class="tab-content active">
+            @Html.Partial("../Victim/Index.cshtml", Model)
+        </div>
+
+        <!-- Disaster Information (Partial View) -->
+        <div id="tab-2" class="tab-content">
+            @Html.Partial("../Disaster/Index")
+        </div>
+
+        <!-- Location Information (Partial View) -->
+        <div id="tab-3" class="tab-content @(Context.Request.Query["tab"] == "3" ? "active" : "")">
+            @Html.Partial("../Location/Index")
+        </div>
+
+        <!-- Image Upload (Partial View) -->
+        <div id="tab-4" class="tab-content @(Context.Request.Query["tab"] == "4" ? "active" : "")">
+            @Html.Partial("../Image/Index")
+        </div>
+    </div>
+
+
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab-link').forEach(tab => {
+            tab.addEventListener('click', function () {
+                const activeTab = document.querySelector('.tab-link.active');
+                const activeContent = document.querySelector('.tab-content.active');
+
+                activeTab.classList.remove('active');
+                activeContent.classList.remove('active');
+
+                const targetTab = document.getElementById(this.getAttribute('data-tab'));
+                this.classList.add('active');
+                targetTab.classList.add('active');
+            });
+        });
+
+        // On page load, activate the tab based on query parameter
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const tabParam = new URLSearchParams(window.location.search).get("tab");
+            if (tabParam) {
+                const activeTab = document.querySelector('.tab-link[data-tab="tab-' + tabParam + '"]');
+                if (activeTab) {
+                    activeTab.classList.add('active');
+                    const activeContent = document.querySelector('#tab-' + tabParam);
+                    if (activeContent) activeContent.classList.add('active');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

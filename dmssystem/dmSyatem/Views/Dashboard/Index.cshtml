@@ -1,0 +1,161 @@
+﻿@model List<Victim>
+<div class="content">
+    <h1 class="mb-4">Admin Dashboard</h1>
+
+    <!-- Statistics Cards -->
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h5 class="card-title">Total Victims</h5>
+                    <p class="card-text">@ViewBag.victimCount</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h5 class="card-title">Ongoing Disasters</h5>
+                    <p class="card-text">@ViewBag.ActiveCases</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h5 class="card-title">Resources Deployed</h5>
+                    <p class="card-text">@ViewBag.ResourceDeployed</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h5 class="card-title">Active Users</h5>
+                    <p class="card-text">@ViewBag.ActiveCases</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <h2 class="mb-4">Overview</h2>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Disaster Timeline</h5>
+                    <canvas id="disasterTimelineChart"></canvas> <!-- Placeholder for chart -->
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Resources Allocation</h5>
+                    <canvas id="resourceChart"></canvas> <!-- Placeholder for chart -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Tables -->
+    <h2 class="mb-4 mt-4">Recent Disasters</h2>
+    <div>
+        <table id="disasterTable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Disaster ID</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Reported Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    int counter = 1;
+                    foreach (var disaster in Model)
+                    {
+                        <tr>
+                            <td>@counter</td>
+                            <td>@disaster.Name</td>
+                            <td>@(disaster.isActive ? "Ongoing" : "Resolved")</td>
+                            <td>@disaster.created_at</td>
+                            <td>
+                                <a asp-controller="Dashboard" asp-action="Details" asp-route-id="@disaster.Id" class="btn btn-primary btn-sm">View</a>
+                            </td>
+                        </tr>
+                        counter++;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="text-center">No recent disasters found.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var ctx = document.getElementById('disasterTimelineChart').getContext('2d');
+    var disasterTimelineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Disasters',
+                data: [3, 2, 5, 1, 4, 6],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        }
+    });
+
+    var ctx2 = document.getElementById('resourceChart').getContext('2d');
+    var resourceChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['Food', 'Medical', 'Shelter', 'Volunteers'],
+            datasets: [{
+                label: 'Resources Deployed',
+                data: [50, 100, 150, 80],
+                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
+                borderWidth: 1
+            }]
+        }
+    });
+
+
+</script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+    // Avoid conflicts with other libraries
+    jQuery.noConflict();
+    jQuery(document).ready(function ($) {
+        // Initialize DataTable
+        var table = $('#disasterTable').DataTable({
+            "searching": true, // Enable the search box
+            "paging": true,    // Enable pagination
+            "ordering": true   // Enable column ordering
+        });
+    });
+</script>
+

@@ -1,0 +1,24 @@
+﻿@model List<Image>
+
+
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <h1>Image Information</h1>
+    <div class="form-group">
+        <label for="imageFiles">Upload Images</label>
+        <input type="file" class="form-control" id="imageFiles" name="imageFiles" multiple />
+        <small class="form-text text-muted">You can select multiple images to upload at once.</small>
+    </div>
+
+    <div class="form-group">
+        <label for="Description">Image Description</label>
+        <textarea class="form-control" id="Description" name="Description" placeholder="Enter description for the images"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="DisasterDate">Disaster Date</label>
+        <input type="date" class="form-control" id="DisasterDate" name="DisasterDate" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Upload Images</button>
+</form>

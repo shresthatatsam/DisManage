@@ -1,0 +1,43 @@
+﻿@model Location
+
+<form asp-controller="Location" asp-action="Create" method="post">
+    <h1>Location Information</h1>
+
+    <h4>Permanent Address</h4>
+    <div class="form-group">
+        <label for="PermanentProvince">Permanent Province</label>
+        <input type="text" class="form-control" id="PermanentProvince" name="PermanentProvince" asp-for="PermanentProvince" required />
+    </div>
+    <div class="form-group">
+        <label for="PermanentDistrict">Permanent District</label>
+        <input type="text" class="form-control" id="PermanentDistrict" name="PermanentDistrict" asp-for="PermanentDistrict" required />
+    </div>
+    <div class="form-group">
+        <label for="PermanentMunicipality">Permanent Municipality</label>
+        <input type="text" class="form-control" id="PermanentMunicipality" name="PermanentMunicipality" asp-for="PermanentMunicipality" required />
+    </div>
+    <div class="form-group">
+        <label for="PermanentTole">Permanent Tole</label>
+        <input type="text" class="form-control" id="PermanentTole" name="PermanentTole" asp-for="PermanentTole" required />
+    </div>
+
+    <h4>Temporary Address</h4>
+    <div class="form-group">
+        <label for="TemporaryProvince">Temporary Province</label>
+        <input type="text" class="form-control" id="TemporaryProvince" name="TemporaryProvince" asp-for="TemporaryProvince" />
+    </div>
+    <div class="form-group">
+        <label for="TemporaryDistrict">Temporary District</label>
+        <input type="text" class="form-control" id="TemporaryDistrict" name="TemporaryDistrict" asp-for="TemporaryDistrict" />
+    </div>
+    <div class="form-group">
+        <label for="TemporaryMunicipality">Temporary Municipality</label>
+        <input type="text" class="form-control" id="TemporaryMunicipality" name="TemporaryMunicipality" asp-for="TemporaryMunicipality" />
+    </div>
+    <div class="form-group">
+        <label for="TemporaryTole">Temporary Tole</label>
+        <input type="text" class="form-control" id="TemporaryTole" name="TemporaryTole" asp-for="TemporaryTole" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Address</button>
+</form>

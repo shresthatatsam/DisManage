@@ -1,0 +1,66 @@
+﻿@model List<Victim>
+<h2 class="mb-4 mt-4">Recent Disasters</h2>
+<div>
+    <table id="disasterTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th>SN</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Reported Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                int counter = 1;
+                foreach (var disaster in Model)
+                {
+                    <tr>
+                        <td>@counter</td>
+                        <td>@disaster.Name</td>
+                        <td>@disaster.ContactNumber</td>
+                        <td>@disaster.Email</td>
+                        <td>@disaster.created_at</td>
+                        <td>@(disaster.isActive ? "Ongoing" : "Resolved")</td>
+                        <td>
+                            <a asp-controller="Dashboard" asp-action="Details" asp-route-id="@disaster.Id" class="btn btn-primary btn-sm">View</a>
+                            <a asp-controller="Victim" asp-action="Edit" asp-route-id="@disaster.Id" class="btn btn-secondary btn-sm">Edit</a>
+                            <a asp-controller="Victim" asp-action="Delete" asp-route-id="@disaster.Id" class="btn btn-danger btn-sm">Delete</a>
+                        </td>
+                    </tr>
+                    counter++;
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center">No recent disasters found.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+</div>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+    // Avoid conflicts with other libraries
+    jQuery.noConflict();
+    jQuery(document).ready(function ($) {
+        // Initialize DataTable
+        var table = $('#disasterTable').DataTable({
+            "searching": true, // Enable the search box
+            "paging": true,    // Enable pagination
+            "ordering": true   // Enable column ordering
+        });
+    });
+</script>

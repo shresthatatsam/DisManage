@@ -1,0 +1,252 @@
+﻿ @model Victim
+<form id="PrintPage">
+	<fieldset class="border p-4 mb-2 rounded shadow">
+		<legend class="w-auto font-weight-bold text-uppercase"> <b><u> Victim Information</u></b></legend>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="name">Name:</label>
+					<input type="text" class="form-control" id="name" asp-for="Name" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-1">
+				<div class="form-group">
+					<label for="age">Age:</label>
+					<input type="text" class="form-control" id="age" asp-for="Age" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-2">
+
+				<div class="form-group">
+					<label for="gender">Gender:</label>
+					<input type="text" class="form-control" id="age" asp-for="Gender" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="contactNumber">Contact Number:</label>
+					<input type="tel" class="form-control" id="contactNumber" asp-for="ContactNumber" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="Email">Email:</label>
+					<input type="tel" class="form-control" id="Email" asp-for="Email" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="Citizenship Number">Citizenship Number:</label>
+					<input type="tel" class="form-control" id="CitizenshipNumber" asp-for="CitizenshipNumber" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-2">
+				<div class="form-group">
+					<label for="NIDNumber">NID Number:</label>
+					<input type="tel" class="form-control" id="NIDNumber" asp-for="NIDNumber" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-2">
+				<div class="form-group">
+					<label for="FatherName">Father Name:</label>
+					<input type="tel" class="form-control" id="FatherName" asp-for="FatherName" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-2">
+				<div class="form-group">
+					<label for="MotherName">Mother Name:</label>
+					<input type="tel" class="form-control" id="MotherName" asp-for="MotherName" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-2">
+				<div class="form-group">
+					<label for="GrandFatherName">Grand Father Name:</label>
+					<input type="tel" class="form-control" id="GrandFatherName" asp-for="GrandFatherName" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="form-group">
+					<label for="image">Profile Picture:</label>
+					<!-- Check if the image exists (base64 data) and load it -->
+					@if (!string.IsNullOrEmpty(Model.PPSizePhoto))
+					{
+						<img src="@($"data:image/jpeg;base64,{Model.PPSizePhoto}")" alt="Profile Picture" class="img-thumbnail" style="max-width: 120px; max-height: 120px;" />
+					}
+					else
+					{
+						<p>No profile image available</p>
+					}
+				</div>
+			</div>
+
+		</div>
+
+
+
+	</fieldset>
+
+	<fieldset class="border p-4 mb-2 rounded shadow">
+		<legend class="w-auto font-weight-bold text-uppercase"><b><u> Disaster Information</u></b></legend>
+
+		<div class="row">
+		
+
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="severity">Severity:</label>
+					<input type="text" class="form-control" id="severity" asp-for="Disaster.DisasterType" readonly>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="Description">Description:</label>
+					<input type="text" class="form-control" id="description" asp-for="Disaster.Description" readonly>
+				</div>
+			</div>
+			@* <div class="col-md-6">
+				<div class="form-group">
+					<label for="dateOccured">Date Occurred:</label>
+					<input type="date" class="form-control" id="dateOccured" asp-for="created_at" readonly>
+				</div>
+			</div> *@
+		</div>
+
+
+
+
+	</fieldset>
+
+	<fieldset class="border p-4 mb-2 rounded shadow">
+		<legend class="w-auto font-weight-bold text-uppercase"><b><u> Location Information </u></b></legend>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="province">province:</label>
+					<input type="text" class="form-control" id="province" asp-for="Location.PermanentProvince" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="District">District:</label>
+					<input type="text" class="form-control" id="District" asp-for="Location.PermanentDistrict" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="Municipality">Municipality:</label>
+					<input type="text" class="form-control" id="Municipality" asp-for="Location.PermanentMunicipality" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="Tole">Tole:</label>
+					<input type="text" class="form-control" id="Tole" asp-for="Location.PermanentTole" readonly>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="Tempprovince">Tempprovince:</label>
+					<input type="text" class="form-control" id="Tempprovince" asp-for="Location.TemporaryProvince" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="TempDistrict">TempDistrict:</label>
+					<input type="text" class="form-control" id="TempDistrict" asp-for="Location.TemporaryDistrict" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="TempMunicipality">TempMunicipality:</label>
+					<input type="text" class="form-control" id="TempMunicipality" asp-for="Location.TemporaryMunicipality" readonly>
+				</div>
+			</div>
+
+			<div class="col-md-3">
+				<div class="form-group">
+					<label for="TempTole">TempTole:</label>
+					<input type="text" class="form-control" id="TempTole" asp-for="Location.TemporaryTole" readonly>
+				</div>
+			</div>
+
+		</div>
+
+
+
+	</fieldset>
+
+	<fieldset class="border p-4 mb-2 rounded shadow">
+		<legend class="w-auto font-weight-bold text-uppercase"><b><u> Photo Information </u></b></legend>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="image-gallery">
+					<h3>Uploaded Photos:</h3>
+					<div id="imagePreviewContainer" class="d-flex flex-wrap">
+						@if (Model.Images != null && Model.Images.Any())
+						{
+							foreach (var base64Image in Model.Images)
+							{
+								<div class="image-preview mr-2 mb-2">
+									<img src="@($"data:image/jpeg;base64,{base64Image.ImageUrl}")" alt="Uploaded Image" class="img-thumbnail" style="max-width: 200px; max-height: 200px;" />
+								</div>
+							}
+						}
+						else
+						{
+							<p>No images uploaded.</p>
+						}
+					</div>
+				</div>
+			</div>
+			 <div class="col-md-12">
+				<div class="form-group">
+					<label for="Description">Description:</label>
+					<textarea class="form-control" id="description" asp-for="Disaster.Description" rows="4" readonly></textarea>
+				</div>
+			</div> 
+		</div>
+
+
+	</fieldset>
+
+	<button type="button" class="btn btn-primary" onclick="printPage()">Print Page</button>
+</form>
+
+
+
+<script>
+	function printPage() {
+		// Hide the header and button for printing
+		document.querySelectorAll('header, button').forEach(el => el.style.display = 'none');
+
+		window.print();
+
+		window.onbeforeprint = function () {
+			document.querySelectorAll('header, button').forEach(el => el.style.display = '');
+		};
+
+		window.onafterprint = function () {
+			document.querySelectorAll('header, button').forEach(el => el.style.display = '');
+		};
+	}
+</script>
+

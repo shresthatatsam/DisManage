@@ -1,0 +1,25 @@
+﻿@model Disaster
+
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <h1>Disaster Information</h1>
+    <div class="form-group">
+        <label for="DisasterType">Disaster Type</label>
+        <input type="text" class="form-control" id="DisasterType" name="DisasterType" asp-for="DisasterType" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea class="form-control" id="Description" name="Description" asp-for="Description" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="DateReported">Date Reported</label>
+        <input type="date" class="form-control" id="DateReported" name="DateReported" asp-for="DateReported" required />
+    </div>
+    <input type="hidden" name="VictimId" value="@Context.Session.GetString("VictimId")" />
+
+
+    <button type="submit" class="btn btn-primary">Create Disaster</button>
+</form>
+
