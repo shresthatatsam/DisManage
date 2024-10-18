@@ -1,16 +1,16 @@
 ﻿@model List<Victim>
-<h2 class="mb-4 mt-4">Recent Disasters</h2>
+<h2 class="mb-4 mt-4">हालैका विपत्तिहरू</h2>
 <div>
     <table id="disasterTable" class="table table-striped">
         <thead>
             <tr>
-                <th>SN</th>
-                <th>Name</th>
-                <th>Contact</th>
-                <th>Email</th>
-                <th>Reported Date</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th>एस.एन.</th>
+                <th>नाम</th>
+                <th>सम्पर्क नम्बर</th>
+                <th>इमेल</th>
+                <th>रिपोर्ट गरिएको मिति</th>
+                <th>स्थिति</th>
+                <th>कार्यहरू</th>
             </tr>
         </thead>
         <tbody>
@@ -27,9 +27,9 @@
                         <td>@disaster.created_at</td>
                         <td>@(disaster.isActive ? "Ongoing" : "Resolved")</td>
                         <td>
-                            <a asp-controller="Dashboard" asp-action="Details" asp-route-id="@disaster.Id" class="btn btn-primary btn-sm">View</a>
-                            <a asp-controller="Victim" asp-action="Edit" asp-route-id="@disaster.Id" class="btn btn-secondary btn-sm">Edit</a>
-                            <a asp-controller="Victim" asp-action="Delete" asp-route-id="@disaster.Id" class="btn btn-danger btn-sm">Delete</a>
+                            <a asp-controller="Dashboard" asp-action="Details" asp-route-id="@disaster.Id" class="btn btn-primary btn-sm">हेर्नुहोस्</a>
+                            <a asp-controller="Victim" asp-action="Edit" asp-route-id="@disaster.Id" class="btn btn-secondary btn-sm"> सम्पादन गर्नुहोस्</a>
+                            <a asp-controller="Victim" asp-action="Delete" asp-route-id="@disaster.Id" class="btn btn-danger btn-sm">मेट्नुहोस्</a>
                         </td>
                     </tr>
                     counter++;
@@ -38,7 +38,7 @@
             else
             {
                 <tr>
-                    <td colspan="5" class="text-center">No recent disasters found.</td>
+                    <td colspan="5" class="text-center">हालसालै कुनै विपत्ति फेला परेन।</td>
                 </tr>
             }
         </tbody>
