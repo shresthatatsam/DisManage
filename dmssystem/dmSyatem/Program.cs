@@ -21,7 +21,7 @@ builder.Services.AddScoped<IImage, ImageService>();
 builder.Services.AddScoped<IPrint, PrintService>();
 builder.Services.AddScoped<IDashboard, DashboardService>();
 builder.Services.AddScoped<IVictimManagement, VictimManagementService>();
-
+builder.Services.AddScoped<IVolunteerService, VolunteerService>();
 builder.Services.AddScoped<IDisasterType, DisasterTypeService>();
 
 builder.Services.AddDistributedMemoryCache();  // Session requires a distributed memory cache

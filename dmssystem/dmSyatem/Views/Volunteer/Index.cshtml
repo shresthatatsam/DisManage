@@ -1,0 +1,43 @@
+﻿@model List<Volunteer>
+
+<div class="container">
+    <h2 class="text-center">List of Volunteers</h2>
+
+    <!-- Create New Button -->
+    <div class="text-end mb-3">
+        <a href="@Url.Action("Create")" class="btn btn-success">Create New Volunteer</a>
+    </div>
+
+    <!-- Table to show the list of volunteers -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Contact Number</th>
+                <th>Email</th>
+                <th>Availability</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var volunteer in Model)
+            {
+                <tr>
+                    <td>@volunteer.Name</td>
+                    <td>@volunteer.Age</td>
+                    <td>@volunteer.Gender</td>
+                    <td>@volunteer.ContactNumber</td>
+                    <td>@volunteer.Email</td>
+                    <td>@volunteer.Availability</td>
+                    <td>
+                        <!-- You can add other actions like Edit, Delete here -->
+                        <a href="@Url.Action("Edit", new { id = volunteer.Id })" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="@Url.Action("Delete", new { id = volunteer.Id })" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

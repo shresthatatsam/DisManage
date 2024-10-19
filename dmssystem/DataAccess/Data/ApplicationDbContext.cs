@@ -20,6 +20,8 @@ namespace DataAccess.Data
         public DbSet<Victim> Victims { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Disaster> Disasters { get; set; }
+
+        public DbSet<Volunteer> volunteers { get; set; }
         public DbSet<Image> DisasterImages { get; set; }
 
         public DbSet<DisasterType> disasterTypes  { get; set; }
@@ -38,6 +40,12 @@ namespace DataAccess.Data
                 .HasOne(v => v.Disaster)
                 .WithOne(d => d.Victim)
                 .HasForeignKey<Disaster>(d => d.VictimId);
+
+
+            builder.Entity<Volunteer>()
+              .HasOne(v => v.Location)  // A volunteer has one location
+              .WithMany(l => l.Volunteers)  // A location can have many volunteers
+              .HasForeignKey(v => v.LocationId);
 
             builder.Entity<Disaster>()
           .HasMany(d => d.Images)
