@@ -1,18 +1,18 @@
 ﻿ @model Victim
 <form id="PrintPage">
 	<fieldset class="border p-4 mb-2 rounded shadow">
-		<legend class="w-auto font-weight-bold text-uppercase"> <b><u> Victim Information</u></b></legend>
+		<legend class="w-auto font-weight-bold text-uppercase"> <b><u> पीडितको सूचना</u></b></legend>
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="name">Name:</label>
+					<label for="name">नाम:</label>
 					<input type="text" class="form-control" id="name" asp-for="Name" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-1">
 				<div class="form-group">
-					<label for="age">Age:</label>
+					<label for="age">उमेर:</label>
 					<input type="text" class="form-control" id="age" asp-for="Age" readonly>
 				</div>
 			</div>
@@ -20,63 +20,63 @@
 			<div class="col-md-2">
 
 				<div class="form-group">
-					<label for="gender">Gender:</label>
+					<label for="gender">लिंग:</label>
 					<input type="text" class="form-control" id="age" asp-for="Gender" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="contactNumber">Contact Number:</label>
+					<label for="contactNumber">सम्पर्क नम्बर:</label>
 					<input type="tel" class="form-control" id="contactNumber" asp-for="ContactNumber" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="Email">Email:</label>
+					<label for="Email">इमेल:</label>
 					<input type="tel" class="form-control" id="Email" asp-for="Email" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="Citizenship Number">Citizenship Number:</label>
+					<label for="Citizenship Number">नागरिकता नम्बर:</label>
 					<input type="tel" class="form-control" id="CitizenshipNumber" asp-for="CitizenshipNumber" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-2">
 				<div class="form-group">
-					<label for="NIDNumber">NID Number:</label>
+					<label for="NIDNumber">एनआईडी नम्बर:</label>
 					<input type="tel" class="form-control" id="NIDNumber" asp-for="NIDNumber" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-2">
 				<div class="form-group">
-					<label for="FatherName">Father Name:</label>
+					<label for="FatherName">बुबाको नाम:</label>
 					<input type="tel" class="form-control" id="FatherName" asp-for="FatherName" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-2">
 				<div class="form-group">
-					<label for="MotherName">Mother Name:</label>
+					<label for="MotherName">आमाको नाम:</label>
 					<input type="tel" class="form-control" id="MotherName" asp-for="MotherName" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-2">
 				<div class="form-group">
-					<label for="GrandFatherName">Grand Father Name:</label>
+					<label for="GrandFatherName">हजुरबुबाको नाम:</label>
 					<input type="tel" class="form-control" id="GrandFatherName" asp-for="GrandFatherName" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="image">Profile Picture:</label>
+					<label for="image">प्रोफाइल चित्र:</label>
 					<!-- Check if the image exists (base64 data) and load it -->
 					@if (!string.IsNullOrEmpty(Model.PPSizePhoto))
 					{
@@ -84,7 +84,7 @@
 					}
 					else
 					{
-						<p>No profile image available</p>
+						<p>कुनै प्रोफाइल फोटो उपलब्ध छैन ।</p>
 					}
 				</div>
 			</div>
