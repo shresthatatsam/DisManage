@@ -105,3 +105,24 @@ input::placeholder {
         display: none;
     }
 }
+
+.custom-table {
+    border-collapse: collapse; /* Ensures borders are combined */
+    width: 100%; /* Full width */
+}
+
+    .custom-table th, .custom-table td {
+        border: 2px solid #007bff; /* Border color */
+        padding: 12px; /* Padding for cells */
+        text-align: left; /* Align text to the left */
+    }
+
+    .custom-table th {
+        background-color: #007bff; /* Header background color */
+        color: white; /* Header text color */
+        font-weight: bold; /* Bold text */
+    }
+
+    .custom-table tr:hover {
+        background-color: #f1f1f1; /* Light grey on hover */
+    }

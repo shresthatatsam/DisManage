@@ -23,6 +23,7 @@ namespace Models
         public bool isActive { get; set; } = true;
 
         public DateTime created_at { get; set; } = DateTime.Now;
+        public List<Volunteer>? Volunteers { get; set; }
         public Guid VictimId { get; set; }
         public Victim Victim { get; set; }
     }
