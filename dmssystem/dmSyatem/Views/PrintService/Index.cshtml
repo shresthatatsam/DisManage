@@ -96,20 +96,20 @@
 	</fieldset>
 
 	<fieldset class="border p-4 mb-2 rounded shadow">
-		<legend class="w-auto font-weight-bold text-uppercase"><b><u> Disaster Information</u></b></legend>
+		<legend class="w-auto font-weight-bold text-uppercase"><b><u> विपत्तिको सूचना</u></b></legend>
 
 		<div class="row">
 		
 
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="severity">Severity:</label>
+					<label for="severity">गम्भीरता:</label>
 					<input type="text" class="form-control" id="severity" asp-for="Disaster.DisasterType" readonly>
 				</div>
 			</div>
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="Description">Description:</label>
+					<label for="Description">विवरण:</label>
 					<input type="text" class="form-control" id="description" asp-for="Disaster.Description" readonly>
 				</div>
 			</div>
@@ -127,32 +127,32 @@
 	</fieldset>
 
 	<fieldset class="border p-4 mb-2 rounded shadow">
-		<legend class="w-auto font-weight-bold text-uppercase"><b><u> Location Information </u></b></legend>
+		<legend class="w-auto font-weight-bold text-uppercase"><b><u> स्थानको जानकारी </u></b></legend>
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="province">province:</label>
+					<label for="province">प्रदेश:</label>
 					<input type="text" class="form-control" id="province" asp-for="Location.PermanentProvince" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="District">District:</label>
+					<label for="District">जिल्ला:</label>
 					<input type="text" class="form-control" id="District" asp-for="Location.PermanentDistrict" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="Municipality">Municipality:</label>
+					<label for="Municipality">नगरपालिका:</label>
 					<input type="text" class="form-control" id="Municipality" asp-for="Location.PermanentMunicipality" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="Tole">Tole:</label>
+					<label for="Tole">टोल:</label>
 					<input type="text" class="form-control" id="Tole" asp-for="Location.PermanentTole" readonly>
 				</div>
 			</div>
@@ -162,28 +162,28 @@
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="Tempprovince">Tempprovince:</label>
+					<label for="Tempprovince"> अस्थायी प्रदेश:</label>
 					<input type="text" class="form-control" id="Tempprovince" asp-for="Location.TemporaryProvince" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="TempDistrict">TempDistrict:</label>
+					<label for="TempDistrict">अस्थायी जिल्ला:</label>
 					<input type="text" class="form-control" id="TempDistrict" asp-for="Location.TemporaryDistrict" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="TempMunicipality">TempMunicipality:</label>
+					<label for="TempMunicipality">अस्थायी नगरपालिका:</label>
 					<input type="text" class="form-control" id="TempMunicipality" asp-for="Location.TemporaryMunicipality" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="TempTole">TempTole:</label>
+					<label for="TempTole">अस्थायी टोल:</label>
 					<input type="text" class="form-control" id="TempTole" asp-for="Location.TemporaryTole" readonly>
 				</div>
 			</div>
@@ -195,7 +195,7 @@
 	</fieldset>
 
 	<fieldset class="border p-4 mb-2 rounded shadow">
-		<legend class="w-auto font-weight-bold text-uppercase"><b><u> Photo Information </u></b></legend>
+		<legend class="w-auto font-weight-bold text-uppercase"><b><u> फोटोको जानकारी </u></b></legend>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="image-gallery">
@@ -212,14 +212,14 @@
 						}
 						else
 						{
-							<p>No images uploaded.</p>
+							<p>कुनै फोटो अपलोड गरिएको छैन ।</p>
 						}
 					</div>
 				</div>
 			</div>
 			 <div class="col-md-12">
 				<div class="form-group">
-					<label for="Description">Description:</label>
+					<label for="Description">विवरण:</label>
 					<textarea class="form-control" id="description" asp-for="Disaster.Description" rows="4" readonly></textarea>
 				</div>
 			</div> 
@@ -228,7 +228,7 @@
 
 	</fieldset>
 
-	<button type="button" class="btn btn-primary" onclick="printPage()">Print Page</button>
+	<button type="button" class="btn btn-primary" onclick="printPage()">प्रिन्ट पृष्ठ</button>
 </form>
 
 
