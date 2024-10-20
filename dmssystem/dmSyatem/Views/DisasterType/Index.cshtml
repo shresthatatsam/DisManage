@@ -5,16 +5,16 @@
 
 <!-- View: Index.cshtml -->
 @model List<DisasterType>
-<a asp-controller="DisasterType" asp-action="Create" class="btn btn-success mb-3">Create New Disaster Type</a>
+<a asp-controller="DisasterType" asp-action="Create" class="btn btn-success mb-3">नयाँ विपत्ति प्रकार सिर्जना गर्नुहोस्</a>
 
 @* <table id="" class="display"> *@
     <table class="table table-striped table-bordered table-hover custom-table display" id="disasterTable">
 
         <thead>
         <tr>
-            <th>Disaster Name</th>
-            <th>Severity</th>
-            <th>Actions</th>
+            <th>विपत्ति नाम</th>
+            <th>गम्भीरता</th>
+            <th>कार्यहरू</th>
         </tr>
     </thead>
     <tbody>
@@ -24,9 +24,9 @@
                 <td>@disasterType.DisasterName</td>
                 <td>@disasterType.Severity</td>
                 <td>
-                    <a href="@Url.Action("Edit", "DisasterType", new { id = disasterType.Id })" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="@Url.Action("Edit", "DisasterType", new { id = disasterType.Id })" class="btn btn-primary btn-sm">सम्पादन गर्नुहोस्</a>
                     <form action="@Url.Action("Delete", "DisasterType", new { id = disasterType.Id })" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('तपाईँ यो वस्तु मेट्न निश्चित हुनुहुन्छ?');">मेट्नुहोस्</button>
                     </form>
                 </td>
             </tr>
