@@ -16,10 +16,10 @@ namespace dmSyatem.Controllers
 
         public async Task<IActionResult> Index()
         {
-           //var victimIdString = Guid.Parse(_httpContextAccessor.HttpContext?.Session?.GetString("VictimId"));
-            var victimid = Guid.Parse("D468FEA0-6521-468D-27BC-08DCEC479791");
+           var victimIdString = Guid.Parse(_httpContextAccessor.HttpContext?.Session?.GetString("VictimId"));
+            //var victimid = Guid.Parse("D468FEA0-6521-468D-27BC-08DCEC479791");
 
-            Victim victim =  _print.GetVictimById(victimid);
+            Victim victim =  _print.GetVictimById(victimIdString);
             return View(victim);
         }
 
