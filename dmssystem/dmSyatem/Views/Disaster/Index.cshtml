@@ -2,24 +2,24 @@
 
 
 <form asp-action="Create" method="post" enctype="multipart/form-data">
-    <h1>Disaster Information</h1>
+    <h1>विपद् सूचना</h1>
     <div class="form-group">
-        <label for="DisasterType">Disaster Type</label>
+        <label for="DisasterType">विपत्ति प्रकार</label>
         <input type="text" class="form-control" id="DisasterType" name="DisasterType" asp-for="DisasterType" required />
     </div>
 
     <div class="form-group">
-        <label for="Description">Description</label>
+        <label for="Description">विवरण</label>
         <textarea class="form-control" id="Description" name="Description" asp-for="Description" required></textarea>
     </div>
 
     <div class="form-group">
-        <label for="DateReported">Date Reported</label>
+        <label for="DateReported">रिपोर्ट गरिएको मिति</label>
         <input type="date" class="form-control" id="DateReported" name="DateReported" asp-for="DateReported" required />
     </div>
     <input type="hidden" name="VictimId" value="@Context.Session.GetString("VictimId")" />
 
 
-    <button type="submit" class="btn btn-primary">Create Disaster</button>
+    <button type="submit" class="btn btn-primary">विपत्ति सिर्जना गर्नुहोस्</button>
 </form>
 

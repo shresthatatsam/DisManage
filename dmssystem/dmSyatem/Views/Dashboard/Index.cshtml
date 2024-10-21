@@ -1,13 +1,13 @@
 ﻿@model List<Victim>
 <div class="content">
-    <h1 class="mb-4">Admin Dashboard</h1>
+    <h1 class="mb-4">व्यवस्थापक ड्यासबोर्ड</h1>
 
     <!-- Statistics Cards -->
     <div class="row">
         <div class="col-lg-3 col-md-6">
             <div class="card stat-card">
                 <div class="card-body">
-                    <h5 class="card-title">Total Victims</h5>
+                    <h5 class="card-title">कुल पीडितहरू</h5>
                     <p class="card-text">@ViewBag.victimCount</p>
                 </div>
             </div>
@@ -15,7 +15,7 @@
         <div class="col-lg-3 col-md-6">
             <div class="card stat-card">
                 <div class="card-body">
-                    <h5 class="card-title">Ongoing Disasters</h5>
+                    <h5 class="card-title">चलिरहेको विपत्तिहरू</h5>
                     <p class="card-text">@ViewBag.ActiveCases</p>
                 </div>
             </div>
@@ -23,7 +23,7 @@
         <div class="col-lg-3 col-md-6">
             <div class="card stat-card">
                 <div class="card-body">
-                    <h5 class="card-title">Resources Deployed</h5>
+                    <h5 class="card-title">परिनियोजन गरिएका स्रोतहरू</h5>
                     <p class="card-text">@ViewBag.ResourceDeployed</p>
                 </div>
             </div>
@@ -31,7 +31,7 @@
         <div class="col-lg-3 col-md-6">
             <div class="card stat-card">
                 <div class="card-body">
-                    <h5 class="card-title">Active Users</h5>
+                    <h5 class="card-title">सक्रिय प्रयोगकर्ता</h5>
                     <p class="card-text">@ViewBag.ActiveCases</p>
                 </div>
             </div>
@@ -39,12 +39,12 @@
     </div>
 
     <!-- Charts Section -->
-    <h2 class="mb-4">Overview</h2>
+    <h2 class="mb-4 mt-4">सिंहावलोकन</h2>
     <div class="row">
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Disaster Timeline</h5>
+                    <h5 class="card-title">विपत्ति समयरेखा</h5>
                     <canvas id="disasterTimelineChart"></canvas> <!-- Placeholder for chart -->
                 </div>
             </div>
@@ -52,7 +52,7 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Resources Allocation</h5>
+                    <h5 class="card-title">स्रोत बाँडफाँड</h5>
                     <canvas id="resourceChart"></canvas> <!-- Placeholder for chart -->
                 </div>
             </div>
@@ -60,18 +60,18 @@
     </div>
 
     <!-- Data Tables -->
-    <h2 class="mb-4 mt-4">Recent Disasters</h2>
+    <h2 class="mb-4 mt-4">हालैका विपत्तिहरू</h2>
     <div>
         @* <table id="disasterTable" class="table table-striped"> *@
             <table class="table table-striped table-bordered table-hover custom-table" id="disasterTable">
 
                 <thead>
                 <tr>
-                    <th>Disaster ID</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                    <th>Reported Date</th>
-                    <th>Actions</th>
+                    <th>विपद् आईडी</th>
+                    <th>प्रकारहरू</th>
+                    <th>स्थिति</th>
+                    <th>रिपोर्ट गरिएको मिति</th>
+                    <th>कार्यहरू</th>
                 </tr>
             </thead>
             <tbody>
@@ -86,7 +86,7 @@
                             <td>@(disaster.isActive ? "Ongoing" : "Resolved")</td>
                             <td>@disaster.created_at</td>
                             <td>
-                                <a asp-controller="Dashboard" asp-action="Details" asp-route-id="@disaster.Id" class="btn btn-primary btn-sm">View</a>
+                                <a asp-controller="Dashboard" asp-action="Details" asp-route-id="@disaster.Id" class="btn btn-primary btn-sm">दृश्य</a>
                             </td>
                         </tr>
                         counter++;
@@ -95,7 +95,7 @@
                 else
                 {
                     <tr>
-                        <td colspan="5" class="text-center">No recent disasters found.</td>
+                        <td colspan="5" class="text-center">हालसालै कुनै विपत्ति फेला परेन।</td>
                     </tr>
                 }
             </tbody>

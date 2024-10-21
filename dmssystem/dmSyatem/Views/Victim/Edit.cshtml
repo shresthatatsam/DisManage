@@ -9,71 +9,72 @@
 </head>
 <body>
     <div class="container">
-        <h1>Victim Information</h1>
+        <h1>पीडितको सूचना</h1>
         <form asp-controller="Victim" asp-action="Edit" method="POST" enctype="multipart/form-data">
 
 
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">नाम</label>
                 <input type="text" id="name" name="name" asp-for="Name" required>
             </div>
 
             <div class="form-group">
-                <label for="age">Age</label>
+                <label for="age">उमेर</label>
                 <input type="text" id="age" name="age" asp-for="Age" required>
             </div>
 
             <div class="form-group">
-                <label for="gender">Gender</label>
+                <label for="gender">लिंग</label>
                 <select id="gender" name="gender" asp-for="Gender">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
+                    <option value="" selected>लिंग चयन गर्नुहोस्</option>
+                    <option value="male">पुरुष</option>
+                    <option value="female">महिला</option>
+                    <option value="other">अन्य</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="contact">Contact Number</label>
+                <label for="contact">सम्पर्क नम्बर</label>
                 <input type="text" id="contact" name="contactNumber" asp-for="ContactNumber" required>
             </div>
 
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">इमेल</label>
                 <input type="email" id="email" name="email" asp-for="Email">
             </div>
 
             <div class="form-group">
-                <label for="ppSizePhotoFile">Upload PP Size Photo</label>
+                <label for="ppSizePhotoFile">पीपी साइज फोटो अपलोड गर्नुहोस्</label>
                 <input type="file" class="form-control" id="ppSizePhotoFile" name="ppSizePhotoFile" asp-for="PPSizePhoto" />
             </div>
 
             <div class="form-group">
-                <label for="citizenshipNumber">Citizenship Number</label>
+                <label for="citizenshipNumber">नागरिकता नम्बर</label>
                 <input type="text" id="citizenshipNumber" name="citizenshipNumber" asp-for="CitizenshipNumber">
             </div>
 
             <div class="form-group">
-                <label for="nidNumber">NID Number</label>
+                <label for="nidNumber">एनआईडी नम्बर</label>
                 <input type="text" id="nidNumber" name="nidNumber" asp-for="NIDNumber">
             </div>
 
             <div class="form-group">
-                <label for="fatherName">Father's Name</label>
+                <label for="fatherName">बुबाको नाम</label>
                 <input type="text" id="fatherName" name="fatherName" asp-for="FatherName">
             </div>
 
             <div class="form-group">
-                <label for="motherName">Mother's Name</label>
+                <label for="motherName">आमाको नाम</label>
                 <input type="text" id="motherName" name="motherName" asp-for="MotherName">
             </div>
 
             <div class="form-group">
-                <label for="grandFatherName">Grandfather's Name</label>
+                <label for="grandFatherName">हजुरबुबाको नाम</label>
                 <input type="text" id="grandFatherName" name="grandFatherName" asp-for="GrandFatherName">
             </div>
 
             <div class="form-group">
-                <button type="submit">Submit</button>
+                <button type="submit">पेश गर्नुहोस्</button>
             </div>
         </form>
     </div>

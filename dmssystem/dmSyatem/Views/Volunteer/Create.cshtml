@@ -1,45 +1,45 @@
 ﻿@model Volunteer
 
 <div class="container">
-    <h2 class="text-center">Create New Volunteer</h2>
+    <h2 class="text-center">नयाँ स्वयंसेवक सिर्जना गर्नुहोस्</h2>
 
     <form  asp-controller="Volunteer" asp-action="Create" method="POST">
     
         <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
+            <label for="name" class="form-label">नाम</label>
             <input type="text" class="form-control" id="name" name="name" required>
         </div>
 
         <div class="mb-3">
-            <label for="age" class="form-label">Age</label>
+            <label for="age" class="form-label">उमेर</label>
             <input type="text" class="form-control" id="age" name="age" required>
         </div>
 
         <div class="mb-3">
-            <label for="gender" class="form-label">Gender</label>
+            <label for="gender" class="form-label">लिंग</label>
             <select id="gender" name="gender" class="form-select" required>
-                <option value="" selected>Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
+                <option value="" selected>लिंग चयन गर्नुहोस्</option>
+                <option value="Male">पुरुष</option>
+                <option value="Female">महिला</option>
+                <option value="Other">अन्य</option>
             </select>
         </div>
 
         <div class="mb-3">
-            <label for="contactNumber" class="form-label">Contact Number</label>
+            <label for="contactNumber" class="form-label">सम्पर्क नम्बर</label>
             <input type="text" class="form-control" id="contactNumber" name="contactNumber" required>
         </div>
 
         <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
+            <label for="email" class="form-label">इमेल</label>
             <input type="email" class="form-control" id="email" name="email" required>
         </div>
 
         <div class="mb-3">
-            <label for="availability" class="form-label">Availability</label>
+            <label for="availability" class="form-label">उपलब्धता</label>
             <input type="text" class="form-control" id="availability" name="availability" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
     </form>
 </div>

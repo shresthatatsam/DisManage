@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - dmSyatem</title>
+    <title>@ViewData["Title"] - विपद् व्यवस्थापन प्रणाली </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/dmSyatem.styles.css" asp-append-version="true" />
@@ -47,12 +47,11 @@
                         <nav id="stickyNavbar" class="navbar navbar-expand-sm navbar-light bg-light border-bottom box-shadow mb-3">
                            
                                 <div class="d-flex justify-content-center w-100">
-                                    <a href="@Url.Action("Index", "Dashboard")" class="btn btn-custom-primary me-2">Dashboard</a>
-                                    <a href="@Url.Action("Index", "Victimmanagement")" class="btn btn-custom-primary me-2">Victim Management</a>
-                                    <a href="@Url.Action("Index", "DisasterType")" class="btn btn-custom-primary me-2">Disaster Management</a>
-                                    <a href="@Url.Action("Index", "Volunteer")" class="btn btn-custom-primary me-2">volunteer</a>
-                                    <a href="@Url.Action("Index", "Report")" class="btn btn-custom-primary me-2">Reports</a>
-                                    <a class="btn btn-custom-primary me-2" asp-area="Identity" asp-page="/Account/Manage/Index">Settings</a>
+                            <a href="@Url.Action("Index", "Dashboard")" class="btn btn-custom-primary me-2">ड्यास बोर्ड</a>
+                            <a href="@Url.Action("Index", "Victimmanagement")" class="btn btn-custom-primary me-2">पीडित व्यवस्थापन</a>
+                            <a href="@Url.Action("Index", "DisasterType")" class="btn btn-custom-primary me-2">विपद् व्यवस्थापन</a>
+                            <a href="@Url.Action("Index", "Report")" class="btn btn-custom-primary me-2">रिपोर्टहरू</a>
+                            <a class="btn btn-custom-primary me-2" asp-area="Identity" asp-page="/Account/Manage/Index">सेटिङ</a>
 
                                 </div>
                           
@@ -66,7 +65,7 @@
                 {
                 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                     <div class="container-fluid">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">dmSyatem</a>
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">विपद् व्यवस्थापन प्रणाली </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -75,10 +74,10 @@
                             <ul class="navbar-nav flex-grow-1">
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Victim" asp-action="Index">Victim Form</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Victim" asp-action="Index">पीडित फारम</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="PrintService" asp-action="Index">Print Form</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="PrintService" asp-action="Index">छाप्नू होस</a>
                                 </li>
                                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                                     <partial name="_LoginPartial.cshtml" />
@@ -103,10 +102,10 @@
                         <ul class="navbar-nav flex-grow-1">
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Victim" asp-action="Index">Victim Form</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Victim" asp-action="Index">पीडित फारम</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="PrintService" asp-action="Index">Print Form</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="PrintService" asp-action="Index">छाप्नू होस</a>
                             </li>
                             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                                 <partial name="_LoginPartial.cshtml" />

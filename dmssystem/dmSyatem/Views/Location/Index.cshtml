@@ -1,43 +1,43 @@
 ﻿@model Location
 
 <form asp-controller="Location" asp-action="Create" method="post">
-    <h1>Location Information</h1>
+    <h1>स्थानको जानकारी</h1>
 
-    <h4>Permanent Address</h4>
+    <h4>स्थायी ठेगाना</h4>
     <div class="form-group">
-        <label for="PermanentProvince">Permanent Province</label>
+        <label for="PermanentProvince">स्थायी प्रदेश</label>
         <input type="text" class="form-control" id="PermanentProvince" name="PermanentProvince" asp-for="PermanentProvince" required />
     </div>
     <div class="form-group">
-        <label for="PermanentDistrict">Permanent District</label>
+        <label for="PermanentDistrict">स्थायी जिल्ला</label>
         <input type="text" class="form-control" id="PermanentDistrict" name="PermanentDistrict" asp-for="PermanentDistrict" required />
     </div>
     <div class="form-group">
-        <label for="PermanentMunicipality">Permanent Municipality</label>
+        <label for="PermanentMunicipality">स्थायी नगरपालिका</label>
         <input type="text" class="form-control" id="PermanentMunicipality" name="PermanentMunicipality" asp-for="PermanentMunicipality" required />
     </div>
     <div class="form-group">
-        <label for="PermanentTole">Permanent Tole</label>
+        <label for="PermanentTole">स्थायी टोल</label>
         <input type="text" class="form-control" id="PermanentTole" name="PermanentTole" asp-for="PermanentTole" required />
     </div>
 
     <h4>Temporary Address</h4>
     <div class="form-group">
-        <label for="TemporaryProvince">Temporary Province</label>
+        <label for="TemporaryProvince">अस्थायी प्रदेश</label>
         <input type="text" class="form-control" id="TemporaryProvince" name="TemporaryProvince" asp-for="TemporaryProvince" />
     </div>
     <div class="form-group">
-        <label for="TemporaryDistrict">Temporary District</label>
+        <label for="TemporaryDistrict">अस्थायी जिल्ला</label>
         <input type="text" class="form-control" id="TemporaryDistrict" name="TemporaryDistrict" asp-for="TemporaryDistrict" />
     </div>
     <div class="form-group">
-        <label for="TemporaryMunicipality">Temporary Municipality</label>
+        <label for="TemporaryMunicipality">अस्थायी नगरपालिका</label>
         <input type="text" class="form-control" id="TemporaryMunicipality" name="TemporaryMunicipality" asp-for="TemporaryMunicipality" />
     </div>
     <div class="form-group">
-        <label for="TemporaryTole">Temporary Tole</label>
+        <label for="TemporaryTole">अस्थायी टोल</label>
         <input type="text" class="form-control" id="TemporaryTole" name="TemporaryTole" asp-for="TemporaryTole" />
     </div>
 
-    <button type="submit" class="btn btn-primary">Save Address</button>
+    <button type="submit" class="btn btn-primary">ठेगाना बचत गर्नुहोस्</button>
 </form>
