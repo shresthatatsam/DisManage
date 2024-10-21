@@ -4,16 +4,16 @@
     ViewData["Title"] = "Disaster Reports";
 }
 
-<h1>Disaster Reports</h1>
-<a asp-controller="Report" asp-action="Index" class="btn btn-primary">Go to Report Generation</a>
+<h1>विपत्तिको रिपोर्ट</h1>
+<a asp-controller="Report" asp-action="Index" class="btn btn-primary">रिपोर्ट सिर्जनामा जानुहोस्</a>
 <!-- Export Options -->
 @* <div class="mt-4">
     <button class="btn btn-success">Export to PDF</button>
   
 </div> *@
-<a id="downloadExcel" class="btn btn-success">Download Excel</a>
-<button class="btn btn-info">Export to Excel</button>
-<button class="btn btn-warning">Export to CSV</button>
+<a id="downloadExcel" class="btn btn-success">एक्सेल डाउनलोड गर्नुहोस्</a>
+<button class="btn btn-info">एक्सेलमा निर्यात गर्नुहोस्</button>
+<button class="btn btn-warning">सीएसभीमा निर्यात गर्नुहोस्</button>
 
 @if (Model != null && Model.Any())
 {
@@ -22,11 +22,11 @@
         <thead>
             <tr>
 
-                <th>Name </th>
-                <th>Phone Number </th>
-                <th>Disaster Type</th>
-                <th>Date</th>
-                <th>Action</th>
+                <th>नाम </th>
+                <th>फोन नम्बर </th>
+                <th>विपत्ति प्रकार</th>
+                <th>मिति</th>
+                <th>कार्य</th>
             </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@
                     <td>@report.ContactNumber</td>
                     <td>@report.Disaster.DisasterType</td>
                     <td>@report.Disaster.DateReported</td>
-                    <td> <a asp-controller="Dashboard" asp-action="Details" asp-route-id="@report.Id" class="btn btn-primary btn-sm">View</a> </td>
+                    <td> <a asp-controller="Dashboard" asp-action="Details" asp-route-id="@report.Id" class="btn btn-primary btn-sm">दृश्य</a> </td>
                 </tr>
             }
         </tbody>
@@ -45,7 +45,7 @@
 }
 else
 {
-    <p>No reports found.</p>
+    <p>कुनै रिपोर्ट फेला परेन ।</p>
 }
 
 
