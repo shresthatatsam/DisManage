@@ -28,7 +28,6 @@ namespace dmSyatem.Controllers.Admin
 
         // POST: Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Create(Volunteer volunteer)
         {
             if (ModelState.IsValid)
