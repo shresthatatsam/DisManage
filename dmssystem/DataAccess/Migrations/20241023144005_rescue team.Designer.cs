@@ -4,6 +4,7 @@ using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241023144005_rescue team")]
+    partial class rescueteam
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -224,24 +227,6 @@ namespace DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Models.AssignVolunteerViewModel", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SelectedVolunteerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("TeamName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("assignVolunteers");
-                });
-
             modelBuilder.Entity("Models.Disaster", b =>
                 {
                     b.Property<Guid>("Id")
@@ -397,10 +382,6 @@ namespace DataAccess.Migrations
                     b.Property<Guid>("LocationId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("SelectedVolunteerIds")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("TeamName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -482,9 +463,6 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("AssignVolunteerViewModelId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Availability")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -512,8 +490,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AssignVolunteerViewModelId");
 
                     b.HasIndex("LocationId");
 
@@ -627,10 +603,6 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Models.Volunteer", b =>
                 {
-                    b.HasOne("Models.AssignVolunteerViewModel", null)
-                        .WithMany("AvailableVolunteers")
-                        .HasForeignKey("AssignVolunteerViewModelId");
-
                     b.HasOne("Models.Location", "Location")
                         .WithMany("Volunteers")
                         .HasForeignKey("LocationId");
@@ -640,11 +612,6 @@ namespace DataAccess.Migrations
                         .HasForeignKey("RescueTeamId");
 
                     b.Navigation("Location");
-                });
-
-            modelBuilder.Entity("Models.AssignVolunteerViewModel", b =>
-                {
-                    b.Navigation("AvailableVolunteers");
                 });
 
             modelBuilder.Entity("Models.Disaster", b =>

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<RescueTeam>
+
+<h2>Rescue Teams</h2>
+
+<a asp-asp-controller="Rescue" asp-action="Create" class="btn btn-primary">Create New Team</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Team Name</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var team in Model)
+        {
+            <tr>
+                <td>@team.TeamName</td>
+                <td>@team.Location</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@team.Id" class="btn btn-warning">Edit</a>
+                    <!-- Add other actions as needed -->
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

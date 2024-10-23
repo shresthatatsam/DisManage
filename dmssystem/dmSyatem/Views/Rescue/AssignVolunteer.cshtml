@@ -1,0 +1,13 @@
+﻿@model AssignVolunteerViewModel
+
+    <form asp-action="AssignVolunteer" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <label for="volunteers">Select Volunteer:</label>
+        <select asp-for="SelectedVolunteerId" asp-items="@(new SelectList(Model.AvailableVolunteers, "Id", "Name"))">
+            <option value="">-- Select a Volunteer --</option>
+        </select>
+
+        <button type="submit">Assign Volunteer</button>
+    </form>
+
