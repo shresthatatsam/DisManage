@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<RescueTeam>
 
-<h2>Rescue Teams</h2>
+<h2>उद्धार टोली</h2>
 
-<a asp-asp-controller="Rescue" asp-action="Create" class="btn btn-primary">Create New Team</a>
+<a asp-asp-controller="Rescue" asp-action="Create" class="btn btn-primary">नयाँ टोली सिर्जना गर्नुहोस्</a>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Team Name</th>
-            <th>Location</th>
-            <th>Actions</th>
+            <th>टोलीको नाम</th>
+            <th>स्थान</th>
+            <th>कार्यहरू</th>
         </tr>
     </thead>
     <tbody>
@@ -19,7 +19,7 @@
                 <td>@team.TeamName</td>
                 <td>@team.Location</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@team.Id" class="btn btn-warning">Edit</a>
+                    <a asp-action="Edit" asp-route-id="@team.Id" class="btn btn-warning">सम्पादन गर्नुहोस्</a>
                     <!-- Add other actions as needed -->
                 </td>
             </tr>

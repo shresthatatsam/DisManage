@@ -1,6 +1,6 @@
 ﻿@model RescueTeam
 
-<h2>Create Rescue Team</h2>
+<h2>उद्धार टोली सिर्जना गर्नुहोस्</h2>
 
 <form asp-action="Create" method="post">
     <div class="form-group">
@@ -10,14 +10,14 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="LocationId">Location</label>
+        <label asp-for="LocationId">स्थान</label>
         <select asp-for="LocationId" class="form-control" asp-items="@(new SelectList(ViewBag.Locations, "Id", "Name"))">
-            <option value="">-- Select a Location --</option>
+            <option value="">-- स्थान चयन गर्नुहोस् --</option>
         </select>
         <span asp-validation-for="LocationId" class="text-danger"></span>
     </div>
 
-    <h5>Select Volunteers</h5>
+    <h5>स्वयंसेवक चयन गर्नुहोस्</h5>
     <div class="form-group">
         <select id="selectedVolunteers" name="SelectedVolunteerIds" class="form-control" multiple>
             @foreach (var volunteer in ViewBag.AvailableVolunteers)
@@ -27,7 +27,7 @@
         </select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
 </form>
 
 @section Scripts {
