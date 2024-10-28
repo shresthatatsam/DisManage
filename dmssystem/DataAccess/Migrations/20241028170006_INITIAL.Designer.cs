@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241017092958_disaster type")]
-    partial class disastertype
+    [Migration("20241028170006_INITIAL")]
+    partial class INITIAL
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -227,6 +227,24 @@ namespace DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Models.AssignVolunteerViewModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SelectedVolunteerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("TeamName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("assignVolunteers");
+                });
+
             modelBuilder.Entity("Models.Disaster", b =>
                 {
                     b.Property<Guid>("Id")
@@ -373,6 +391,30 @@ namespace DataAccess.Migrations
                     b.ToTable("Locations");
                 });
 
+            modelBuilder.Entity("Models.RescueTeam", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("SelectedVolunteerIds")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TeamName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("provinceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("provinceId");
+
+                    b.ToTable("rescueTeams");
+                });
+
             modelBuilder.Entity("Models.Victim", b =>
                 {
                     b.Property<Guid>("Id")
@@ -431,6 +473,83 @@ namespace DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Victims");
+                });
+
+            modelBuilder.Entity("Models.Volunteer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Age")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("AssignVolunteerViewModelId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Availability")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("LocationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("RescueTeamId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssignVolunteerViewModelId");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("RescueTeamId");
+
+                    b.ToTable("volunteers");
+                });
+
+            modelBuilder.Entity("Models.province", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("District")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Municipality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Province")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ward")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("provinces");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -525,9 +644,52 @@ namespace DataAccess.Migrations
                     b.Navigation("Victim");
                 });
 
+            modelBuilder.Entity("Models.RescueTeam", b =>
+                {
+                    b.HasOne("Models.province", "province")
+                        .WithMany()
+                        .HasForeignKey("provinceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("province");
+                });
+
+            modelBuilder.Entity("Models.Volunteer", b =>
+                {
+                    b.HasOne("Models.AssignVolunteerViewModel", null)
+                        .WithMany("AvailableVolunteers")
+                        .HasForeignKey("AssignVolunteerViewModelId");
+
+                    b.HasOne("Models.Location", "Location")
+                        .WithMany("Volunteers")
+                        .HasForeignKey("LocationId");
+
+                    b.HasOne("Models.RescueTeam", null)
+                        .WithMany("Volunteers")
+                        .HasForeignKey("RescueTeamId");
+
+                    b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("Models.AssignVolunteerViewModel", b =>
+                {
+                    b.Navigation("AvailableVolunteers");
+                });
+
             modelBuilder.Entity("Models.Disaster", b =>
                 {
                     b.Navigation("Images");
+                });
+
+            modelBuilder.Entity("Models.Location", b =>
+                {
+                    b.Navigation("Volunteers");
+                });
+
+            modelBuilder.Entity("Models.RescueTeam", b =>
+                {
+                    b.Navigation("Volunteers");
                 });
 
             modelBuilder.Entity("Models.Victim", b =>

@@ -23,7 +23,7 @@ namespace dmSyatem.Controllers.Admin
 
         public IActionResult Index()
         {
-            ViewBag.teams = _context.rescueTeams.Include(t => t.Location).ToList(); // Adjust the query as needed
+            ViewBag.teams = _context.rescueTeams.Include(t => t.provinceId).ToList(); // Adjust the query as needed
             return View();
         }
 
