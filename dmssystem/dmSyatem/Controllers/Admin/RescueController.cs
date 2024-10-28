@@ -23,8 +23,8 @@ namespace dmSyatem.Controllers.Admin
 
         public IActionResult Index()
         {
-            var teams = _context.rescueTeams.Include(t => t.Location).ToList(); // Adjust the query as needed
-            return View(teams);
+            ViewBag.teams = _context.rescueTeams.Include(t => t.Location).ToList(); // Adjust the query as needed
+            return View();
         }
 
         public IActionResult Create()
@@ -37,8 +37,7 @@ namespace dmSyatem.Controllers.Admin
         [HttpPost]
         public IActionResult Create(RescueTeam team, List<Guid> SelectedVolunteerIds)
         {
-            if (ModelState.IsValid)
-            {
+           
                 // Add the selected volunteers to the team
                 foreach (var volunteerId in SelectedVolunteerIds)
                 {
@@ -52,10 +51,10 @@ namespace dmSyatem.Controllers.Admin
                 _context.rescueTeams.Add(team);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            
 
-            ViewBag.Locations = _context.Locations.ToList(); // Repopulate locations if the model state is invalid
-            return View(team);
+            ////ViewBag.Locations = _context.Locations.ToList(); // Repopulate locations if the model state is invalid
+            //return View();
         }
 
      

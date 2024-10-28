@@ -10,14 +10,14 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="LocationId">Location</label>
-        <select asp-for="LocationId" class="form-control" asp-items="@(new SelectList(ViewBag.Locations, "Id", "Name"))">
+      @*   <label asp-for="LocationId">Location</label>
+        <select asp-for="LocationId" class="form-control">
             <option value="">-- Select a Location --</option>
-        </select>
+        </select> *@
+        <input asp-for="LocationId" class="form-control" />
         <span asp-validation-for="LocationId" class="text-danger"></span>
     </div>
 
-    <h5>Select Volunteers</h5>
     <div class="form-group">
         <select id="selectedVolunteers" name="SelectedVolunteerIds" class="form-control" multiple>
             @foreach (var volunteer in ViewBag.AvailableVolunteers)
@@ -29,14 +29,18 @@
 
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
             $('#selectedVolunteers').select2({
-                placeholder: "Select Volunteers",
+                placeholder: "Select volunteers",
                 allowClear: true
             });
         });
     </script>
+
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RescueTeam>
+﻿@* @model IEnumerable<RescueTeam> *@
 
 <h2>Rescue Teams</h2>
 
@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var team in Model)
+        @foreach (var team in ViewBag.teams)
         {
             <tr>
                 <td>@team.TeamName</td>
