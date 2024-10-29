@@ -26,7 +26,7 @@ namespace DataAccess.Data
         public DbSet<RescueTeam> rescueTeams { get; set; }
         public DbSet<AssignVolunteerViewModel> assignVolunteers { get; set; }
         public DbSet<DisasterType> disasterTypes  { get; set; }
-
+        public DbSet<province> provinces { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

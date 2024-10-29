@@ -1,5 +1,4 @@
-﻿using DataAccess.Migrations;
-using DataAccess.Service.AdminInterface;
+﻿using DataAccess.Service.AdminInterface;
 using DataAccess.Service.AdminService;
 using Microsoft.AspNetCore.Mvc;
 using Models;

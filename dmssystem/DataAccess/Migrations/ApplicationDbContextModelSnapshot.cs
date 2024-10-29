@@ -394,9 +394,6 @@ namespace DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("LocationId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("SelectedVolunteerIds")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -405,9 +402,12 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("provinceId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("LocationId");
+                    b.HasIndex("provinceId");
 
                     b.ToTable("rescueTeams");
                 });
@@ -522,6 +522,33 @@ namespace DataAccess.Migrations
                     b.ToTable("volunteers");
                 });
 
+            modelBuilder.Entity("Models.province", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("District")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Municipality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Province")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ward")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("provinces");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -616,13 +643,13 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Models.RescueTeam", b =>
                 {
-                    b.HasOne("Models.Location", "Location")
+                    b.HasOne("Models.province", "province")
                         .WithMany()
-                        .HasForeignKey("LocationId")
+                        .HasForeignKey("provinceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Location");
+                    b.Navigation("province");
                 });
 
             modelBuilder.Entity("Models.Volunteer", b =>
