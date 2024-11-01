@@ -44,9 +44,9 @@ namespace DataAccess.Data
 
 
             builder.Entity<Volunteer>()
-              .HasOne(v => v.Location)  // A volunteer has one location
+              .HasOne(v => v.province)  // A volunteer has one location
               .WithMany(l => l.Volunteers)  // A location can have many volunteers
-              .HasForeignKey(v => v.LocationId);
+              .HasForeignKey(v => v.provinceId);
 
             builder.Entity<Disaster>()
           .HasMany(d => d.Images)

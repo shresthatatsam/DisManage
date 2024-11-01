@@ -15,5 +15,7 @@ namespace Models
         public string Municipality { get; set; }
         public string ward { get; set; }
 
+        public List<Volunteer>? Volunteers { get; set; }
+
     }
 }

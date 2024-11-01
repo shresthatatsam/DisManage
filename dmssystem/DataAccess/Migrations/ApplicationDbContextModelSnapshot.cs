@@ -501,9 +501,6 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("LocationId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -511,13 +508,16 @@ namespace DataAccess.Migrations
                     b.Property<Guid?>("RescueTeamId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("provinceId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AssignVolunteerViewModelId");
 
-                    b.HasIndex("LocationId");
-
                     b.HasIndex("RescueTeamId");
+
+                    b.HasIndex("provinceId");
 
                     b.ToTable("volunteers");
                 });
@@ -658,15 +658,15 @@ namespace DataAccess.Migrations
                         .WithMany("AvailableVolunteers")
                         .HasForeignKey("AssignVolunteerViewModelId");
 
-                    b.HasOne("Models.Location", "Location")
-                        .WithMany("Volunteers")
-                        .HasForeignKey("LocationId");
-
                     b.HasOne("Models.RescueTeam", null)
                         .WithMany("Volunteers")
                         .HasForeignKey("RescueTeamId");
 
-                    b.Navigation("Location");
+                    b.HasOne("Models.province", "province")
+                        .WithMany("Volunteers")
+                        .HasForeignKey("provinceId");
+
+                    b.Navigation("province");
                 });
 
             modelBuilder.Entity("Models.AssignVolunteerViewModel", b =>
@@ -677,11 +677,6 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Models.Disaster", b =>
                 {
                     b.Navigation("Images");
-                });
-
-            modelBuilder.Entity("Models.Location", b =>
-                {
-                    b.Navigation("Volunteers");
                 });
 
             modelBuilder.Entity("Models.RescueTeam", b =>
@@ -696,6 +691,11 @@ namespace DataAccess.Migrations
                     b.Navigation("Images");
 
                     b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("Models.province", b =>
+                {
+                    b.Navigation("Volunteers");
                 });
 #pragma warning restore 612, 618
         }

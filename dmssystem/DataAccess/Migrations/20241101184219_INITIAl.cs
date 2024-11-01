@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class INITIAL : Migration
+    public partial class INITIAl : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -295,6 +295,41 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "volunteers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Age = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Availability = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    provinceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    AssignVolunteerViewModelId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    RescueTeamId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_volunteers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_volunteers_assignVolunteers_AssignVolunteerViewModelId",
+                        column: x => x.AssignVolunteerViewModelId,
+                        principalTable: "assignVolunteers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_volunteers_provinces_provinceId",
+                        column: x => x.provinceId,
+                        principalTable: "provinces",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_volunteers_rescueTeams_RescueTeamId",
+                        column: x => x.RescueTeamId,
+                        principalTable: "rescueTeams",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DisasterImages",
                 columns: table => new
                 {
@@ -322,41 +357,6 @@ namespace DataAccess.Migrations
                         principalTable: "Victims",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "volunteers",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Age = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Availability = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LocationId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    AssignVolunteerViewModelId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    RescueTeamId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_volunteers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_volunteers_Locations_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Locations",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_volunteers_assignVolunteers_AssignVolunteerViewModelId",
-                        column: x => x.AssignVolunteerViewModelId,
-                        principalTable: "assignVolunteers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_volunteers_rescueTeams_RescueTeamId",
-                        column: x => x.RescueTeamId,
-                        principalTable: "rescueTeams",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -431,9 +431,9 @@ namespace DataAccess.Migrations
                 column: "AssignVolunteerViewModelId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_volunteers_LocationId",
+                name: "IX_volunteers_provinceId",
                 table: "volunteers",
-                column: "LocationId");
+                column: "provinceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_volunteers_RescueTeamId",
@@ -466,6 +466,9 @@ namespace DataAccess.Migrations
                 name: "disasterTypes");
 
             migrationBuilder.DropTable(
+                name: "Locations");
+
+            migrationBuilder.DropTable(
                 name: "volunteers");
 
             migrationBuilder.DropTable(
@@ -476,9 +479,6 @@ namespace DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Disasters");
-
-            migrationBuilder.DropTable(
-                name: "Locations");
 
             migrationBuilder.DropTable(
                 name: "assignVolunteers");

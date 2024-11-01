@@ -8,21 +8,32 @@
     <thead>
         <tr>
             <th>Team Name</th>
-            <th>Location</th>
+            <th>Province</th>
+
+            <th>District</th>
+
+            <th>Municipality</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var team in ViewBag.teams)
+        @if(ViewBag.teams != null)
         {
-            <tr>
-                <td>@team.TeamName</td>
-                <td>@team.Location</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@team.Id" class="btn btn-warning">Edit</a>
-                    <!-- Add other actions as needed -->
-                </td>
-            </tr>
+            @foreach (var team in ViewBag.teams)
+            {
+                <tr>
+                    <td>@team.TeamName</td>
+                      <td>@team.province.Province</td>
+                    <td>@team.province.District</td>
+                    <td>@team.province.Municipality</td> 
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@team.Id" class="btn btn-warning">Edit</a>
+                        <!-- Add other actions as needed -->
+                    </td>
+                </tr>
+            }
         }
+      
+      
     </tbody>
 </table>

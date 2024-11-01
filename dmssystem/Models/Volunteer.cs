@@ -15,8 +15,9 @@ namespace Models
         public string ContactNumber { get; set; }
         public string Email { get; set; }
         public string Availability { get; set; }
-        public Guid? LocationId { get; set; } 
-        public Location? Location { get; set; }
+
+        public Guid? provinceId { get; set; }
+        public province? province { get; set; }
 
     }
 }
