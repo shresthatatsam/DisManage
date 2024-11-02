@@ -10,5 +10,9 @@ namespace DataAccess.Service.AdminInterface
     public interface IDonationService
     {
         Donation Create(Donation donation);
+        string TotalDonationReceived();
+        string TotalDonationGiven();
+        decimal TotalDonationReceivedAmount();
+        decimal TotalDonationGivenAmount();
     }
 }

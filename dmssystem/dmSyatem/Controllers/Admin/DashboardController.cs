@@ -1,4 +1,5 @@
-﻿using DataAccess.Service.Interface;
+﻿using DataAccess.Service.AdminInterface;
+using DataAccess.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
@@ -9,10 +10,12 @@ namespace dmSyatem.Controllers.Admin
 
         public readonly IVictimService _victim;
         private readonly IDashboard _dashboard;
-        public DashboardController(IVictimService victim, IDashboard dashboard)
+        public readonly IDonationService _donationService;
+        public DashboardController(IVictimService victim, IDashboard dashboard, IDonationService donationService)
         {
             _dashboard = dashboard;
             _victim = victim;
+            _donationService = donationService;
         }
 
  
@@ -22,6 +25,12 @@ namespace dmSyatem.Controllers.Admin
             ViewBag.VictimCount = _dashboard.TotalVictim();
             ViewBag.ActiveCases = _dashboard.ActiveCases();
             ViewBag.ResourceDeployed = _dashboard.ResourceDeployed();
+
+            ViewBag.donationReceived = _donationService.TotalDonationReceived(); 
+            ViewBag.donationGiven = _donationService.TotalDonationGiven();
+            ViewBag.TotalDonationReceivedAmount = _donationService.TotalDonationReceivedAmount();
+            ViewBag.TotalDonationGivenAmount = _donationService.TotalDonationGivenAmount();
+
             List<Victim> victimViewModel = _dashboard.recentDisaster();
             return View(victimViewModel);
         }
