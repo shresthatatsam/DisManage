@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <form id="paymentForm">
+
+            <input type="hidden" name="type" value="Receive" />
+            <div class="form-row">
+                <div class="form-group col-lg-6">
+                    <label for="name">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required>
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <label for="address">Address:</label>
+                    <input type="text" class="form-control" id="address" name="address" required>
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <label for="paymentMethod">Payment Method:</label>
+                    <select class="form-control" id="paymentMethod" name="paymentMethod" onchange="showRelevantFields()" required>
+                        <option value="">Select</option>
+                        <option value="cash">Cash</option>
+                        <option value="cheque">Cheque</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-lg-6 " id="amountField">
+                    <label for="amount">Amount:</label>
+                    <input type="text" class="form-control" id="amount" name="amount">
+                </div>
+
+                <div class="form-group col-lg-6 hidden" id="bankNameField">
+                    <label for="bankName">Bank Name:</label>
+                    <input type="text" class="form-control" id="bankName" name="bankName">
+                </div>
+
+
+               @*  <div class="form-group col-lg-6 hidden" id="chequeNumber">
+                    <label for="chequeNo">Cheque No:</label>
+                    <input type="text" class="form-control" id="bankName" name="bankName">
+                </div> *@
+
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function showRelevantFields() {
+            const paymentMethod = document.getElementById('paymentMethod').value;
+
+            const bankNameField = document.getElementById('bankNameField');
+
+
+
+
+            bankNameField.classList.add('hidden');
+
+
+            // Show relevant fields based on payment method
+            if (paymentMethod === 'cash') {
+            } else if (paymentMethod === 'cheque') {
+                bankNameField.classList.remove('hidden');
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
