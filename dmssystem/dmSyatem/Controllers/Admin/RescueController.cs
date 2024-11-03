@@ -32,18 +32,18 @@ namespace dmSyatem.Controllers.Admin
             ViewBag.AvailableVolunteers = _context.volunteers.ToList();
             ViewBag.location = _context.provinces.ToList();
 
-            if(provinceId.HasValue)
-        {
-                // Load volunteers based on the selected province
-                ViewBag.AvailableVolunteers = _context.volunteers
-                    .Where(v => v.provinceId == provinceId.Value) // Adjust according to your data model
-                    .ToList();
-                //.provinceId = provinceId.Value; // Set the selected province in the model
-            }
-        else
-            {
-                ViewBag.AvailableVolunteers = new List<Volunteer>(); // No volunteers if no province is selected
-            }
+        //    if(provinceId.HasValue)
+        //{
+        //        // Load volunteers based on the selected province
+        //        ViewBag.AvailableVolunteers = _context.volunteers
+        //            .Where(v => v.provinceId == provinceId.Value) // Adjust according to your data model
+        //            .ToList();
+        //        //.provinceId = provinceId.Value; // Set the selected province in the model
+        //    }
+        //else
+        //    {
+        //        ViewBag.AvailableVolunteers = new List<Volunteer>(); // No volunteers if no province is selected
+        //    }
 
             return View();
         }
