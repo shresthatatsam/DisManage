@@ -1,4 +1,5 @@
-﻿using DataAccess.Service.Interface;
+﻿using DataAccess.Service;
+using DataAccess.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
@@ -16,15 +17,35 @@ namespace dmSyatem.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Province = _Location.getProvince();
             return View();
         }
 
 
         public IActionResult Edit()
         {
+            ViewBag.Province = _Location.getProvince();
             var VictimId = Guid.Parse(_httpContextAccessor?.HttpContext?.Session?.GetString("VictimId"));
             Location data = _Location.getData(VictimId);
             return View(data);
+        }
+
+
+
+
+        [HttpGet]
+        public JsonResult GetDistricts(Guid provinceId)
+        {
+            var districts = _Location.GetDistricts(provinceId);
+            return Json(districts);
+        }
+
+
+        [HttpGet]
+        public JsonResult GetMunicipalities(Guid districtId)
+        {
+            var municipalities = _Location.GetMunicipalities(districtId); // Fetch municipalities based on district ID
+            return Json(municipalities);
         }
 
 

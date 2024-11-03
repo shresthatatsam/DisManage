@@ -20,7 +20,48 @@ namespace DataAccess.Service
         public Location getData(Guid id)
         {
             return _context.Locations.Where(x => x.VictimId == id).FirstOrDefault();
+
+            //var Perprovince = _context.provinces.FirstOrDefault(x => x.Id == Guid.Parse(data.PermanentProvince));
+            //var Tempprovince = _context.provinces.Where(x => x.Id == Guid.Parse(data.TemporaryProvince)).FirstOrDefault();
+            //var PerDistrict = _context.provinces.Where(x => x.Id == Guid.Parse(data.PermanentDistrict)).FirstOrDefault();
+            //var TempDistrict = _context.provinces.Where(x => x.Id == Guid.Parse(data.TemporaryDistrict)).FirstOrDefault();
+            //return new Location
+            //{
+            //    PermanentProvince = Perprovince.Province,
+            //    TemporaryProvince = Tempprovince.Province,
+            //    PermanentDistrict = PerDistrict.District,
+            //    TemporaryDistrict = TempDistrict.District
+            //};
         }
+
+        public List<province> getProvince()
+        {
+            return _context.provinces.Where(x => x.ParentDistrict == Guid.Empty && x.ParentProvince == Guid.Empty).ToList();
+        }
+
+        public List<province> GetDistricts(Guid provinceId)
+        {
+            // Fetch districts based on provinceId
+            var districts = _context.provinces
+                .Where(d => d.ParentProvince == provinceId && d.ParentDistrict == null) // Ensure you have a relationship defined
+                .Select(d => new province
+                {
+                    Id = d.Id,
+                    District = d.District // Adjust as necessary based on your District entity
+                })
+                .ToList();
+
+            return districts;
+        }
+
+
+        public List<province> GetMunicipalities(Guid districtId)
+        {
+            return _context.provinces
+                .Where(m => m.ParentDistrict == districtId) // Adjust as per your entity structure
+                .ToList();
+        }
+
 
         public Location Create(Location location)
         {
