@@ -19,6 +19,16 @@ namespace DataAccess.Service.AdminService
         }
         public Donation Create(Donation donation)
         {
+            var existingDonation = _context.donations
+        .FirstOrDefault(d => d.SecretNumber == donation.SecretNumber);
+
+            if (existingDonation != null)
+            {
+                // Optionally return the existing donation or handle it as needed
+                return existingDonation; // or throw an exception, or return null
+            }
+
+            // If no existing donation, add the new donation
             _context.donations.Add(donation);
             _context.SaveChanges();
             return donation;

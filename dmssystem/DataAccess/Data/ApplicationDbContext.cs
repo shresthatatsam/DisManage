@@ -28,6 +28,7 @@ namespace DataAccess.Data
         public DbSet<DisasterType> disasterTypes  { get; set; }
         public DbSet<province> provinces { get; set; }
         public DbSet<Donation> donations  { get; set; }
+        public DbSet<Fingerprint> Fingerprints { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

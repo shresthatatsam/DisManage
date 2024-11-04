@@ -27,7 +27,7 @@ namespace DataAccess.Service
         public Victim Create(Victim victim)
         {
             var existingRecord = _context.Victims.Where(x => x.ContactNumber == victim.ContactNumber).FirstOrDefault();
-
+            victim.Secret_Number = GenerateSecretNumber();
             if (existingRecord != null)
             {
                 existingRecord.Name = victim.Name ?? existingRecord.Name;
@@ -40,13 +40,14 @@ namespace DataAccess.Service
                 existingRecord.FatherName = victim.FatherName ?? existingRecord.FatherName;
                 existingRecord.MotherName = victim.MotherName ?? existingRecord.MotherName;
                 existingRecord.GrandFatherName = victim.GrandFatherName ?? existingRecord.GrandFatherName;
-
+                existingRecord.Secret_Number = victim.Secret_Number ?? existingRecord.Secret_Number;
                 _context.SaveChanges();
                 victim = existingRecord;
                 return victim;
             }
             else
             {
+               
                 _context.Victims.Add(victim);
                 _context.SaveChanges();
                 return victim;
@@ -54,7 +55,13 @@ namespace DataAccess.Service
        
         }
 
-
+        private string GenerateSecretNumber()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            Random random = new Random();
+            return new string(Enumerable.Repeat(chars, 6)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
         public Victim Edit(Victim victim)
         {
             var existingRecord = _context.Victims.Where(x => x.Id == victim.Id).FirstOrDefault();

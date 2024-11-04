@@ -87,6 +87,7 @@ namespace DataAccess.Service
         {
             Id = v.Id,
             Name = v.Name,
+            Secret_Number = v.Secret_Number,
             Age = v.Age,
             Gender = v.Gender,
             ContactNumber = v.ContactNumber,

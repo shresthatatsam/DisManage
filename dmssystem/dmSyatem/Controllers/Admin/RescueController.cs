@@ -28,7 +28,7 @@ namespace dmSyatem.Controllers.Admin
         }
 
         public IActionResult Create(Guid? provinceId = null)
-        {
+          {
             ViewBag.AvailableVolunteers = _context.volunteers.ToList();
             ViewBag.location = _context.provinces.ToList();
 
