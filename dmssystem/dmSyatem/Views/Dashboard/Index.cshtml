@@ -23,7 +23,7 @@
         <div class="col-lg-3 col-md-6">
             <div class="card stat-card">
                 <div class="card-body">
-                    <h5 class="card-title">परिनियोजन गरिएका स्रोतहरू</h5>
+                    <h5 class="card-title">परिनियोजन  स्रोतहरू</h5>
                     <p class="card-text">@ViewBag.ResourceDeployed</p>
                 </div>
             </div>
@@ -33,6 +33,44 @@
                 <div class="card-body">
                     <h5 class="card-title">सक्रिय प्रयोगकर्ता</h5>
                     <p class="card-text">@ViewBag.ActiveCases</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h5 class="card-title">Donation Given</h5>
+                    <p class="card-text">@ViewBag.donationGiven</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h5 class="card-title">Donation Received</h5>
+                    <p class="card-text">@ViewBag.donationReceived</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h5 class="card-title">given amount</h5>
+                    <p class="card-text">@ViewBag.TotalDonationGivenAmount</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <h5 class="card-title">Received amount</h5>
+                    <p class="card-text">@ViewBag.TotalDonationReceivedAmount</p>
                 </div>
             </div>
         </div>

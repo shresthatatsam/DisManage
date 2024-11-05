@@ -27,6 +27,8 @@ namespace DataAccess.Data
         public DbSet<AssignVolunteerViewModel> assignVolunteers { get; set; }
         public DbSet<DisasterType> disasterTypes  { get; set; }
         public DbSet<province> provinces { get; set; }
+        public DbSet<Donation> donations  { get; set; }
+        public DbSet<Fingerprint> Fingerprints { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -44,9 +46,9 @@ namespace DataAccess.Data
 
 
             builder.Entity<Volunteer>()
-              .HasOne(v => v.Location)  // A volunteer has one location
+              .HasOne(v => v.province)  // A volunteer has one location
               .WithMany(l => l.Volunteers)  // A location can have many volunteers
-              .HasForeignKey(v => v.LocationId);
+              .HasForeignKey(v => v.provinceId);
 
             builder.Entity<Disaster>()
           .HasMany(d => d.Images)

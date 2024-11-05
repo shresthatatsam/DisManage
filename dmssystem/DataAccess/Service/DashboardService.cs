@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataAccess.Data;
 using DataAccess.Service.Interface;
 using Models;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DataAccess.Service
 {
@@ -19,7 +20,13 @@ namespace DataAccess.Service
                }
 
 
-               public string TotalVictim()
+        private province GetProvince(string id)
+        {
+            if (string.IsNullOrEmpty(id)) return null;
+            return _context.provinces.FirstOrDefault(x => x.Id == Guid.Parse(id));
+        }
+
+        public string TotalVictim()
                {
                   var totalVictim = _context.Victims.Count().ToString();
                    return totalVictim;
@@ -61,12 +68,26 @@ namespace DataAccess.Service
 
         public Victim GetById(Guid id)
         {
+           var item = _context.Victims.Where(x => x.Id == id).FirstOrDefault();
+            var location = _context.Locations.Where(x => x.Id == item.LocationId).FirstOrDefault();
+            var disaster = _context.Disasters.Where(x => x.Id == item.DisasterId).FirstOrDefault();
+
+            var disasterType = _context.disasterTypes.Where(x => x.Id == Guid.Parse(disaster.DisasterType)).FirstOrDefault();
+            var Perprovince = GetProvince(location.PermanentProvince);
+            var Tempprovince = GetProvince(location.TemporaryProvince);
+            var PerDistrict = GetProvince(location.PermanentDistrict);
+            var TempDistrict = GetProvince(location.TemporaryDistrict);
+            var PerMun = GetProvince(location.PermanentMunicipality);
+            var TempMun = GetProvince(location.TemporaryMunicipality);
+
+
             var victim = _context.Victims
         .Where(x => x.Id == id)
         .Select(v => new Victim
         {
             Id = v.Id,
             Name = v.Name,
+            Secret_Number = v.Secret_Number,
             Age = v.Age,
             Gender = v.Gender,
             ContactNumber = v.ContactNumber,
@@ -82,13 +103,13 @@ namespace DataAccess.Service
             Location = v.Location != null ? new Location
             {
                 Id = v.Location.Id,
-                PermanentProvince = v.Location.PermanentProvince,
-                PermanentDistrict = v.Location.PermanentDistrict,
-                PermanentMunicipality = v.Location.PermanentMunicipality,
+                PermanentProvince = Perprovince != null ? Perprovince.Province : string.Empty,
+                PermanentDistrict = PerDistrict != null ? PerDistrict.District : string.Empty,
+                PermanentMunicipality = PerMun != null ? PerMun.Municipality : string.Empty,
                 PermanentTole = v.Location.PermanentTole,
-                TemporaryProvince = v.Location.TemporaryProvince,
-                TemporaryDistrict = v.Location.TemporaryDistrict,
-                TemporaryMunicipality = v.Location.TemporaryMunicipality,
+                TemporaryProvince = Tempprovince != null ? Tempprovince.Province : string.Empty,
+                TemporaryDistrict = TempDistrict != null ? TempDistrict.District : string.Empty,
+                TemporaryMunicipality = TempMun != null ? TempMun.Municipality : string.Empty,
                 TemporaryTole = v.Location.TemporaryTole,
                 isActive = v.Location.isActive,
                 created_at = v.Location.created_at
@@ -97,7 +118,7 @@ namespace DataAccess.Service
             Disaster = v.Disaster != null ? new Disaster
             {
                 Id = v.Disaster.Id,
-                DisasterType = v.Disaster.DisasterType,
+                DisasterType = disasterType.DisasterName,
                 Description = v.Disaster.Description,
                 DateReported = v.Disaster.DateReported,
                 created_at = v.Disaster.created_at,
@@ -128,5 +149,9 @@ namespace DataAccess.Service
             return victim; 
                 }
 
+
+
+
     }
+
 }

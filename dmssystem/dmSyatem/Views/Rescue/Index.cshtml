@@ -7,14 +7,25 @@
 <table class="table">
     <thead>
         <tr>
+<<<<<<< HEAD
             <th>टोलीको नाम</th>
             <th>स्थान</th>
             <th>कार्यहरू</th>
+=======
+            <th>Team Name</th>
+            <th>Province</th>
+
+            <th>District</th>
+
+            <th>Municipality</th>
+            <th>Actions</th>
+>>>>>>> ded488e2e6438d7ae79e193248fee529b16fd0aa
         </tr>
     </thead>
     <tbody>
-        @foreach (var team in ViewBag.teams)
+        @if(ViewBag.teams != null)
         {
+<<<<<<< HEAD
             <tr>
                 <td>@team.TeamName</td>
                 <td>@team.Location</td>
@@ -23,6 +34,23 @@
                     <!-- Add other actions as needed -->
                 </td>
             </tr>
+=======
+            @foreach (var team in ViewBag.teams)
+            {
+                <tr>
+                    <td>@team.TeamName</td>
+                      <td>@team.province.Province</td>
+                    <td>@team.province.District</td>
+                    <td>@team.province.Municipality</td> 
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@team.Id" class="btn btn-warning">Edit</a>
+                        <!-- Add other actions as needed -->
+                    </td>
+                </tr>
+            }
+>>>>>>> ded488e2e6438d7ae79e193248fee529b16fd0aa
         }
+      
+      
     </tbody>
 </table>

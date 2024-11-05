@@ -11,5 +11,8 @@ namespace DataAccess.Service.Interface
     {
         Location Create(Location location);
         Location getData(Guid id);
+        List<province> getProvince();
+        List<province> GetDistricts(Guid provinceId);
+        List<province> GetMunicipalities(Guid districtId);
     }
 }

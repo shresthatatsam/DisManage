@@ -23,13 +23,27 @@ namespace dmSyatem.Controllers.Admin
 
         public IActionResult Index()
         {
-            ViewBag.teams = _context.rescueTeams.Include(t => t.provinceId).ToList(); // Adjust the query as needed
+            ViewBag.teams = _context.rescueTeams.Include(t => t.province).ToList(); 
             return View();
         }
 
-        public IActionResult Create()
-        {
-            ViewBag.AvailableVolunteers = _context.volunteers.ToList(); // Fetch available volunteers
+        public IActionResult Create(Guid? provinceId = null)
+          {
+            ViewBag.AvailableVolunteers = _context.volunteers.ToList();
+            ViewBag.location = _context.provinces.ToList();
+
+        //    if(provinceId.HasValue)
+        //{
+        //        // Load volunteers based on the selected province
+        //        ViewBag.AvailableVolunteers = _context.volunteers
+        //            .Where(v => v.provinceId == provinceId.Value) // Adjust according to your data model
+        //            .ToList();
+        //        //.provinceId = provinceId.Value; // Set the selected province in the model
+        //    }
+        //else
+        //    {
+        //        ViewBag.AvailableVolunteers = new List<Volunteer>(); // No volunteers if no province is selected
+        //    }
 
             return View();
         }

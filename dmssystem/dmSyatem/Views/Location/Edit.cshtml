@@ -6,15 +6,29 @@
     <h4>स्थायी ठेगाना</h4>
     <div class="form-group">
         <label for="PermanentProvince">स्थायी प्रदेश</label>
-        <input type="text" class="form-control" id="PermanentProvince" name="PermanentProvince" asp-for="PermanentProvince" required />
+        @* <input type="text" class="form-control" id="PermanentProvince" name="PermanentProvince" asp-for="PermanentProvince" required /> *@
+        <select class="form-control province" id="PermanentProvince" name="PermanentProvince" asp-for="PermanentProvince" required>
+            <option value="">Select</option>
+            @foreach (var item in ViewBag.Province)
+            {
+                <option value="@item.Id">@item.Province</option>
+            }
+        </select>
     </div>
     <div class="form-group">
         <label for="PermanentDistrict">स्थायी जिल्ला</label>
-        <input type="text" class="form-control" id="PermanentDistrict" name="PermanentDistrict" asp-for="PermanentDistrict" required />
-    </div>
+        <select class="form-control district" id="PermanentDistrict" name="PermanentDistrict" asp-for="PermanentDistrict" required>
+            <option value="">Select District</option>
+            <!-- District options will be populated here via AJAX -->
+        </select>
+        </div>
     <div class="form-group">
         <label for="PermanentMunicipality">स्थायी नगरपालिका</label>
-        <input type="text" class="form-control" id="PermanentMunicipality" name="PermanentMunicipality" asp-for="PermanentMunicipality" required />
+        @* <input type="text" class="form-control" id="PermanentMunicipality" name="PermanentMunicipality" asp-for="PermanentMunicipality" required /> *@
+        <select class="form-control municipality" id="PermanentMunicipality" name="PermanentMunicipality" asp-for="PermanentMunicipality" required>
+            <option value="">Select Municipality</option>
+            <!-- Municipality options will be populated here via AJAX -->
+        </select>
     </div>
     <div class="form-group">
         <label for="PermanentTole">स्थायी टोल</label>
@@ -24,15 +38,32 @@
     <h4>अस्थायी ठेगाना</h4>
     <div class="form-group">
         <label for="TemporaryProvince">अस्थायी प्रदेश</label>
-        <input type="text" class="form-control" id="TemporaryProvince" name="TemporaryProvince" asp-for="TemporaryProvince" />
+        @* <input type="text" class="form-control" id="TemporaryProvince" name="TemporaryProvince" asp-for="TemporaryProvince" /> *@
+
+        <select class="form-control province" id="TemporaryProvince" name="TemporaryProvince" asp-for="TemporaryProvince" required>
+            <option value="">Select</option>
+            @foreach (var item in ViewBag.Province)
+            {
+                <option value="@item.Id">@item.Province</option>
+            }
+        </select>
+
     </div>
     <div class="form-group">
         <label for="TemporaryDistrict">अस्थायी जिल्ला</label>
-        <input type="text" class="form-control" id="TemporaryDistrict" name="TemporaryDistrict" asp-for="TemporaryDistrict" />
+        @* <input type="text" class="form-control" id="TemporaryDistrict" name="TemporaryDistrict" asp-for="TemporaryDistrict" /> *@
+        <select class="form-control district" id="TemporaryDistrict" name="TemporaryDistrict" asp-for="TemporaryDistrict" required>
+            <option value="">Select District</option>
+            <!-- District options will be populated here via AJAX -->
+        </select>
     </div>
     <div class="form-group">
         <label for="TemporaryMunicipality">अस्थायी नगरपालिका</label>
-        <input type="text" class="form-control" id="TemporaryMunicipality" name="TemporaryMunicipality" asp-for="TemporaryMunicipality" />
+        @* <input type="text" class="form-control" id="TemporaryMunicipality" name="TemporaryMunicipality" asp-for="TemporaryMunicipality" /> *@
+        <select class="form-control municipality" id="TemporaryMunicipality" name="TemporaryMunicipality" asp-for="TemporaryMunicipality" required>
+            <option value="">Select Municipality</option>
+            <!-- Municipality options will be populated here via AJAX -->
+        </select>
     </div>
     <div class="form-group">
         <label for="TemporaryTole">अस्थायी टोल</label>
@@ -41,3 +72,98 @@
 
     <button type="submit" class="btn btn-primary">ठेगाना बचत गर्नुहोस्</button>
 </form>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#PermanentProvince').change(function () {
+            var provinceId = $(this).val();
+
+            if (provinceId) {
+                $.ajax({
+                    url: '@Url.Action("GetDistricts", "Location")',
+                    type: 'GET',
+                    data: { provinceId: provinceId },
+                    success: function (data) {
+                        console.log(data);
+                        var districtSelect = $('.district');
+                        districtSelect.empty(); // Clear existing options
+                        districtSelect.append('<option value="">Select District</option>'); // Add default option
+
+                        $.each(data, function (index, item) {
+                            districtSelect.append('<option value="' + item.id + '">' + item.district + '</option>'); // Access 'district' correctly
+                        });
+                    },
+                    error: function () {
+                        alert('Error retrieving districts');
+                    }
+                });
+            } else {
+                $('#PermanentDistrict').empty().append('<option value="">Select District</option>'); // Reset if no province selected
+                $('#PermanentMunicipality').empty().append('<option value="">Select Municipality</option>'); // Reset municipality
+            }
+        });
+
+        $('#PermanentDistrict').change(function () {
+            var districtId = $(this).val();
+
+            if (districtId) {
+                $.ajax({
+                    url: '@Url.Action("GetMunicipalities", "Location")',
+                    type: 'GET',
+                    data: { districtId: districtId },
+                    success: function (data) {
+                        console.log(data);
+                        var municipalitySelect = $('.municipality');
+                        municipalitySelect.empty(); // Clear existing options
+                        municipalitySelect.append('<option value="">Select Municipality</option>'); // Add default option
+
+                        $.each(data, function (index, item) {
+                            municipalitySelect.append('<option value="' + item.id + '" data-municipality="' + item.municipality + '">' + item.municipality + '</option>'); // Store municipality in data attribute
+                        });
+                    },
+                    error: function () {
+                        alert('Error retrieving municipalities');
+                    }
+                });
+            } else {
+                $('#PermanentMunicipality').empty().append('<option value="">Select Municipality</option>'); // Reset if no district selected
+            }
+        });
+    });
+
+</script>
+
+@* <script>
+    $(document).ready(function () {
+        $('#PermanentProvince').change(function () {
+            var provinceId = $(this).val();
+
+            if (provinceId) {
+                $.ajax({
+                    url: '@Url.Action("GetDistricts", "Location")',
+                    type: 'GET',
+                    data: { provinceId: provinceId },
+                    success: function (data) {
+                        console.log(data);
+                        var districtSelect = $('#PermanentDistrict');
+                        districtSelect.empty(); // Clear existing options
+                        districtSelect.append('<option value="">Select District</option>'); // Add default option
+
+                        $.each(data, function (index, item) {
+                            districtSelect.append('<option value="' + item.id + '">' + item.district + '</option>'); // Access 'district' correctly
+                        });
+                    },
+                    error: function () {
+                        alert('Error retrieving districts');
+                    }
+                });
+            } else {
+                $('#PermanentDistrict').empty().append('<option value="">Select District</option>'); // Reset if no province selected
+            }
+        });
+    });
+</script> *@
+
+

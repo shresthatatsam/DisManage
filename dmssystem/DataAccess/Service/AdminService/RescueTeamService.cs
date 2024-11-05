@@ -33,7 +33,7 @@ namespace DataAccess.Service.AdminService
 
         public IEnumerable<Volunteer> GetAvailableVolunteers()
         {
-            return _context.volunteers.Where(v => v.LocationId == null).ToList(); // Assuming available means not assigned
+            return _context.volunteers.Where(v => v.provinceId == null).ToList(); // Assuming available means not assigned
         }
 
         public RescueTeam GetTeamById(Guid teamId)

@@ -10,11 +10,15 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="LocationId">स्थान</label>
-        <select asp-for="LocationId" class="form-control" asp-items="@(new SelectList(ViewBag.Locations, "Id", "Name"))">
-            <option value="">-- स्थान चयन गर्नुहोस् --</option>
-        </select>
-        <span asp-validation-for="LocationId" class="text-danger"></span>
+         <label asp-for="provinceId">Location</label>
+        <select asp-for="provinceId" class="form-control">
+            @foreach (var allLocation in ViewBag.location)
+            {
+                <option value="@allLocation.Id">@allLocation.Municipality</option>
+            }
+        </select> 
+        @* <input asp-for="LocationId" class="form-control" />
+        <span asp-validation-for="LocationId" class="text-danger"></span> *@
     </div>
 
     <h5>स्वयंसेवक चयन गर्नुहोस्</h5>

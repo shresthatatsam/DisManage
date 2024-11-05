@@ -18,6 +18,7 @@ namespace Models
         public string? PPSizePhoto { get; set; }
         public string? CitizenshipNumber { get; set; }
 
+        public string? Secret_Number {  get; set; }
         public string? NIDNumber { get; set; }
         public string? FatherName { get; set; }
         public string? MotherName { get; set; }
