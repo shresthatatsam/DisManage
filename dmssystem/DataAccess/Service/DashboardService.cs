@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Data;
 using DataAccess.Service.Interface;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -19,7 +20,19 @@ namespace DataAccess.Service
                    _context = context;
                }
 
+		public async Task<IEnumerable<int>> GetMonthlyDisasterCountsAsync()
+		{
+			// Example: Count disasters per month over the last 6 months
+			var disasterCounts = await _context.Disasters
+				.Where(d => d.created_at >= DateTime.Now.AddMonths(-6))
+				.GroupBy(d => d.created_at.Month)
+				.Select(group => group.Count())
+				.ToListAsync();
 
+			return disasterCounts;
+		}
+
+       
         private province GetProvince(string id)
         {
             if (string.IsNullOrEmpty(id)) return null;
@@ -153,5 +166,6 @@ namespace DataAccess.Service
 
 
     }
+
 
 }

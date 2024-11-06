@@ -20,7 +20,7 @@ namespace DataAccess.Service.AdminService
 
         public List<Volunteer> GetAllVolunteers()
         {
-            return _context.volunteers.ToList();
+            return _context.volunteers.Where(x=>x.isactive).ToList();
         }
 
         public void AddVolunteer(Volunteer volunteer)
