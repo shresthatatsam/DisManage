@@ -11,6 +11,9 @@ namespace DataAccess.Service.Interface
     {
         string TotalVictim();
         string ActiveCases();
+        Task<IEnumerable<int>> GetMonthlyDisasterCountsAsync();
+        //Task<IEnumerable<VictimData>> GetVictimDataAsync();
+
 
         string ResourceDeployed();
         List<Victim> recentDisaster();

@@ -22,7 +22,7 @@ namespace DataAccess.Service.AdminService
 		public List<Victim> recentDisaster()
 		{
             var victim = _context.Victims
-    .AsNoTracking()
+    .AsNoTracking().Where(x=>x.isActive == true)
     .OrderByDescending(x => x.created_at)
     .Select(v => new Victim
     {

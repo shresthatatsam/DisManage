@@ -32,6 +32,7 @@ namespace dmSyatem.Controllers.Admin
         {
             if (ModelState.IsValid)
             {
+                volunteer.isactive = true;
                 _volunteerService.AddVolunteer(volunteer);
                 return RedirectToAction(nameof(Index));
             }
