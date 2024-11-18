@@ -10,6 +10,10 @@ namespace Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string? Nationality { get; set; }
+
+        public string? PassportNumber { get; set; }
+        
         public string Age { get; set; }
         public string Gender { get; set; }
         public string ContactNumber { get; set; }

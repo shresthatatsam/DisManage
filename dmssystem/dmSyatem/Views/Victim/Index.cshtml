@@ -12,6 +12,23 @@
         <h1>पीडितको सूचना</h1>
         <form asp-controller="Victim" asp-action="Edit" method="POST" enctype="multipart/form-data">
 
+             <div class="form-group">
+                <label for="Nationality">राष्ट्रीयता</label>
+                <select id="Nationality" name="Nationality" asp-for="Nationality" required onchange="toggleCitizenInput()">
+                    <option value="foreigner">Foreigner</option>
+                    <option value="nepali">Nepali</option>
+                </select>
+            </div> 
+
+           
+
+            <!-- Passport Number field (initially hidden) -->
+             <div class="form-group" id="passport-group" style="display: none;">
+                <label for="PassportNumber">पासपोर्ट संख्या</label>
+                <input type="text" id="PassportNumber" name="PassportNumber" asp-for="PassportNumber">
+            </div>
+ 
+
 
             <div class="form-group">
                 <label for="name">नाम</label>
@@ -50,7 +67,7 @@
 
             <div class="form-group">
                 <label for="citizenshipNumber">नागरिकता नम्बर</label>
-                <input type="text" id="citizenshipNumber" name="citizenshipNumber" asp-for="CitizenshipNumber">
+                <input type="text" id="citizenshipNumber" name="citizenshipNumber" asp-for="CitizenshipNumber" disabled>
             </div>
 
             <div class="form-group">
@@ -78,5 +95,25 @@
             </div>
         </form>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        function toggleCitizenInput() {
+            var nationality = $("#Nationality").val();
+            alert(nationality);
+            
+            var citizenInput = $("#citizenshipNumber");
+            var passportInput = $("#PassportNumber");
+
+            if (nationality === "foreigner") {
+                // Using AJAX-like dynamic UI change (no actual server call in this case)
+                citizenInput.prop("disabled", "disabled");  // Disable the citizenship input
+             
+            } else {
+                citizenInput.prop("disabled", false);  // Enable the citizenship input
+              
+            }
+        }
+    </script>
 </body>
 </html>
