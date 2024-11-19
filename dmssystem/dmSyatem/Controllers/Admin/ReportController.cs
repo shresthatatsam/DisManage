@@ -37,7 +37,8 @@ namespace dmSyatem.Controllers.Admin
 
             if (!string.IsNullOrEmpty(disasterType) && disasterType != "All")
             {
-                query = query.Where(r => r.Disaster.DisasterType == disasterType);
+                var disasterTypes = _context.disasterTypes.Where(x => x.DisasterName == disasterType).Select(x => x.Id).FirstOrDefault().ToString();
+                query = query.Where(r => r.Disaster.DisasterType == disasterTypes);
             }
 
             if (startDate.HasValue)
