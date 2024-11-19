@@ -23,21 +23,21 @@
            
 
             <!-- Passport Number field (initially hidden) -->
-             <div class="form-group" id="passport-group" style="display: none;">
+             <div class="form-group" id="passport-group">
                 <label for="PassportNumber">पासपोर्ट संख्या</label>
-                <input type="text" id="PassportNumber" name="PassportNumber" asp-for="PassportNumber">
+                <input type="text" class="claForeign" id="PassportNumber" name="PassportNumber" asp-for="PassportNumber" disabled>
             </div>
  
 
 
             <div class="form-group">
                 <label for="name">नाम</label>
-                <input type="text" id="name" name="name" asp-for="Name" required>
+                <input type="text" class="shorttext" id="name" name="name" asp-for="Name" required>
             </div>
 
             <div class="form-group">
                 <label for="age">उमेर</label>
-                <input type="text" id="age" name="age" asp-for="Age" required>
+                <input type="text"  id="age" name="age" asp-for="Age" required>
             </div>
 
             <div class="form-group">
@@ -52,7 +52,7 @@
 
             <div class="form-group">
                 <label for="contact">सम्पर्क नम्बर</label>
-                <input type="text" id="contact" name="contactNumber" asp-for="ContactNumber" required>
+                <input type="text" class="numb" id="contact" name="contactNumber" asp-for="ContactNumber" required>
             </div>
 
             <div class="form-group">
@@ -67,12 +67,12 @@
 
             <div class="form-group">
                 <label for="citizenshipNumber">नागरिकता नम्बर</label>
-                <input type="text" id="citizenshipNumber" name="citizenshipNumber" asp-for="CitizenshipNumber" disabled>
+                <input type="text" class="claNepali" id="citizenshipNumber" name="citizenshipNumber" asp-for="CitizenshipNumber" disabled>
             </div>
 
             <div class="form-group">
                 <label for="nidNumber">एनआईडी नम्बर</label>
-                <input type="text" id="nidNumber" name="nidNumber" asp-for="NIDNumber">
+                <input type="text" class="claNepali" id="nidNumber" name="nidNumber" asp-for="NIDNumber" disabled>
             </div>
 
             <div class="form-group">
@@ -102,16 +102,16 @@
             var nationality = $("#Nationality").val();
             alert(nationality);
             
-            var citizenInput = $("#citizenshipNumber");
-            var passportInput = $("#PassportNumber");
-
+            var nepaliInput = $(".claNepali");
+            var foreignInput = $(".claForeign");
             if (nationality === "foreigner") {
-                // Using AJAX-like dynamic UI change (no actual server call in this case)
-                citizenInput.prop("disabled", "disabled");  // Disable the citizenship input
-             
+                // Disable Nepali citizen input and enable Foreign input
+                nepaliInput.prop("disabled", true);
+                foreignInput.prop("disabled", false);
             } else {
-                citizenInput.prop("disabled", false);  // Enable the citizenship input
-              
+                // Disable Foreign input and enable Nepali citizen input
+                foreignInput.prop("disabled", true);
+                nepaliInput.prop("disabled", false);
             }
         }
     </script>

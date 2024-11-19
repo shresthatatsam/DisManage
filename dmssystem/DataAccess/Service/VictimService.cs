@@ -37,6 +37,8 @@ namespace DataAccess.Service
                 existingRecord.PPSizePhoto = victim.PPSizePhoto ?? existingRecord.PPSizePhoto;
                 existingRecord.CitizenshipNumber = victim.CitizenshipNumber ?? existingRecord.CitizenshipNumber;
                 existingRecord.NIDNumber = victim.NIDNumber ?? existingRecord.NIDNumber;
+                existingRecord.PassportNumber = victim.PassportNumber ?? existingRecord.PassportNumber;
+                existingRecord.Nationality = victim.Nationality ?? existingRecord.Nationality;
                 existingRecord.FatherName = victim.FatherName ?? existingRecord.FatherName;
                 existingRecord.MotherName = victim.MotherName ?? existingRecord.MotherName;
                 existingRecord.GrandFatherName = victim.GrandFatherName ?? existingRecord.GrandFatherName;
