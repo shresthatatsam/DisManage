@@ -1,0 +1,31 @@
+﻿@model DisasterType
+
+<h2>विपत्ति प्रकार सिर्जना गर्नुहोस्</h2>
+
+<form asp-controller="DisasterType" asp-action="Create"  method="post">
+    <div class="form-group">
+       
+        <input asp-for="Id" class="form-control" hidden/>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DisasterName"></label>
+        <input asp-for="DisasterName" class="form-control" />
+        <span asp-validation-for="DisasterName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Severity"></label>
+        <input asp-for="Severity" class="form-control" />
+        <span asp-validation-for="Severity" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">सिर्जना गर्नुहोस्</button>
+        <a asp-controller="DisasterType" asp-action="Index" class="btn btn-secondary">रद्द गर्नुहोस्</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

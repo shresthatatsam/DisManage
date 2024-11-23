@@ -32,7 +32,7 @@ namespace Models
 
         public DateTime created_at { get; set; } = DateTime.Now;
 
-        public Guid? LocationId { get; set; } // Foreign Key to Location
+        public Guid LocationId { get; set; } // Foreign Key to Location
         public Location? Location { get; set; }
 
         // One-to-one relationship with Disaster
