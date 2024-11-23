@@ -62,6 +62,21 @@ namespace DataAccess.Data
                 .WithMany(v => v.Images)
                 .HasForeignKey(di => di.VictimId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<DisasterType>(entity =>
+            {
+                // Define the primary key
+                entity.HasKey(d => d.Id);
+
+              
+                entity.Property(d => d.Isactive)
+                    .HasDefaultValue(true);  // Example: setting a maximum length for Description
+
+                // Optional: Configure table name if it's different from the default
+                entity.ToTable("DisasterTypes");
+
+                // You can add more configurations here as needed
+            });
         }
     }
 }
