@@ -11,5 +11,8 @@ namespace DataAccess.Service.AdminInterface
     {
         List<Volunteer> GetAllVolunteers();
         void AddVolunteer(Volunteer volunteer);
+        Volunteer getData(Guid id);
+        bool EditVolunteer(Volunteer volunteer);
+        Guid Delete(Guid id);
     }
 }
