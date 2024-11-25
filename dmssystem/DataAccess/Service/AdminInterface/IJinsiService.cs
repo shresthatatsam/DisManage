@@ -10,5 +10,6 @@ namespace DataAccess.Service.AdminInterface
     public interface IJinsiService
     {
         JinsiDonation Create(JinsiDonation Jinsidonation);
+        List<JinsiDonation> getAllJinsi(JinsiDonation Jinsidonation);
     }
 }

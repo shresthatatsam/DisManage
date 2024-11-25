@@ -26,5 +26,21 @@ namespace DataAccess.Service.AdminService
             return Jinsidonation;
 
         }
+
+        public List<JinsiDonation> getAllJinsi(JinsiDonation Jinsidonation)
+        {
+           return _context.jinsiDonations.Select(x => new JinsiDonation
+            {
+               Brand = x.Brand,
+               Cost = x.Cost,
+               id = x.id,
+               Kaifayat = x.Kaifayat,
+               name = x.name,
+               Quantity = x.Quantity,
+               Source = x.Source,
+
+            }).ToList();
+
+        }
     }
 }
