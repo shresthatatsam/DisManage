@@ -25,6 +25,7 @@ builder.Services.AddScoped<IVolunteerService, VolunteerService>();
 builder.Services.AddScoped<IDisasterType, DisasterTypeService>();
 builder.Services.AddScoped<IRescueTeamService, RescueTeamService>();
 builder.Services.AddScoped<IDonationService, DonationService>();
+builder.Services.AddScoped<IJinsiService, JinsiDonationService>();
 builder.Services.AddDistributedMemoryCache();  // Session requires a distributed memory cache
 builder.Services.AddSession(options =>
 {

@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <form asp-controller="JinsiDonation" asp-action="CreateJinsiDonation" id="productForm">
+            <div class="form-row">
+                <!-- Hidden field for id (GUID) -->
+                <input type="hidden" name="id" value="">
+
+                <!-- Name field -->
+                <div class="form-group col-lg-6">
+                    <label for="name">नाम:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+
+                <!-- Cost field -->
+                <div class="form-group col-lg-6">
+                    <label for="Cost">कोस्ट:</label>
+                    <input type="text" class="form-control" id="Cost" name="Cost">
+                </div>
+
+                <!-- Brand field -->
+                <div class="form-group col-lg-6">
+                    <label for="Brand">ब्राण्ड:</label>
+                    <input type="text" class="form-control" id="Brand" name="Brand" required>
+                </div>
+
+                <!-- Quantity field -->
+                <div class="form-group col-lg-6">
+                    <label for="Quantity">मात्रा:</label>
+                    <input type="number" class="form-control" id="Quantity" name="Quantity" step="any" required>
+                </div>
+
+                <!-- Kaifayat field -->
+                <div class="form-group col-lg-6">
+                    <label for="Kaifayat">कैफियत:</label>
+                    <input type="text" class="form-control" id="Kaifayat" name="Kaifayat" required>
+                </div>
+
+                <!-- Source field -->
+                <div class="form-group col-lg-6">
+                    <label for="Source">स्रोत:</label>
+                    <input type="text" class="form-control" id="Source" name="Source" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

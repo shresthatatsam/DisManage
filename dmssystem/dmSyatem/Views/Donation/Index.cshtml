@@ -5,6 +5,8 @@
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">प्राप्त </button>
             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">दिनुहोस्</button>
+            <button class="nav-link" id="nav-profile-jinsi-tab" data-bs-toggle="tab" data-bs-target="#nav-profile-jinsi" type="button" role="tab" aria-controls="nav-profile-jinsi" aria-selected="false">jinsi</button>
+
         </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
@@ -14,6 +16,10 @@
         </div>
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
             <partial name="GiveDonation.cshtml" />
+        </div>
+
+        <div class="tab-pane fade" id="nav-profile-jinsi" role="tabpanel" aria-labelledby="nav-profile-jinsi-tab">
+            <partial name="../JinsiDonation/Index.cshtml" />
         </div>
     </div>
 
