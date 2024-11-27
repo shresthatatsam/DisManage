@@ -5,11 +5,7 @@
 
     <label for="volunteers">स्वयंसेवक चयन गर्नुहोस्:</label>
         <select asp-for="SelectedVolunteerId" asp-items="@(new SelectList(Model.AvailableVolunteers, "Id", "Name"))">
-<<<<<<< HEAD
-        <option value="">-- स्वयंसेवक चयन गर्नुहोस् --</option>
-=======
         <option value="">-- कृपया स्वयंसेवक चयन गर्नुहोस् --</option>
->>>>>>> 9e0454d8dc08b614eca468d4ae5b6f62475b8459
         </select>
 
     <button type="submit">स्वयंसेवक नियुक्त गर्नुहोस्</button>
