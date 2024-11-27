@@ -51,15 +51,16 @@ namespace dmSyatem.Controllers.Admin
         [HttpPost]
         public IActionResult Create(RescueTeam team, List<Guid> SelectedVolunteerIds)
         {
-           
                 // Add the selected volunteers to the team
                 foreach (var volunteerId in SelectedVolunteerIds)
                 {
                     var volunteer = _context.volunteers.Find(volunteerId);
                     if (volunteer != null)
                     {
+                        team.isactive = true;
                         team.Volunteers.Add(volunteer);
                     }
+                    volunteer.isactive = false;
                 }
 
                 _context.rescueTeams.Add(team);

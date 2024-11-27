@@ -28,6 +28,8 @@ namespace DataAccess.Data
         public DbSet<DisasterType> disasterTypes  { get; set; }
         public DbSet<province> provinces { get; set; }
         public DbSet<Donation> donations  { get; set; }
+
+        public DbSet<JinsiDonation> jinsiDonations { get; set; }
         public DbSet<Fingerprint> Fingerprints { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -62,6 +64,21 @@ namespace DataAccess.Data
                 .WithMany(v => v.Images)
                 .HasForeignKey(di => di.VictimId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<DisasterType>(entity =>
+            {
+                // Define the primary key
+                entity.HasKey(d => d.Id);
+
+              
+                entity.Property(d => d.Isactive)
+                    .HasDefaultValue(true);  // Example: setting a maximum length for Description
+
+                // Optional: Configure table name if it's different from the default
+                entity.ToTable("DisasterTypes");
+
+                // You can add more configurations here as needed
+            });
         }
     }
 }

@@ -40,7 +40,7 @@
         <div class="col-lg-3 col-md-6">
             <div class="card stat-card">
                 <div class="card-body">
-                    <h5 class="card-title">Donation Given</h5>
+                    <h5 class="card-title">दान दिइएको छ</h5>
                     <p class="card-text">@ViewBag.donationGiven</p>
                 </div>
             </div>
@@ -49,7 +49,7 @@
         <div class="col-lg-3 col-md-6">
             <div class="card stat-card">
                 <div class="card-body">
-                    <h5 class="card-title">Donation Received</h5>
+                    <h5 class="card-title">प्राप्त दान</h5>
                     <p class="card-text">@ViewBag.donationReceived</p>
                 </div>
             </div>
@@ -60,7 +60,7 @@
         <div class="col-lg-3 col-md-6">
             <div class="card stat-card">
                 <div class="card-body">
-                    <h5 class="card-title">given amount</h5>
+                    <h5 class="card-title">दिएको रकम</h5>
                     <p class="card-text">@ViewBag.TotalDonationGivenAmount</p>
                 </div>
             </div>
@@ -69,7 +69,7 @@
         <div class="col-lg-3 col-md-6">
             <div class="card stat-card">
                 <div class="card-body">
-                    <h5 class="card-title">Received amount</h5>
+                    <h5 class="card-title">प्राप्त रकम</h5>
                     <p class="card-text">@ViewBag.TotalDonationReceivedAmount</p>
                 </div>
             </div>
@@ -146,7 +146,57 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+
 <script>
+    // Disaster Timeline Chart (Dynamic Data)
+    var disasterTimelineChartCtx = document.getElementById('disasterTimelineChart').getContext('2d');
+    var disasterTimelineChart = new Chart(disasterTimelineChartCtx, {
+        type: 'line',
+        data: {
+            labels: @Html.Raw(Json.Serialize(ViewBag.DisasterMonths)), // Dynamic Months (Labels)
+            datasets: [{
+                label: 'Disasters',
+                data: @Html.Raw(Json.Serialize(ViewBag.DisasterCounts)), // Dynamic Disaster Count (Data)
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        }
+    });
+
+    // Resource Chart (Dynamic Data)
+    // var victimChartCtx = document.getElementById('victimChart').getContext('2d');
+    // var victimChart = new Chart(victimChartCtx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: @Html.Raw(Json.Serialize(ViewBag.DisasterMonths)), // Dynamic Disaster Types (Labels)
+    //         datasets: [{
+    //             label: 'Victim Count',
+    //             data: @Html.Raw(Json.Serialize(ViewBag.DisasterMonths)), // Dynamic Victim Counts (Data)
+    //             backgroundColor: 'rgba(75, 192, 192, 0.2)',
+    //             borderColor: 'rgba(75, 192, 192, 1)',
+    //             borderWidth: 1
+    //         }]
+    //     }
+    // });
+    var ctx2 = document.getElementById('resourceChart').getContext('2d');
+    var resourceChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['Food', 'Medical', 'Shelter', 'Volunteers'],
+            datasets: [{
+                label: 'Resources Deployed',
+                data: [50, 100, 150, 80],
+                backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
+                borderWidth: 1
+            }]
+        }
+    });
+</script>
+
+
+@* <script>
     var ctx = document.getElementById('disasterTimelineChart').getContext('2d');
     var disasterTimelineChart = new Chart(ctx, {
         type: 'line',
@@ -178,7 +228,7 @@
     });
 
 
-</script>
+</script> *@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -198,4 +248,5 @@
         });
     });
 </script>
+
 

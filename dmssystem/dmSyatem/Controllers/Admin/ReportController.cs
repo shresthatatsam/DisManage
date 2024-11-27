@@ -1,5 +1,6 @@
 ﻿using ClosedXML.Excel;
 using DataAccess.Data;
+using DataAccess.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
@@ -9,14 +10,16 @@ namespace dmSyatem.Controllers.Admin
     public class ReportController : Controller
     {
         public readonly ApplicationDbContext _context;
-
-        public ReportController(ApplicationDbContext context)
+        private readonly ILocation _Location;
+     
+        public ReportController(ILocation Location,ApplicationDbContext context)
         {
+            _Location = Location;
             _context = context;
         }
       
         public IActionResult Index()
-        {
+        {   ViewBag.Province = _Location.getProvince();
             return View();
         }
         public IActionResult GenerateDisasterReport()
@@ -24,12 +27,41 @@ namespace dmSyatem.Controllers.Admin
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> GenerateDisasterReport(string disasterType, DateTime? startDate, DateTime? endDate ,string phoneNumber)
+        public async Task<IActionResult> GenerateDisasterReport(string disasterType, DateTime? startDate, DateTime? endDate ,string phoneNumber , string PermanentProvince , string PermanentDistrict , string PermanentMunicipality)
         {
             var query = _context.Victims
-            .Include(v => v.Disaster) 
-                .AsQueryable();
+     .Include(v => v.Disaster)
+     .AsQueryable();
 
+            if(!string.IsNullOrEmpty(PermanentProvince))
+            {
+                var locationIds = _context.Locations
+                    .Where(x => x.PermanentProvince == PermanentProvince)
+                    .Select(x => x.Id)
+                    .ToList(); 
+                query = query.Where(x => locationIds.Contains(x.LocationId));
+            }
+
+            if(!string.IsNullOrEmpty(PermanentDistrict))
+            {
+                var locationIds = _context.Locations
+                   .Where(x => x.PermanentDistrict == PermanentDistrict)
+                   .Select(x => x.Id)
+                   .ToList();
+                query = query.Where(x => locationIds.Contains(x.LocationId));
+            }
+
+            if (!string.IsNullOrEmpty(PermanentMunicipality))
+            {
+                var locationIds = _context.Locations
+                   .Where(x => x.PermanentMunicipality == PermanentMunicipality)
+                   .Select(x => x.Id)
+                   .ToList();
+                query = query.Where(x => locationIds.Contains(x.LocationId));
+            }
+
+
+            var result = query.ToList();
             if (!string.IsNullOrEmpty(phoneNumber))
             {
                 query = query.Where(r => r.ContactNumber == phoneNumber);
@@ -37,7 +69,8 @@ namespace dmSyatem.Controllers.Admin
 
             if (!string.IsNullOrEmpty(disasterType) && disasterType != "All")
             {
-                query = query.Where(r => r.Disaster.DisasterType == disasterType);
+                var disasterTypes = _context.disasterTypes.Where(x => x.DisasterName == disasterType).Select(x => x.Id).FirstOrDefault().ToString();
+                query = query.Where(r => r.Disaster.DisasterType == disasterTypes);
             }
 
             if (startDate.HasValue)

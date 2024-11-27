@@ -11,7 +11,9 @@ namespace Models
        
             public Guid Id { get; set; }
             public string TeamName { get; set; }
-            public List<Volunteer> Volunteers { get; set; } = new List<Volunteer>();
+
+		public bool isactive { get; set; }
+		public List<Volunteer> Volunteers { get; set; } = new List<Volunteer>();
        
 
          public Guid provinceId { get; set; }

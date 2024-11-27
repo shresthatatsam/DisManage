@@ -37,6 +37,8 @@ namespace DataAccess.Service
                 existingRecord.PPSizePhoto = victim.PPSizePhoto ?? existingRecord.PPSizePhoto;
                 existingRecord.CitizenshipNumber = victim.CitizenshipNumber ?? existingRecord.CitizenshipNumber;
                 existingRecord.NIDNumber = victim.NIDNumber ?? existingRecord.NIDNumber;
+                existingRecord.PassportNumber = victim.PassportNumber ?? existingRecord.PassportNumber;
+                existingRecord.Nationality = victim.Nationality ?? existingRecord.Nationality;
                 existingRecord.FatherName = victim.FatherName ?? existingRecord.FatherName;
                 existingRecord.MotherName = victim.MotherName ?? existingRecord.MotherName;
                 existingRecord.GrandFatherName = victim.GrandFatherName ?? existingRecord.GrandFatherName;
@@ -57,9 +59,9 @@ namespace DataAccess.Service
 
         private string GenerateSecretNumber()
         {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             Random random = new Random();
-            return new string(Enumerable.Repeat(chars, 6)
+            return new string(Enumerable.Repeat(chars, 12)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
         public Victim Edit(Victim victim)

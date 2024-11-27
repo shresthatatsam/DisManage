@@ -11,5 +11,7 @@ namespace DataAccess.Service.AdminInterface
     {
         DisasterType create(DisasterType disasterTypeService);
         List<DisasterType> GetAll();
+        DisasterType getData(Guid id);
+        Guid Delete(Guid id);
     }
 }

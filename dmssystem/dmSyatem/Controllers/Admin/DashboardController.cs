@@ -1,4 +1,5 @@
-﻿using DataAccess.Service.AdminInterface;
+﻿using DataAccess.Service;
+using DataAccess.Service.AdminInterface;
 using DataAccess.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -22,7 +23,16 @@ namespace dmSyatem.Controllers.Admin
 
         public async Task<IActionResult> Index()
         {
-            ViewBag.VictimCount = _dashboard.TotalVictim();
+			var disasterCounts = await _dashboard.GetMonthlyDisasterCountsAsync();
+			var disasterMonths = Enumerable.Range(1, 6).ToList(); // For example, use last 6 months
+
+        
+            ViewBag.DisasterCounts = disasterCounts;
+			ViewBag.DisasterMonths = disasterMonths;
+			
+
+
+			ViewBag.VictimCount = _dashboard.TotalVictim();
             ViewBag.ActiveCases = _dashboard.ActiveCases();
             ViewBag.ResourceDeployed = _dashboard.ResourceDeployed();
 
