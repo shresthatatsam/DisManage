@@ -17,6 +17,7 @@ namespace dmSyatem.Controllers.Admin
         }
         public IActionResult Index()
         {
+         
             return View();
         }
 
@@ -30,9 +31,7 @@ namespace dmSyatem.Controllers.Admin
         {
           
             List<JinsiDonation> jinsiDonations = _jinsiService.getAllJinsi(new JinsiDonation());
-
-            
-            ViewBag.JinsiDonations = new SelectList(jinsiDonations, "name", "name");
+            ViewBag.JinsiDonations = jinsiDonations;
 
             return View();
         }

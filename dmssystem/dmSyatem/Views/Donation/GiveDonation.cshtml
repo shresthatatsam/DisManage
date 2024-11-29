@@ -66,9 +66,19 @@
                     <input type="text" class="form-control" id="amount" name="amount">
                 </div>
 
-                <div class="form-group col-lg-6" id="Jinsi">
+               @*  <div class="form-group col-lg-6" id="Jinsi">
                     <label for="Jinsi">Jinsi:</label>
                     <input type="text" class="form-control" id="Jinsi" name="Jinsi">
+                </div> *@
+                <div class="form-group col-lg-6">
+                    <label for="name">नाम:</label>
+                    <select class="form-control" id="Jinsi" name="Jinsi" multiple>
+                        <option value="">Select Name</option>
+                        @foreach (var itemm in ViewBag.JinsiDonations)
+                        {
+                            <option value="@itemm.id">@itemm.name</option>
+                        }
+                    </select>
                 </div>
             </div>
 
