@@ -15,9 +15,9 @@
              <div class="form-group">
                 <label for="Nationality">राष्ट्रीयता</label>
                 <select id="Nationality" name="Nationality" asp-for="Nationality" required onchange="toggleCitizenInput()">
-                    <option value="" selected>Select one</option>
-                    <option value="foreigner">Foreigner</option>
-                    <option value="nepali">Nepali</option>
+                    <option value="" selected>एउटा चयन गर्नुहोस्</option>
+                    <option value="foreigner">विदेशी</option>
+                    <option value="nepali">नेपाली</option>
                 </select>
             </div> 
 
@@ -25,7 +25,7 @@
 
             <!-- Passport Number field (initially hidden) -->
              <div class="form-group" id="passport-group">
-                <label for="PassportNumber">पासपोर्ट संख्या</label>
+                <label for="PassportNumber">पासपोर्ट नम्बर</label>
                 <input type="text" class="claForeign" id="PassportNumber" name="PassportNumber" asp-for="PassportNumber" disabled>
             </div>
  
