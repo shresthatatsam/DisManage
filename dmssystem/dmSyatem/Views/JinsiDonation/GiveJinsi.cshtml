@@ -1,15 +1,16 @@
-﻿@model JinsiDonation  
+﻿@* 
 <div class="container mt-5">
     <form asp-controller="JinsiDonation" asp-action="CreateJinsiDonation" id="productForm">
         <div class="form-row">
-            <!-- Hidden field for id (GUID) -->
-            @* <input type="hidden" name="id" value="@Model.id"> *@
-
-            <!-- Name field (Dropdown populated with JinsiDonation names) -->
+           
             <div class="form-group col-lg-6">
                 <label for="name">नाम:</label>
-                <select class="form-control" asp-for="name" asp-items="@ViewBag.JinsiDonations" required>
+                <select class="form-control" required>
                     <option value="">Select Name</option>
+                    @foreach (var itemm in ViewBag.JinsiDonations)
+                    {
+                        <option value="">@itemm.name</option>
+                    }
                 </select>
             </div>
 
@@ -47,3 +48,4 @@
         <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
     </form>
 </div>
+ *@
