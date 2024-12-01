@@ -20,5 +20,10 @@ namespace Models
 
         public Guid DisasterId { get; set; }
         public Disaster Disaster { get; set; }
+
+        public string? WitnessName {  get; set; }
+        public string? WitnessPhonenumber { get; set; }
+        public string? WitnessAddress { get; set; }
+        public string? WitnessGender { get; set; }
     }
 }
