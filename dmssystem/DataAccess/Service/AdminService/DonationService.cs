@@ -12,13 +12,24 @@ namespace DataAccess.Service.AdminService
     public class DonationService :IDonationService
     {
         public readonly ApplicationDbContext _context;
-
-        public DonationService(ApplicationDbContext context)
+        private readonly IJinsiService _jinsiService;
+      
+        public DonationService(ApplicationDbContext context, IJinsiService jinsiService)
         {
             _context = context;
+            _jinsiService = jinsiService;
         }
         public Donation Create(Donation donation)
         {
+            for(int i=0; i< donation.Jinsi.Count; i++)
+            {
+                if (!HasSufficientQuantity(Guid.Parse(donation.Jinsi[i]) , (float)donation.Quantity[i]))
+                {
+                    throw new InvalidOperationException("Not enough stock available for the donation.");
+                }
+            }
+           
+
             var existingDonation = _context.donations
         .FirstOrDefault(d => d.SecretNumber == donation.SecretNumber);
 
@@ -34,7 +45,20 @@ namespace DataAccess.Service.AdminService
             return donation;
 
         }
+        public bool HasSufficientQuantity(Guid jinsiId, float requestedQuantity)
+        {
+            // Get the product by its ID
+            var product = _context.jinsiDonations.FirstOrDefault(p => p.id == jinsiId);
 
+            if (product == null)
+            {
+                // Product doesn't exist, return false
+                return false;
+            }
+
+            // Check if the available quantity is enough for the requested quantity
+            return product.Quantity >= requestedQuantity;
+        }
         public string TotalDonationReceived()
         {
             var donationReceived = _context.donations.Where(x => x.Type == "Receive").Count().ToString();

@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Form</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         .hidden {
             display: none;
         }
+
+      
     </style>
 </head>
 <body>
@@ -70,18 +73,33 @@
                     <label for="Jinsi">Jinsi:</label>
                     <input type="text" class="form-control" id="Jinsi" name="Jinsi">
                 </div> *@
+               
                 <div class="form-group col-lg-6">
                     <label for="name">नाम:</label>
-                    <select class="form-control" id="Jinsi" name="Jinsi" multiple>
-                        <option value="">Select Name</option>
+                    <select class="chosen-select form-control" id="Jinsi" name="Jinsi" multiple>
+                        @* <option value="">Select Name</option> *@
                         @foreach (var itemm in ViewBag.JinsiDonations)
                         {
                             <option value="@itemm.id">@itemm.name</option>
                         }
                     </select>
                 </div>
-            </div>
 
+                <div class="form-group col-lg-6">
+            
+                    <div class="form-group" id="quantity-group-1">
+                        <label for="quantity-1">Quantity:</label>
+                        <select class="chosen-select form-control" id="quantity-1" name="Quantity" multiple>
+                            @* <option value="">Select Quantity</option> *@
+                            @for (int i = 1; i < 25; i++)
+                            {
+                                <option value=@i>@i</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+             
+            </div>
             <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
         </form>
     </div>
@@ -89,6 +107,17 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
 
+    <script>
+        $(".chosen-select").chosen({
+            no_results_text: "Oops, nothing found!",
+            width: "100%" 
+        })
+       
+    </script>
 </body>
 </html>
