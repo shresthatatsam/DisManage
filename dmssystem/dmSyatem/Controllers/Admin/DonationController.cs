@@ -34,7 +34,7 @@ namespace dmSyatem.Controllers.Admin
         public IActionResult CreateGiveDonation(Donation donation)
         {
             _donationService.Create(donation);
-             return View("Index");
+             return RedirectToAction("Index");
         }
     }
 }

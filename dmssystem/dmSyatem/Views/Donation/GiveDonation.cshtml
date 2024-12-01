@@ -90,10 +90,12 @@
                     <div class="form-group" id="quantity-group-1">
                         <label for="quantity-1">Quantity:</label>
                         <select class="chosen-select form-control" id="quantity-1" name="Quantity" multiple>
-                            @* <option value="">Select Quantity</option> *@
-                            @for (int i = 1; i < 25; i++)
+                            @for (int j = 1; j < 10; j++)
+                            {
+                            @for (int i = 1; i < 10; i++)
                             {
                                 <option value=@i>@i</option>
+                            }
                             }
                         </select>
                     </div>
@@ -117,7 +119,23 @@
             no_results_text: "Oops, nothing found!",
             width: "100%" 
         })
-       
+                $("#quantity-1").on('change', function () {
+            var selectedValues = $(this).val(); // Get selected values
+                var options = $(this).find('option'); // Get all options in the select
+
+                // Loop through all options and hide those that are selected
+                options.each(function () {
+                    var option = $(this);
+                    if (selectedValues.includes(option.val())) {
+                        option.hide(); // Hide the selected option
+                    } else {
+                        option.show(); // Ensure unselected options are visible
+                    }
+                });
+
+                // Re-initialize Chosen plugin to update the dropdown UI
+                $(this).trigger('chosen:updated');
+            });
     </script>
 </body>
 </html>

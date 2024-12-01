@@ -55,9 +55,21 @@ namespace DataAccess.Service.AdminService
                 // Product doesn't exist, return false
                 return false;
             }
+            if (product.Quantity >= requestedQuantity)
+            {
+                // Decrease the product quantity
+                product.Quantity -= requestedQuantity;
 
-            // Check if the available quantity is enough for the requested quantity
-            return product.Quantity >= requestedQuantity;
+                // Save changes to the database
+                _context.SaveChanges();
+
+                return true; // Return true after successfully updating the quantity
+            }
+            else
+            {
+                // Throw an exception if the quantity is insufficient
+                throw new InvalidOperationException("Insufficient quantity available.");
+            }
         }
         public string TotalDonationReceived()
         {
