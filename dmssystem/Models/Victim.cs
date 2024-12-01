@@ -39,8 +39,9 @@ namespace Models
         public Guid? DisasterId { get; set; } // Foreign Key to Disaster
         public Disaster? Disaster { get; set; }
 
-  
 
+        public Guid? DonationId { get; set; } // Foreign Key to Disaster
+        public Donation? Donation { get; set; }
         // One-to-many relationship with DisasterImage
         public ICollection<Image>? Images { get; set; } = new List<Image>();
     }

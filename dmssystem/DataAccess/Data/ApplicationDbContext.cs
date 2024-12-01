@@ -46,6 +46,11 @@ namespace DataAccess.Data
                 .WithOne(d => d.Victim)
                 .HasForeignKey<Disaster>(d => d.VictimId);
 
+            builder.Entity<Victim>()
+          .HasOne(v => v.Donation)
+          .WithOne(d => d.Victim)
+          .HasForeignKey<Donation>(d => d.VictimId);
+
 
             builder.Entity<Volunteer>()
               .HasOne(v => v.province)  // A volunteer has one location
@@ -57,6 +62,8 @@ namespace DataAccess.Data
           .WithOne(di => di.Disaster)
           .HasForeignKey(di => di.DisasterId)
           .OnDelete(DeleteBehavior.Cascade); // Cascade delete for Disaster-DisasterImage
+            
+          
 
             // Disable Cascade Delete on DisasterImages -> Victim to prevent multiple cascade paths
             builder.Entity<Image>()

@@ -22,5 +22,8 @@ namespace Models
         public List<double>? Quantity { get; set; }
         public string Type { get; set; }
 
+        public Guid? VictimId { get; set; }
+        public Victim? Victim { get; set; }
+
     }
 }

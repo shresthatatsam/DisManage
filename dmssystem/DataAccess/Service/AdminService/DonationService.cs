@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Data;
 using DataAccess.Service.AdminInterface;
+using DataAccess.Service.Interface;
 using Models;
 
 namespace DataAccess.Service.AdminService
@@ -21,6 +22,28 @@ namespace DataAccess.Service.AdminService
         }
         public Donation Create(Donation donation)
         {
+            if(donation.Type == "Receive")
+            {
+                var existingDonation = _context.donations
+            .FirstOrDefault(d => d.SecretNumber == donation.SecretNumber);
+
+                if (existingDonation != null)
+                {
+                    return existingDonation;
+                }
+
+                _context.donations.Add(donation);
+                _context.SaveChanges();
+                return donation;
+
+            }
+            else
+            {
+
+           Victim victims = _context.Victims.Where(x => x.Secret_Number == donation.SecretNumber).FirstOrDefault();
+
+            donation.VictimId = victims.Id;
+
             for(int i=0; i< donation.Jinsi.Count; i++)
             {
                 if (!HasSufficientQuantity(Guid.Parse(donation.Jinsi[i]) , (float)donation.Quantity[i]))
@@ -41,9 +64,20 @@ namespace DataAccess.Service.AdminService
 
             // If no existing donation, add the new donation
             _context.donations.Add(donation);
+
+            if (donation.VictimId != Guid.Empty)
+            {
+                var victim = _context.Victims.FirstOrDefault(v => v.Id == donation.VictimId);
+                if (victim != null)
+                {
+                    victim.DonationId = donation.id;
+                    _context.SaveChanges();
+                }
+            }
             _context.SaveChanges();
             return donation;
 
+            }
         }
         public bool HasSufficientQuantity(Guid jinsiId, float requestedQuantity)
         {

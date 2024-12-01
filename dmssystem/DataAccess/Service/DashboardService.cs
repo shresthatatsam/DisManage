@@ -84,6 +84,23 @@ namespace DataAccess.Service
            var item = _context.Victims.Where(x => x.Id == id).FirstOrDefault();
             var location = _context.Locations.Where(x => x.Id == item.LocationId).FirstOrDefault();
             var disaster = _context.Disasters.Where(x => x.Id == item.DisasterId).FirstOrDefault();
+            var donation = _context.donations.Where(x => x.id == item.DonationId).FirstOrDefault();
+           
+            List<string> jinsiList = new List<string>();
+
+            foreach (var jinsiitem in donation.Jinsi)
+            {
+               
+                Guid jinsiId = Guid.Parse(jinsiitem);
+
+                var fetchedJinsi = _context.jinsiDonations
+                                           .Where(x => x.id == jinsiId)
+                                           .Select(x=>x.name); 
+
+                jinsiList.AddRange(fetchedJinsi); 
+            }
+
+
 
             var disasterType = _context.disasterTypes.Where(x => x.Id == Guid.Parse(disaster.DisasterType)).FirstOrDefault();
             var Perprovince = GetProvince(location.PermanentProvince);
@@ -155,8 +172,14 @@ namespace DataAccess.Service
                 DisasterDate = i.DisasterDate,
                 isActive = i.isActive,
                 created_at = i.created_at
-            }).ToList() : new List<Image>() // Return images related to the victim
-        })
+            }).ToList() : new List<Image>(), // Return images related to the victim\
+            Donation = v.Donation != null ? new Donation
+            {
+                id = v.Donation.id,
+                amount = v.Donation.amount,
+                Jinsi = jinsiList
+            }  : null,
+            })
         .FirstOrDefault();
 
             return victim; 
