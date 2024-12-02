@@ -87,10 +87,12 @@ namespace DataAccess.Service
             var donation = _context.donations.Where(x => x.id == item.DonationId).FirstOrDefault();
            
             List<string> jinsiList = new List<string>();
+            if(donation!= null)
+            {
 
             foreach (var jinsiitem in donation.Jinsi)
             {
-               
+             
                 Guid jinsiId = Guid.Parse(jinsiitem);
 
                 var fetchedJinsi = _context.jinsiDonations
@@ -98,6 +100,7 @@ namespace DataAccess.Service
                                            .Select(x=>x.name); 
 
                 jinsiList.AddRange(fetchedJinsi); 
+            }
             }
 
 
