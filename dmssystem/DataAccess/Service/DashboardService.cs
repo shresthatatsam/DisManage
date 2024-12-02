@@ -84,31 +84,31 @@ namespace DataAccess.Service
            var item = _context.Victims.Where(x => x.Id == id).FirstOrDefault();
             var location = _context.Locations.Where(x => x.Id == item.LocationId).FirstOrDefault();
             var disaster = _context.Disasters.Where(x => x.Id == item.DisasterId).FirstOrDefault();
-            var donation = _context.donations.Where(x => x.id == item.DonationId).FirstOrDefault();
+            //var donation = _context.donations.Where(x => x.id == item.DonationId).FirstOrDefault();
            
-            List<string> jinsiList = new List<string>();
+            //List<string> jinsiList = new List<string>();
 
-            foreach (var jinsiitem in donation.Jinsi)
-            {
+            //foreach (var jinsiitem in donation.Jinsi)
+            //{
                
-                Guid jinsiId = Guid.Parse(jinsiitem);
+            //    Guid jinsiId = Guid.Parse(jinsiitem);
 
-                var fetchedJinsi = _context.jinsiDonations
-                                           .Where(x => x.id == jinsiId)
-                                           .Select(x=>x.name); 
+            //    var fetchedJinsi = _context.jinsiDonations
+            //                               .Where(x => x.id == jinsiId)
+            //                               .Select(x=>x.name); 
 
-                jinsiList.AddRange(fetchedJinsi); 
-            }
+            //    jinsiList.AddRange(fetchedJinsi); 
+            //}
 
 
 
             var disasterType = _context.disasterTypes.Where(x => x.Id == Guid.Parse(disaster.DisasterType)).FirstOrDefault();
-            var Perprovince = GetProvince(location.PermanentProvince);
-            var Tempprovince = GetProvince(location.TemporaryProvince);
-            var PerDistrict = GetProvince(location.PermanentDistrict);
-            var TempDistrict = GetProvince(location.TemporaryDistrict);
-            var PerMun = GetProvince(location.PermanentMunicipality);
-            var TempMun = GetProvince(location.TemporaryMunicipality);
+            //var Perprovince = GetProvince(location.PermanentProvince);
+            //var Tempprovince = GetProvince(location.TemporaryProvince);
+            //var PerDistrict = GetProvince(location.PermanentDistrict);
+            //var TempDistrict = GetProvince(location.TemporaryDistrict);
+            //var PerMun = GetProvince(location.PermanentMunicipality);
+            //var TempMun = GetProvince(location.TemporaryMunicipality);
 
 
             var victim = _context.Victims
@@ -133,13 +133,13 @@ namespace DataAccess.Service
             Location = v.Location != null ? new Location
             {
                 Id = v.Location.Id,
-                PermanentProvince = Perprovince != null ? Perprovince.Province : string.Empty,
-                PermanentDistrict = PerDistrict != null ? PerDistrict.District : string.Empty,
-                PermanentMunicipality = PerMun != null ? PerMun.Municipality : string.Empty,
-                PermanentTole = v.Location.PermanentTole,
-                TemporaryProvince = Tempprovince != null ? Tempprovince.Province : string.Empty,
-                TemporaryDistrict = TempDistrict != null ? TempDistrict.District : string.Empty,
-                TemporaryMunicipality = TempMun != null ? TempMun.Municipality : string.Empty,
+                //PermanentProvince = Perprovince != null ? Perprovince.Province : string.Empty,
+                //PermanentDistrict = PerDistrict != null ? PerDistrict.District : string.Empty,
+                //PermanentMunicipality = PerMun != null ? PerMun.Municipality : string.Empty,
+                //PermanentTole = v.Location.PermanentTole,
+                //TemporaryProvince = Tempprovince != null ? Tempprovince.Province : string.Empty,
+                //TemporaryDistrict = TempDistrict != null ? TempDistrict.District : string.Empty,
+                //TemporaryMunicipality = TempMun != null ? TempMun.Municipality : string.Empty,
                 TemporaryTole = v.Location.TemporaryTole,
                 isActive = v.Location.isActive,
                 created_at = v.Location.created_at
@@ -173,12 +173,12 @@ namespace DataAccess.Service
                 isActive = i.isActive,
                 created_at = i.created_at
             }).ToList() : new List<Image>(), // Return images related to the victim\
-            Donation = v.Donation != null ? new Donation
-            {
-                id = v.Donation.id,
-                amount = v.Donation.amount,
-                Jinsi = jinsiList
-            }  : null,
+            //Donation = v.Donation != null ? new Donation
+            //{
+            //    id = v.Donation.id,
+            //    amount = v.Donation.amount,
+            //    Jinsi = jinsiList
+            //}  : null,
             })
         .FirstOrDefault();
 
