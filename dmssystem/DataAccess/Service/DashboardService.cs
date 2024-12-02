@@ -92,7 +92,7 @@ namespace DataAccess.Service
 
             foreach (var jinsiitem in donation.Jinsi)
             {
-               
+             
                 Guid jinsiId = Guid.Parse(jinsiitem);
 
                 var fetchedJinsi = _context.jinsiDonations
