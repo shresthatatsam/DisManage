@@ -31,7 +31,11 @@
 
         <div class="mb-3">
             <label for="contactNumber" class="form-label">सम्पर्क नम्बर</label>
-            <input type="text" class="form-control" id="contactNumber" asp-for="ContactNumber" required>
+            <!--<input type="tel" class="form-control" id="contactNumber" asp-for="ContactNumber" readonly> -->
+            <input type="tel" class="numb" id="contactNumber" name="contactNumber"
+                   minlength="10" maxlength="10"
+                   title="Please enter exactly 10 digits"
+                   required>
         </div>
 
         <div class="mb-3">
@@ -41,7 +45,12 @@
 
         <div class="mb-3">
             <label for="availability" class="form-label">उपलब्धता</label>
-            <input type="text" class="form-control" id="availability" name="availability" asp-for="Availability" required>
+            <!-- <input type="text" class="form-control" id="availability" name="availability" asp-for="Availability" required> -->
+            <select id="availability" name="availability" class="form-select" required>
+                <option value="" selected>उपलब्धता चयन गर्नुहोस्</option>
+                <option value="1">छु</option>
+                <option value="0">छैन</option>
+            </select>
         </div>
 
         <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
