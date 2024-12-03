@@ -10,9 +10,15 @@
     </div>
     <div class="form-group">
         <label asp-for="Severity"></label>
-        <input asp-for="Severity" class="form-control" />
+        <select asp-for="Severity" class="form-control">
+            <option value="" selected>गम्भीरता चयन गर्नुहोस्</option>
+            <option value="High">उच्च</option>
+            <option value="Medium">मध्यम</option>
+            <option value="Low">कम</option>
+        </select>
         <span asp-validation-for="Severity" class="text-danger"></span>
     </div>
+
     <div class="form-group">
         <button type="submit" class="btn btn-primary">सिर्जना गर्नुहोस्</button>
         <a asp-controller="DisasterType" asp-action="Index" class="btn btn-secondary">रद्द गर्नुहोस्</a>

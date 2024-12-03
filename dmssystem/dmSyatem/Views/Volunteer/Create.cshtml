@@ -27,7 +27,11 @@
 
         <div class="mb-3">
             <label for="contactNumber" class="form-label">सम्पर्क नम्बर</label>
-            <input type="text" class="numb" id="contactNumber" name="contactNumber" required>
+            <!--<input type="tel" class="form-control" id="contactNumber" asp-for="ContactNumber" readonly> -->
+            <input type="tel" class="numb" id="contactNumber" name="contactNumber"
+                   minlength="10" maxlength="10"
+                   title="Please enter exactly 10 digits"
+                   required>
         </div>
 
         <div class="mb-3">

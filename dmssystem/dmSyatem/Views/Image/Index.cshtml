@@ -24,7 +24,7 @@
         <h3>Witness Section</h3>
         <div class="form-group">
             <label for="WitnessName">Witness Name</label>
-            <input type="tel" class="form-control" id="WitnessName" asp-for="WitnessName" readonly>
+            <input type="tel" class="shorttext" id="WitnessName" asp-for="WitnessName" readonly>
         </div>
 
         <div class="form-group">
@@ -34,12 +34,17 @@
 
         <div class="form-group">
             <label for="WitnessPhonenumber">Witness Phonenumber</label>
-            <input type="tel" class="form-control" id="WitnessPhonenumber" asp-for="WitnessPhonenumber" readonly>
+            <input type="tel" class="numb" id="WitnessPhonenumber" asp-for="WitnessPhonenumber" readonly>
         </div>
 
         <div class="form-group">
-            <label for="WitnessGender">Witness Gender</label>
-            <input type="tel" class="form-control" id="WitnessGender" asp-for="WitnessGender" readonly>
+            <label for="gender" class="form-label">लिंग</label>
+            <select id="gender" name="gender" class="form-select" required>
+                <option value="" selected>लिंग चयन गर्नुहोस्</option>
+                <option value="Male">पुरुष</option>
+                <option value="Female">महिला</option>
+                <option value="Other">अन्य</option>
+            </select>
         </div>
       </div>
     <button type="submit" class="btn btn-primary">फोटोहरू अपलोड गर्नुहोस्</button>
