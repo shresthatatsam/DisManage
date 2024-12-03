@@ -14,14 +14,15 @@ namespace Models
         public string phoneNumber { get; set; }
         public string email { get; set; }
         public string address { get; set; }
-        public string paymentMethod { get; set; }
-        public string amount { get; set; }
+        public List<string> paymentMethod { get; set; }
+        public List<string> amount { get; set; }
         public string? bankName {  get; set; }
         public string? chequeNumber { get; set; }
         public List<string>? Jinsi { get; set; }
         public List<double>? Quantity { get; set; }
         public string Type { get; set; }
 
+   
         public Guid? VictimId { get; set; }
         public Victim? Victim { get; set; }
 

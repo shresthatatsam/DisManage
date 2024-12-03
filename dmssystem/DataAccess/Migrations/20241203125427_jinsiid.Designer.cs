@@ -4,6 +4,7 @@ using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241203125427_jinsiid")]
+    partial class jinsiid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -309,6 +312,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("Jinsi")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("JinsiId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Quantity")
                         .HasColumnType("nvarchar(max)");
 
@@ -470,7 +476,9 @@ namespace DataAccess.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("DonationId");
+                    b.HasIndex("DonationId")
+                        .IsUnique()
+                        .HasFilter("[DonationId] IS NOT NULL");
 
                     b.ToTable("jinsiDonations");
                 });
@@ -804,8 +812,8 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Models.JinsiDonation", b =>
                 {
                     b.HasOne("Models.Donation", "Donation")
-                        .WithMany()
-                        .HasForeignKey("DonationId");
+                        .WithOne("jinsiDonation")
+                        .HasForeignKey("Models.JinsiDonation", "DonationId");
 
                     b.Navigation("Donation");
                 });
@@ -857,6 +865,11 @@ namespace DataAccess.Migrations
             modelBuilder.Entity("Models.Disaster", b =>
                 {
                     b.Navigation("Images");
+                });
+
+            modelBuilder.Entity("Models.Donation", b =>
+                {
+                    b.Navigation("jinsiDonation");
                 });
 
             modelBuilder.Entity("Models.RescueTeam", b =>

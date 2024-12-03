@@ -80,7 +80,7 @@
                         @* <option value="">Select Name</option> *@
                         @foreach (var itemm in ViewBag.JinsiDonations)
                         {
-                            <option value="@itemm.id">@itemm.name</option>
+                            <option value="@itemm.id">@itemm.jname</option>
                         }
                     </select>
                 </div>
@@ -89,7 +89,7 @@
             
                     <div class="form-group" id="quantity-group-1">
                         <label for="quantity-1">Quantity:</label>
-                        <select class="chosen-select form-control" id="quantity-1" name="Quantity" multiple>
+                        <select class="chosen-select form-control" id="quantity-1" name="jQuantity" multiple>
                             @for (int j = 1; j < 10; j++)
                             {
                             @for (int i = 1; i < 10; i++)

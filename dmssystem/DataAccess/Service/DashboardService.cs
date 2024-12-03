@@ -97,7 +97,7 @@ namespace DataAccess.Service
 
                 var fetchedJinsi = _context.jinsiDonations
                                            .Where(x => x.id == jinsiId)
-                                           .Select(x=>x.name); 
+                                           .Select(x=>x.jname); 
 
                 jinsiList.AddRange(fetchedJinsi); 
             }

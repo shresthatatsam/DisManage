@@ -4,6 +4,7 @@ using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241203080415_changes in donation  as list")]
+    partial class changesindonationaslist
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -443,34 +446,29 @@ namespace DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("DonationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("jBrand")
+                    b.Property<string>("Brand")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("jCost")
+                    b.Property<string>("Cost")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("jKaifayat")
+                    b.Property<string>("Kaifayat")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("jQuantity")
+                    b.Property<double>("Quantity")
                         .HasColumnType("float");
 
-                    b.Property<string>("jSource")
+                    b.Property<string>("Source")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("jname")
+                    b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
-
-                    b.HasIndex("DonationId");
 
                     b.ToTable("jinsiDonations");
                 });
@@ -799,15 +797,6 @@ namespace DataAccess.Migrations
                     b.Navigation("Disaster");
 
                     b.Navigation("Victim");
-                });
-
-            modelBuilder.Entity("Models.JinsiDonation", b =>
-                {
-                    b.HasOne("Models.Donation", "Donation")
-                        .WithMany()
-                        .HasForeignKey("DonationId");
-
-                    b.Navigation("Donation");
                 });
 
             modelBuilder.Entity("Models.Location", b =>

@@ -31,13 +31,13 @@ namespace DataAccess.Service.AdminService
         {
            return _context.jinsiDonations.Select(x => new JinsiDonation
             {
-               Brand = x.Brand,
-               Cost = x.Cost,
+               jBrand = x.jBrand,
+               jCost = x.jCost,
                id = x.id,
-               Kaifayat = x.Kaifayat,
-               name = x.name,
-               Quantity = x.Quantity,
-               Source = x.Source,
+               jKaifayat = x.jKaifayat,
+               jname = x.jname,
+               jQuantity = x.jQuantity,
+               jSource = x.jSource,
 
             }).ToList();
 
