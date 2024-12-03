@@ -1,17 +1,11 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Form</title>
+﻿
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .hidden {
             display: none;
         }
     </style>
-</head>
-<body>
+
 
     <div class="container mt-5">
         <form asp-controller="Donation" asp-action="CreateGiveDOnation" id="paymentForm">
@@ -25,7 +19,7 @@
 
                 <div class="form-group col-lg-6">
                     <label for="phoneNumber">फोन नम्बर:</label>
-                    <input type="text" class="numb" id="phoneNumber" name="phoneNumber" required>
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required>
                 </div>
 
                 <div class="form-group col-lg-6">
@@ -38,61 +32,201 @@
                     <input type="text" class="form-control" id="address" name="address" required>
                 </div>
 
-                <div class="form-group col-lg-6">
+            <div class="col-lg-12" id="paymentFieldsContainer">
+                <div class="row">
+                <div class="form-group col-lg-4">
                     <label for="paymentMethod">भुक्तानी विधि:</label>
-                    <select class="form-control" id="paymentMethod" name="paymentMethod" onchange="showRelevantFields()" required>
+                    <select class="form-control payment-method" id="paymentMethod" name="paymentMethod" onchange="showRelevantFields(this)" required>
                         <option value="">चयन गर्नुहोस्</option>
                         <option value="cash">नगद</option>
                         <option value="cheque">चेक</option>
+                        <option value="Jinsi">Jinsi</option>
                     </select>
                 </div>
 
-                <div class="form-group col-lg-6 " id="amountField">
+                <div class="form-group col-lg-4 amount-field">
                     <label for="amount">रकम:</label>
-                    <input type="text" class="form-control" id="amount" name="amount">
+                    <input type="text" class="form-control amount" id="amount" name="amount">
                 </div>
 
-          <!--     <div class="form-group col-lg-6" id="Jinsi">
+                 @* <div class="form-group col-lg-6 jinsi-field">
                     <label for="Jinsi">Jinsi:</label>
-                    <input type="text" class="form-control" id="Jinsi" name="Jinsi">
-                </div>
-                -->
-
-                <div class="form-group col-lg-6 hidden" id="bankNameField">
+                    <input type="text" class="form-control jinsi" id="Jinsi" name="Jinsi">
+                </div>  
+ *@
+                <div class="form-group col-lg-4 hidden bank-name-field">
                     <label for="bankName">बैंकको नाम:</label>
-                    <input type="text" class="form-control" id="bankName" name="bankName">
+                    <input type="text" class="form-control bank-name" id="bankName" name="bankName">
                 </div>
 
+                @* <div class="jinsiField row"> *@
+                    <!-- Hidden field for id (GUID) -->
+                    @* <input type="hidden" name="id" value=""> *@
+
+                    <!-- Name field -->
+                <div class="form-group jinsiField hidden col-lg-4">
+                        <label for="name">नाम:</label>
+                        <input type="text" class="form-control" id="jname" name="jinsiDonation[0].jname" >
+                    </div>
+
+                    <!-- Cost field -->
+                <div class="form-group jinsiField hidden col-lg-4">
+                        <label for="Cost">कोस्ट:</label>
+                        <input type="text" class="form-control" id="jCost" name="jinsiDonation[0].jCost">
+                    </div>
+
+                    <!-- Brand field -->
+                <div class="form-group jinsiField hidden col-lg-4">
+                        <label for="Brand">ब्राण्ड:</label>
+                        <input type="text" class="form-control" id="jBrand" name="jinsiDonation[0].jBrand">
+                    </div>
+
+                    <!-- Quantity field -->
+                <div class="form-group jinsiField hidden col-lg-4">
+                        <label for="Quantity">मात्रा:</label>
+                        <input type="number" class="form-control" id="jQuantity" name="jinsiDonation[0].jQuantity" step="any">
+                    </div>
+
+                    <!-- Kaifayat field -->
+                <div class="form-group jinsiField hidden col-lg-4">
+                        <label for="Kaifayat">कैफियत:</label>
+                        <input type="text" class="form-control" id="jKaifayat" name="jinsiDonation[0].jKaifayat">
+                    </div>
+
+                    <!-- Source field -->
+                <div class="form-group jinsiField hidden col-lg-4">
+                        <label for="Source">स्रोत:</label>
+                        <input type="text" class="form-control" id="jSource" name="jinsiDonation[0].jSource">
+                    </div>
+            
+
+            </div>
+            </div>
 
               
             </div>
 
-            <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
+        <button type="button" class="btn btn-primary m-2" id="addFieldsButton">Add</button>
+        <button id="removeLastFieldsButton" class="btn btn-danger m-2" type="button">Remove Last</button>
+        <button type="submit" class="btn btn-success m-2">पेश गर्नुहोस्</button>
+
+       
+       
+
+
         </form>
     </div>
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        function showRelevantFields() {
-            const paymentMethod = document.getElementById('paymentMethod').value;
 
-            const bankNameField = document.getElementById('bankNameField');
+        $(document).ready(function () {
+            function showRelevantFields(selectElement) {
+              
+            var paymentFieldsContainer = $(selectElement).closest('#paymentFieldsContainer');
 
+           
+                if (paymentFieldsContainer.length === 0) {
+                    console.log("paymentFieldsContainer not found!");
+                    return;
+                }
 
+                var bankField = paymentFieldsContainer.find('.bank-name-field');
+            var jinsiField = paymentFieldsContainer.find('.jinsiField');
+            var amountField = paymentFieldsContainer.find('.amount-field');
+            
+                if (bankField.length === 0) return; 
 
+                var paymentMethod = $(selectElement).val(); 
 
-            bankNameField.classList.add('hidden');
-
-
-            // Show relevant fields based on payment method
-            if (paymentMethod === 'cash') {
-            } else if (paymentMethod === 'cheque') {
-                bankNameField.classList.remove('hidden');
+                if (paymentMethod === "cheque") {
+                    bankField.removeClass('hidden');
+                amountField.removeClass('hidden');
+                jinsiField.addClass('hidden')
+                } else if (paymentMethod === "cash") {
+                    bankField.addClass('hidden');
+                    jinsiField.addClass('hidden');
+                amountField.removeClass('hidden');
+                }
+                else {
+                bankField.addClass('hidden');
+                jinsiField.removeClass('hidden')
+                amountField.addClass('hidden');
+                }
             }
-        }
+        var fieldCounter = 0;
+
+            $('#addFieldsButton').on('click', function () {
+                var container = $('#paymentFieldsContainer');
+                
+                var clonedFields = container.clone();
+
+                 fieldCounter++;
+        clonedFields.find('input[type="text"], input[type="number"]').val('');
+
+            clonedFields.find('.jinsiField').each(function (index, field) {
+                var inputElement = $(field).find('input');
+
+               
+                inputElement.each(function () {
+                    var name = $(this).attr('name');
+
+                    if (name.includes('jname')) {
+                        $(this).attr('name', 'jinsiDonation[' + fieldCounter + '].jname');
+                    } else if (name.includes('jCost')) {
+                        $(this).attr('name', 'jinsiDonation[' + fieldCounter + '].jCost');
+                    } else if (name.includes('jBrand')) {
+                        $(this).attr('name', 'jinsiDonation[' + fieldCounter + '].jBrand');
+                    } else if (name.includes('jQuantity')) {
+                        $(this).attr('name', 'jinsiDonation[' + fieldCounter + '].jQuantity');
+                    } else if (name.includes('jKaifayat')) {
+                        $(this).attr('name', 'jinsiDonation[' + fieldCounter + '].jKaifayat');
+                    } else if (name.includes('jSource')) {
+                        $(this).attr('name', 'jinsiDonation[' + fieldCounter + '].jSource');
+                    }
+                });
+            });
+        container.parent().append(clonedFields);
+
+               
+                container.parent().append(clonedFields);
+
+                    var newSelectElement = clonedFields.find('.payment-method');
+
+
+            if (newSelectElement.length > 0) {
+                newSelectElement.on('change', function () {
+                    showRelevantFields(this);
+                });
+
+                showRelevantFields(newSelectElement);
+            } else {
+                console.log("newSelectElement not found or invalid.");
+            }
+              
+                showRelevantFields(newSelectElement);
+            });
+
+            $('.payment-method').on('change', function () {
+                showRelevantFields(this);
+            });
+
+       
+        $('#removeLastFieldsButton').on('click', function () {
+            var lastContainer = $('#paymentFieldsContainer').parent().children('#paymentFieldsContainer').last();
+            var Containercount = $('#paymentFieldsContainer').parent().children('#paymentFieldsContainer');
+
+            console.log(Containercount.length)
+            if (Containercount.length > 1) {
+                lastContainer.remove();
+            } else {
+                console.log("No containers to remove.");
+            }
+        });
+        });
+
     </script>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
 
-</body>
-</html>
+

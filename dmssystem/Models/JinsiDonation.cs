@@ -9,11 +9,13 @@ namespace Models
     public class JinsiDonation
     {
         public Guid id { get; set; }
-        public string name { get; set; }
-        public string? Cost { get; set; }
-        public string Brand { get; set; }
-        public double Quantity { get; set; }
-        public string Kaifayat { get; set; }
-        public string Source { get; set; }
+        public string jname { get; set; }
+        public string? jCost { get; set; }
+        public string jBrand { get; set; }
+        public double jQuantity { get; set; }
+        public string jKaifayat { get; set; }
+        public string jSource { get; set; }
+        public Guid? DonationId { get; set; } // Foreign Key to Disaster
+        public Donation? Donation { get; set; }
     }
 }
