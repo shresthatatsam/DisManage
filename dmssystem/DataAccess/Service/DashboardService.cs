@@ -174,7 +174,11 @@ namespace DataAccess.Service
                 Description = i.Description,
                 DisasterDate = i.DisasterDate,
                 isActive = i.isActive,
-                created_at = i.created_at
+                created_at = i.created_at,
+                WitnessName = i.WitnessName,
+                WitnessAddress = i.WitnessAddress,
+                WitnessGender = i.WitnessGender,
+                WitnessPhonenumber = i.WitnessPhonenumber
             }).ToList() : new List<Image>(), // Return images related to the victim\
             Donation = v.Donation != null ? new Donation
             {
