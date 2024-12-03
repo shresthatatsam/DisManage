@@ -34,8 +34,6 @@
 
             <div class="col-lg-12" id="paymentFieldsContainer">
                 <div class="row">
-
-             
                 <div class="form-group col-lg-4">
                     <label for="paymentMethod">भुक्तानी विधि:</label>
                     <select class="form-control payment-method" id="paymentMethod" name="paymentMethod" onchange="showRelevantFields(this)" required>
@@ -160,24 +158,19 @@
 
             $('#addFieldsButton').on('click', function () {
                 var container = $('#paymentFieldsContainer');
+                
                 var clonedFields = container.clone();
 
                  fieldCounter++;
-                console.log(fieldCounter);
-        // Update the cloned fields with unique IDs and names
-            clonedFields.find('.payment-method').attr('name', 'paymentMethod_' + fieldCounter);
-            clonedFields.find('.amount-field input').attr('name', 'amount_' + fieldCounter);
-            clonedFields.find('.bank-name-field input').attr('name', 'bankName_' + fieldCounter);
+        clonedFields.find('input[type="text"], input[type="number"]').val('');
 
-            // Update names for the 'jinsiField' input fields individually
             clonedFields.find('.jinsiField').each(function (index, field) {
                 var inputElement = $(field).find('input');
 
-                // For each input field, update the 'name' attribute individually
+               
                 inputElement.each(function () {
                     var name = $(this).attr('name');
 
-                    // Update each field's name with the correct counter
                     if (name.includes('jname')) {
                         $(this).attr('name', 'jinsiDonation[' + fieldCounter + '].jname');
                     } else if (name.includes('jCost')) {
@@ -193,7 +186,6 @@
                     }
                 });
             });
-        // Append the cloned fields to the parent container
         container.parent().append(clonedFields);
 
                
