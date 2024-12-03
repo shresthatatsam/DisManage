@@ -31,9 +31,9 @@ namespace dmSyatem.Controllers.Admin
             return View();
         }
 
-        public IActionResult CreateGiveDonation(Donation donation)
+        public IActionResult CreateGiveDonation(Donation donation ,List<JinsiDonation> jinsiDonation)
         {
-            _donationService.Create(donation);
+            _donationService.Create(donation, jinsiDonation);
              return RedirectToAction("Index");
         }
     }

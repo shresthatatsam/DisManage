@@ -9,7 +9,7 @@ namespace DataAccess.Service.AdminInterface
 {
     public interface IDonationService
     {
-        Donation Create(Donation donation);
+        Donation Create(Donation donation, List<JinsiDonation> jinsiDonation);
         string TotalDonationReceived();
         string TotalDonationGiven();
         decimal TotalDonationReceivedAmount();

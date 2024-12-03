@@ -4,6 +4,7 @@ using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241203110003_j added in jinsi table")]
+    partial class jaddedinjinsitable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -443,9 +446,6 @@ namespace DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("DonationId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("jBrand")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -469,8 +469,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
-
-                    b.HasIndex("DonationId");
 
                     b.ToTable("jinsiDonations");
                 });
@@ -799,15 +797,6 @@ namespace DataAccess.Migrations
                     b.Navigation("Disaster");
 
                     b.Navigation("Victim");
-                });
-
-            modelBuilder.Entity("Models.JinsiDonation", b =>
-                {
-                    b.HasOne("Models.Donation", "Donation")
-                        .WithMany()
-                        .HasForeignKey("DonationId");
-
-                    b.Navigation("Donation");
                 });
 
             modelBuilder.Entity("Models.Location", b =>
