@@ -1,0 +1,112 @@
+﻿@model List<Donation>
+
+@{
+    ViewData["Title"] = "Disaster Reports";
+}
+
+<h1>विपत्तिको रिपोर्ट</h1>
+<a asp-controller="Report" asp-action="Index" class="btn btn-primary">रिपोर्ट सिर्जनामा जानुहोस्</a>
+
+<a id="downloadExcel" class="btn btn-success">एक्सेल डाउनलोड गर्नुहोस्</a>
+<button class="btn btn-info">एक्सेलमा निर्यात गर्नुहोस्</button>
+<button class="btn btn-warning">सीएसभीमा निर्यात गर्नुहोस्</button>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped table-bordered table-hover custom-table">
+        <thead>
+            <tr>
+                <th>नाम </th>
+                <th>फोन नम्बर </th>
+                <th>Email</th>
+                <th>PaymentMethod</th>
+                <th>Amount</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var report in Model)
+            {
+                <tr>
+                    <td>@report.name</td>
+                    <td>@report.phoneNumber</td>
+                    <td>@report.email</td>
+                    <td>@string.Join(", ", report.paymentMethod)</td>
+                    <td>@string.Join(", ", report.amount)</td>
+                    <td>
+                        <a href="javascript:void(0);" class="btn btn-primary btn-sm viewDetailsBtn" data-id="@report.id">दृश्य</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>कुनै रिपोर्ट फेला परेन ।</p>
+}
+
+<!-- Modal to display the JinsiDonation details -->
+<div class="modal fade" id="jinsiDetailsModal" tabindex="-1" aria-labelledby="jinsiDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jinsiDetailsModalLabel">Jinsi Donation Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="jinsiDetailsContent">
+                <!-- Details will be populated here dynamically using AJAX -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Click event for the 'viewDetailsBtn' buttons dynamically
+        $(document).on('click', '.viewDetailsBtn', function (event) {
+            event.preventDefault();
+
+            var donationId = $(this).data('id'); // Retrieve the donation id from data-id attribute
+
+            // Make an AJAX call to the server to fetch the JinsiDonation details
+            $.ajax({
+                url: '/Report/JinsiDetails',  // Controller action that will return the data
+                type: 'GET',
+                data: { id: donationId },
+                success: function (data) {
+                    var content = "<table class='table table-bordered'>";
+                    content += "<thead><tr><th>Name</th><th>Cost</th><th>Brand</th><th>Quantity</th></tr></thead>";
+                    content += "<tbody>";
+
+                    data.forEach(function (item) {
+                        content += "<tr>";
+                        content += "<td>" + item.jname + "</td>";
+                        content += "<td>" + item.jCost + "</td>";
+                        content += "<td>" + item.jBrand + "</td>";
+                        content += "<td>" + item.jQuantity + "</td>";
+                        content += "</tr>";
+                    });
+
+                    content += "</tbody></table>";
+
+                    // Set the modal content dynamically
+                    $('#jinsiDetailsContent').html(content);
+
+                    // Show the modal
+                    $('#jinsiDetailsModal').modal('show');
+
+                },
+                error: function () {
+                    alert("An error occurred while fetching the details.");
+                }
+            });
+        });
+    });
+</script>
