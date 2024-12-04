@@ -92,15 +92,21 @@ namespace DataAccess.Service
 
             foreach (var jinsiitem in donation.Jinsi)
             {
-             
-                Guid jinsiId = Guid.Parse(jinsiitem);
 
-                var fetchedJinsi = _context.jinsiDonations
-                                           .Where(x => x.id == jinsiId)
-                                           .Select(x=>x.jname); 
+                    if (!string.IsNullOrEmpty(jinsiitem))
+                    {
+                        // Proceed with the operation only if the item is not null or empty
+                        Guid jinsiId = Guid.Parse(jinsiitem);
 
-                jinsiList.AddRange(fetchedJinsi); 
-            }
+                        var fetchedJinsi = _context.jinsiDonations
+                                                   .Where(x => x.id == jinsiId)
+                                                   .Select(x => x.jname)
+                                                   .ToList(); // You need to execute the query to get the results.
+
+                        // Add the fetched values to the list
+                        jinsiList.AddRange(fetchedJinsi);
+                    }
+                }
             }
 
 

@@ -1,11 +1,4 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Form</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
+﻿
     <style>
         .hidden {
             display: none;
@@ -13,71 +6,62 @@
 
       
     </style>
-</head>
-<body>
+
 
     <div class="container mt-5">
-        <form asp-controller="Donation" asp-action="CreateGiveDOnation" id="paymentForm">
-            <div class="form-row">
-                <input type="hidden" name="type" value="Give" />
-                <input type="hidden" name="paymentMethod" value="cheque" />
-                <div class="form-group col-lg-6">
-                    <label for="name">नाम:</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
-                </div>
+         <form asp-controller="Donation" asp-action="CreateGiveDOnation" id="paymentForm">
+        <div class="form-row">
+            <input type="hidden" name="type" value="Give" />
+            <div class="form-group col-lg-6">
+                <label for="name">नाम:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
 
-                <div class="form-group col-lg-6">
-                    <label for="SecretNumber">गुप्त नम्बर:</label>
-                    <input type="text" class="form-control" id="SecretNumber" name="SecretNumber" required>
-                </div>
+            <div class="form-group col-lg-6">
+                <label for="SecretNumber">गुप्त नम्बर:</label>
+                <input type="text" class="form-control" id="SecretNumber" name="SecretNumber" required>
+            </div>
 
-                <div class="form-group col-lg-6">
-                    <label for="phoneNumber">फोन नम्बर:</label>
-                    <input type="text" class="numb" id="phoneNumber" name="phoneNumber" required>
-                </div>
+            <div class="form-group col-lg-6">
+                <label for="phoneNumber">फोन नम्बर:</label>
+                <input type="text" class="numb" id="phoneNumber" name="phoneNumber" required>
+            </div>
 
-                <div class="form-group col-lg-6">
-                    <label for="email">इमेल:</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
+            <div class="form-group col-lg-6">
+                <label for="email">इमेल:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
 
-                <div class="form-group col-lg-6">
-                    <label for="address">ठेगाना:</label>
-                    <input type="text" class="form-control" id="address" name="address" required>
-                </div>
+            <div class="form-group col-lg-6">
+                <label for="address">ठेगाना:</label>
+                <input type="text" class="form-control" id="address" name="address" required>
+            </div>
 
-                @*      <div class="form-group col-lg-6">
-                <label for="paymentMethod">Payment Method:</label>
-                <select class="form-control" id="paymentMethod" name="paymentMethod" onchange="showRelevantFields()" required>
-                <option value="">Select</option>
-                <option value="cash">Cash</option>
-                <option value="cheque">Cheque</option>
-                </select>
-                </div> *@
+            <div class="col-lg-12" id="receiveFieldsContainer">
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label for="paymentMethod">भुक्तानी विधि:</label>
+                        <select class="form-control payment-receive-method chosen-select" id="paymentMethod" name="paymentMethod" onchange="showReceiveRelevantFields(this)" required>
+                            <option value="">चयन गर्नुहोस्</option>
+                            <option value="cash">नगद</option>
+                            <option value="cheque">चेक</option>
+                            <option value="Jinsi">Jinsi</option>
+                        </select>
+                    </div>
 
+                    <div class="form-group col-lg-4 amount-field">
+                        <label for="amount">रकम:</label>
+                        <input type="text" class="form-control amount" id="amount" name="amount">
+                    </div>
 
-              
-
-
-                <div class="form-group col-lg-6 " id="bankNameField">
-                    <label for="bankName">बैंकको नाम:</label>
-                    <input type="text" class="form-control" id="bankName" name="bankName">
-                </div>
-
-                <div class="form-group col-lg-6 " id="amountField">
-                    <label for="amount">रकम:</label>
-                    <input type="numb" class="form-control" id="amount" name="amount">
-                </div>
-
-               @*  <div class="form-group col-lg-6" id="Jinsi">
-                    <label for="Jinsi">Jinsi:</label>
-                    <input type="text" class="form-control" id="Jinsi" name="Jinsi">
-                </div> *@
-               
-                <div class="form-group col-lg-6">
-                    <label for="name">नाम:</label>
-                    <select class="chosen-select form-control" id="Jinsi" name="Jinsi" multiple>
-                        @* <option value="">Select Name</option> *@
+                    <div class="form-group col-lg-4 hidden bank-name-field">
+                        <label for="bankName">बैंकको नाम:</label>
+                        <input type="text" class="form-control bank-name" id="bankName" name="bankName">
+                    </div>
+                    <div class="form-group jinsiField hidden col-lg-6">
+                    <label for="name">jinsi:</label>
+                    <select class="form-control" id="Jinsi" name="Jinsi">
+                        <option value="">Select Name</option> 
                         @foreach (var itemm in ViewBag.JinsiDonations)
                         {
                             <option value="@itemm.id">@itemm.jname</option>
@@ -85,57 +69,127 @@
                     </select>
                 </div>
 
-                <div class="form-group col-lg-6">
+                <div class="form-group jinsiField hidden col-lg-6">
             
-                    <div class="form-group" id="quantity-group-1">
-                        <label for="quantity-1">Quantity:</label>
-                        <select class="chosen-select form-control" id="quantity-1" name="jQuantity" multiple>
-                            @for (int j = 1; j < 10; j++)
-                            {
-                            @for (int i = 1; i < 10; i++)
+                        <label for="quantity">Quantity:</label>
+                        <select class="form-control" id="Quantity" name="Quantity">
+                              <option value="0">Select Quantity</option> 
+                            @for (int i = 1; i < 25; i++)
                             {
                                 <option value=@i>@i</option>
                             }
-                            }
+                            
                         </select>
-                    </div>
                 </div>
-             
+
+                 @*    <div class="form-group jinsiField hidden col-lg-4">
+                        <label for="Quantity">मात्रा:</label>
+                        <input type="number" class="form-control" id="Quantity" name="Quantity" step="any">
+                    </div> *@
+                </div>
             </div>
+            </div>
+                     <button type="button" class="btn btn-primary m-2" id="addReceiveFieldsButton">Add</button>
+            <button type="button" class="btn btn-danger m-2" id="removeReceiveLastFieldsButton">Remove Last</button>
             <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
         </form>
+        
+   
     </div>
 
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
     <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
 
-    <script>
-        $(".chosen-select").chosen({
-            no_results_text: "Oops, nothing found!",
-            width: "100%" 
-        })
-                $("#quantity-1").on('change', function () {
-            var selectedValues = $(this).val(); // Get selected values
-                var options = $(this).find('option'); // Get all options in the select
 
-                // Loop through all options and hide those that are selected
-                options.each(function () {
-                    var option = $(this);
-                    if (selectedValues.includes(option.val())) {
-                        option.hide(); // Hide the selected option
-                    } else {
-                        option.show(); // Ensure unselected options are visible
-                    }
+
+ 
+   <script>
+
+        $(document).ready(function () {
+            function showReceiveRelevantFields(selectElement) {
+              
+            var receiveFieldsContainer = $(selectElement).closest('#receiveFieldsContainer');
+
+           console.log(receiveFieldsContainer.length);
+                if (receiveFieldsContainer.length === 0) {
+                    console.log("receiveFieldsContainer not found!");
+                    return;
+                }
+
+                var bankField = receiveFieldsContainer.find('.bank-name-field');
+            var jinsiField = receiveFieldsContainer.find('.jinsiField');
+            var amountField = receiveFieldsContainer.find('.amount-field');
+            
+                if (bankField.length === 0) return; 
+
+                var paymentMethod = $(selectElement).val(); 
+
+                if (paymentMethod === "cheque") {
+                    bankField.removeClass('hidden');
+                amountField.removeClass('hidden');
+                jinsiField.addClass('hidden')
+                } else if (paymentMethod === "cash") {
+                    bankField.addClass('hidden');
+                    jinsiField.addClass('hidden');
+                amountField.removeClass('hidden');
+                }
+                else {
+                bankField.addClass('hidden');
+                jinsiField.removeClass('hidden')
+                amountField.addClass('hidden');
+                }
+            }
+        var fieldCounter = 0;
+
+            $('#addReceiveFieldsButton').on('click', function () {
+                alert("hi");
+                var container = $('#receiveFieldsContainer');
+                console.log(container.length);
+                var clonedFields = container.clone();
+
+                 fieldCounter++;
+         clonedFields.find('input[type="text"], input[type="number"]').val('');
+
+                container.parent().append(clonedFields);
+
+                    var newSelectElement = clonedFields.find('.payment-receive-method');
+
+
+            if (newSelectElement.length > 0) {
+                newSelectElement.on('change', function () {
+                    showReceiveRelevantFields(this);
                 });
 
-                // Re-initialize Chosen plugin to update the dropdown UI
-                $(this).trigger('chosen:updated');
+                showReceiveRelevantFields(newSelectElement);
+            } else {
+                console.log("newrecSelectElement not found or invalid.");
+            }
+              
+                showReceiveRelevantFields(newSelectElement);
             });
+
+            $('.payment-receive-method').on('change', function () {
+                showReceiveRelevantFields(this);
+            });
+
+       
+        $('#removeReceiveLastFieldsButton').on('click', function () {
+            var lastContainer = $('#receiveFieldsContainer').parent().children('#receiveFieldsContainer').last();
+            var Containercount = $('#receiveFieldsContainer').parent().children('#receiveFieldsContainer');
+
+            console.log(Containercount.length)
+            if (Containercount.length > 1) {
+                lastContainer.remove();
+            } else {
+                console.log("No containers to remove.");
+            }
+        });
+        });
+
     </script>
-</body>
-</html>
+
+    
