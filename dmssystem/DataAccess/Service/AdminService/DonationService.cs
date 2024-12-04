@@ -61,12 +61,14 @@ namespace DataAccess.Service.AdminService
 
                 for (int i = 0; i < donation.Jinsi.Count; i++)
                 {
-                    if (!HasSufficientQuantity(Guid.Parse(donation.Jinsi[i]) , (float)donation.Quantity[i]))
+                    if (donation.Jinsi[i] != null)
                     {
-                        throw new InvalidOperationException("Not enough stock available for the donation.");
+                        if (!HasSufficientQuantity(Guid.Parse(donation.Jinsi[i]), (float)donation.Quantity[i]))
+                        {
+                            throw new InvalidOperationException("Not enough stock available for the donation.");
+                        }
                     }
                 }
-
 
                 var existingDonation = _context.donations
             .FirstOrDefault(d => d.SecretNumber == donation.SecretNumber);
@@ -154,7 +156,10 @@ namespace DataAccess.Service.AdminService
             decimal amount = 0;
             foreach (var item in donationReceived)
             {
-                amount += Convert.ToDecimal(item.amount);
+                foreach (var amo in item.Quantity)
+                {
+                    amount += Convert.ToDecimal(amo);
+                }
             }
             return amount;
         }
