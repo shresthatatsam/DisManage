@@ -34,7 +34,10 @@
                     <td>
                         <!-- You can add other actions like Edit, Delete here -->
                         <a href="@Url.Action("Edit", new { id = volunteer.Id })" class="btn btn-warning btn-sm">सम्पादन गर्नुहोस्</a>
-                        <a href="@Url.Action("Delete", new { id = volunteer.Id })" class="btn btn-danger btn-sm">मेट्नुहोस्</a>
+                        @* <a href="@Url.Action("Delete", new { id = volunteer.Id })" class="btn btn-danger btn-sm">मेट्नुहोस्</a> *@
+                        <form action="@Url.Action("Delete", "Volunteer", new { id = volunteer.Id })" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('तपाईँ यो वस्तु मेट्न निश्चित हुनुहुन्छ?');">मेट्नुहोस्</button>
+                        </form>
                     </td>
                 </tr>
             }

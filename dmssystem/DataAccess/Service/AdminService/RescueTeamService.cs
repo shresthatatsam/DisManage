@@ -40,5 +40,31 @@ namespace DataAccess.Service.AdminService
         {
             return _context.rescueTeams.Include(t => t.Volunteers).FirstOrDefault(t => t.Id == teamId);
         }
-    }
+
+
+		public Guid Delete(Guid id)
+		{
+
+			var rescueData = _context.rescueTeams.Where(x => x.Id == id).FirstOrDefault();
+
+			rescueData.isactive = false;
+
+			_context.SaveChanges();
+
+			if (rescueData != null)
+			{
+				
+				foreach (var item in rescueData.SelectedVolunteerIds)
+				{
+                  var volunteerData=  _context.volunteers.Where(x => x.Id == item).FirstOrDefault();
+                    volunteerData.isactive =true;
+				}
+
+				_context.SaveChanges();
+			}
+
+			return id;
+		}
+
+	}
 }

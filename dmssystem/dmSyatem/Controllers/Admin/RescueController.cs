@@ -1,5 +1,6 @@
 ﻿using DataAccess.Data;
 using DataAccess.Service.AdminInterface;
+using DataAccess.Service.AdminService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
@@ -23,13 +24,13 @@ namespace dmSyatem.Controllers.Admin
 
         public IActionResult Index()
         {
-            ViewBag.teams = _context.rescueTeams.Include(t => t.province).ToList(); 
+            ViewBag.teams = _context.rescueTeams.Include(x=>x.Volunteers).Include(t => t.province).Where(x=>x.isactive== true).ToList(); 
             return View();
         }
 
         public IActionResult Create(Guid? provinceId = null)
           {
-            ViewBag.AvailableVolunteers = _context.volunteers.ToList();
+            ViewBag.AvailableVolunteers = _context.volunteers.Where(x=>x.isactive == true).ToList();
             ViewBag.location = _context.provinces.ToList();
 
         //    if(provinceId.HasValue)
@@ -72,7 +73,13 @@ namespace dmSyatem.Controllers.Admin
             //return View();
         }
 
-     
-    }
+
+		public async Task<IActionResult> Delete(RescueTeam RescueTeam)
+		{
+			_rescueTeamService.Delete(RescueTeam.Id);
+			return RedirectToAction("Index");
+		}
+
+	}
 }
 

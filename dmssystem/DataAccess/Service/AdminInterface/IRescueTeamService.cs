@@ -12,5 +12,6 @@ namespace DataAccess.Service.AdminInterface
         void AssignVolunteerToTeam(Guid teamId, Guid volunteerId);
         IEnumerable<Volunteer> GetAvailableVolunteers();
         RescueTeam GetTeamById(Guid teamId);
-    }
+		Guid Delete(Guid id);
+	}
 }

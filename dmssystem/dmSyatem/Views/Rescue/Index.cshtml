@@ -4,36 +4,50 @@
 
 <a asp-asp-controller="Rescue" asp-action="Create" class="btn btn-primary">नयाँ टोली सिर्जना गर्नुहोस्</a>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>टोलीको नाम</th>
-            <th>प्रदेश</th>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>टोलीको नाम</th>
+			<th>Volunteer Name</th>
+			<th>Contact Number</th> 
+			<th>नगरपालिका</th>
+			<th>कार्यहरू</th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (ViewBag.teams != null)
+		{
+			@foreach (var team in ViewBag.teams)
+			{
+				<tr>
+					<td>@team.TeamName</td>
 
-            <th>जिल्ला</th>
+					<td>
+						@foreach (var item in @team.Volunteers)
+						{
+							@item.Name @:,
+						}
 
-            <th>नगरपालिका</th>
-            <th>कार्यहरू</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if(ViewBag.teams != null)
-        {
-            @foreach (var team in ViewBag.teams)
-            {
-                <tr>
-                    <td>@team.TeamName</td>
-                      <td>@team.province.Province</td>
-                    <td>@team.province.District</td>
-                    <td>@team.province.Municipality</td> 
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@team.Id" class="btn btn-warning">सम्पादन गर्नुहोस्</a>
-                        <!-- Add other actions as needed -->
-                    </td>
-                </tr>
-            }
-        }
-      
-      
-    </tbody>
+					</td>
+					<td>
+						@foreach (var item in @team.Volunteers)
+						{
+							@item.ContactNumber @:,
+						}
+
+					</td>
+					<td>@team.province.Municipality</td>
+					<td>
+						<a asp-action="Edit" asp-route-id="@team.Id" class="btn btn-warning">सम्पादन गर्नुहोस्</a>
+						@* <a asp-action="Delete" asp-route-id="@team.Id" class="btn btn-warning">Delete</a> *@
+						<form action="@Url.Action("Delete", "Rescue", new { id = team.Id })" method="post" style="display:inline;">
+							<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('तपाईँ यो वस्तु मेट्न निश्चित हुनुहुन्छ?');">मेट्नुहोस्</button>
+						</form>
+					</td>
+				</tr>
+			}
+		}
+
+
+	</tbody>
 </table>
