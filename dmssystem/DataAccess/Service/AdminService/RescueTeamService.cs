@@ -42,6 +42,39 @@ namespace DataAccess.Service.AdminService
         }
 
 
+		public bool EditRescueTeam(RescueTeam RescueTeam)
+		{
+			var existingRescueTeam = _context.rescueTeams.FirstOrDefault(v => v.Id == RescueTeam.Id);
+
+			if (existingRescueTeam == null)
+			{
+				return false;  // Volunteer not found
+			}
+
+			// Update the properties of the existing volunteer
+			existingRescueTeam.TeamName = RescueTeam.TeamName;
+			existingRescueTeam.isactive = true;
+			existingRescueTeam.SelectedVolunteerIds = RescueTeam.SelectedVolunteerIds;
+			existingRescueTeam.provinceId = RescueTeam.provinceId;
+			
+
+			// Optional: Update the province object if it's included
+			if (existingRescueTeam.province != null)
+			{
+				existingRescueTeam.province = RescueTeam.province;
+			}
+
+
+		
+
+		// Save the changes to the database
+		_context.SaveChanges();
+
+			return true;  // Return true if the volunteer was updated successfully
+		}
+
+
+
 		public Guid Delete(Guid id)
 		{
 

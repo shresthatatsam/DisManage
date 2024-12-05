@@ -74,6 +74,29 @@ namespace dmSyatem.Controllers.Admin
         }
 
 
+		public IActionResult Edit(Guid id)
+		{
+			ViewBag.AvailableVolunteers = _context.volunteers.Where(x => x.isactive == true).ToList();
+			ViewBag.location = _context.provinces.ToList();
+            RescueTeam rescueTeam = _rescueTeamService.GetTeamById(id);
+            return View(rescueTeam);
+		}
+
+
+
+
+		[HttpPost]
+		public IActionResult Edit(RescueTeam rescueTeam)
+		{
+			if (ModelState.IsValid)
+			{
+				_rescueTeamService.EditRescueTeam(rescueTeam);
+				return RedirectToAction("Index");
+			}
+			return View();
+		}
+
+
 		public async Task<IActionResult> Delete(RescueTeam RescueTeam)
 		{
 			_rescueTeamService.Delete(RescueTeam.Id);
