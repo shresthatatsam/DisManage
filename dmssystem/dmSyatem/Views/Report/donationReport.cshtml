@@ -1,0 +1,82 @@
+﻿@model Location﻿
+<form method="post" action="@Url.Action("GenerateDonationReport", "Report")">
+	<div class="row mt-2">
+
+		<div class="col-lg-3">
+			<div class="form-group">
+				<label for="donation">donation:</label>
+
+				<select class="form-control" id="donation" name="donation">
+					<option value="">Select</option>
+					<option value="Receive">Receive</option>
+				</select>
+			</div>
+		</div>
+
+	</div>
+
+
+
+	<button type="submit" class="btn btn-primary">रिपोर्ट सिर्जना गर्नुहोस्</button>
+</form>
+@* 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$('#PermanentProvince').change(function () {
+			var provinceId = $(this).val();
+
+			if (provinceId) {
+				$.ajax({
+					url: '@Url.Action("GetDistricts", "Location")',
+					type: 'GET',
+					data: { provinceId: provinceId },
+					success: function (data) {
+						console.log(data);
+						var districtSelect = $('.district');
+						districtSelect.empty(); // Clear existing options
+						districtSelect.append('<option value="">Select District</option>'); // Add default option
+
+						$.each(data, function (index, item) {
+							districtSelect.append('<option value="' + item.id + '">' + item.district + '</option>'); // Access 'district' correctly
+						});
+					},
+					error: function () {
+						alert('Error retrieving districts');
+					}
+				});
+			} else {
+				$('#PermanentDistrict').empty().append('<option value="">Select District</option>'); // Reset if no province selected
+				$('#PermanentMunicipality').empty().append('<option value="">Select Municipality</option>'); // Reset municipality
+			}
+		});
+
+		$('#PermanentDistrict').change(function () {
+			var districtId = $(this).val();
+
+			if (districtId) {
+				$.ajax({
+					url: '@Url.Action("GetMunicipalities", "Location")',
+					type: 'GET',
+					data: { districtId: districtId },
+					success: function (data) {
+						console.log(data);
+						var municipalitySelect = $('.municipality');
+						municipalitySelect.empty(); // Clear existing options
+						municipalitySelect.append('<option value="">Select Municipality</option>'); // Add default option
+
+						$.each(data, function (index, item) {
+							municipalitySelect.append('<option value="' + item.id + '" data-municipality="' + item.municipality + '">' + item.municipality + '</option>'); // Store municipality in data attribute
+						});
+					},
+					error: function () {
+						alert('Error retrieving municipalities');
+					}
+				});
+			} else {
+				$('#PermanentMunicipality').empty().append('<option value="">Select Municipality</option>'); // Reset if no district selected
+			}
+		});
+	});
+
+</script> *@

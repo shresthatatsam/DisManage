@@ -44,7 +44,7 @@
                     </select>
                 </div>
 
-                <div class="form-group col-lg-4 amount-field">
+                <div class="form-group hidden col-lg-4 amount-field">
                     <label for="amount">रकम:</label>
                     <input type="text" class="form-control amount" id="amount" name="amount">
                 </div>
@@ -148,16 +148,22 @@
                     jinsiField.addClass('hidden');
                 amountField.removeClass('hidden');
                 }
-                else {
+            else if (paymentMethod === "Jinsi") {
                 bankField.addClass('hidden');
                 jinsiField.removeClass('hidden')
                 amountField.addClass('hidden');
+                // jinsiField.show();
+              
                 }
+                // else{
+               
+                // $('.jinsiField').hide();
+                // }
             }
         var fieldCounter = 0;
 
             $('#addFieldsButton').on('click', function () {
-                alert("his");
+            // $('.jinsiField').hide();
                 var container = $('#paymentFieldsContainer');
                 
                 var clonedFields = container.clone();
@@ -186,8 +192,8 @@
                         $(this).attr('name', 'jinsiDonation[' + fieldCounter + '].jSource');
                     }
                 });
+             
             });
-        container.parent().append(clonedFields);
 
                
                 container.parent().append(clonedFields);
