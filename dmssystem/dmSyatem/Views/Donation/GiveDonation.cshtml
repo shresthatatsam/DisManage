@@ -45,7 +45,7 @@
                             <option value="">चयन गर्नुहोस्</option>
                             <option value="cash">नगद</option>
                             <option value="cheque">चेक</option>
-                            <option value="Jinsi">Jinsi</option>
+                            <option value="Jinsi">जिन्सी</option>
                         </select>
                     </div>
 
@@ -59,10 +59,10 @@
                         <input type="text" class="form-control bank-name" id="bankName" name="bankName">
                     </div>
                     <div class="form-group jinsiField hidden col-lg-6">
-                    <label for="name">jinsi:</label>
+                        <label for="name">जिन्सी:</label>
                     <select class="form-control" id="Jinsi" name="Jinsi">
-                        <option value="">Select Name</option> 
-                        @foreach (var itemm in ViewBag.JinsiDonations)
+                            <option value="">नाम चयन गर्नुहोस्</option>
+                            @foreach (var itemm in ViewBag.JinsiDonations)
                         {
                             <option value="@itemm.id">@itemm.jname</option>
                         }
@@ -71,7 +71,7 @@
 
                 <div class="form-group jinsiField hidden col-lg-6">
             
-                        <label for="quantity">Quantity:</label>
+                        <label for="quantity">मात्रा:</label>
                         <select class="form-control" id="Quantity" name="Quantity">
                               <option value="0">Select Quantity</option> 
                             @for (int i = 1; i < 25; i++)
@@ -89,8 +89,8 @@
                 </div>
             </div>
             </div>
-                     <button type="button" class="btn btn-primary m-2" id="addReceiveFieldsButton">Add</button>
-            <button type="button" class="btn btn-danger m-2" id="removeReceiveLastFieldsButton">Remove Last</button>
+        <button type="button" class="btn btn-primary m-2" id="addReceiveFieldsButton">थप्नुहोस्</button>
+        <button type="button" class="btn btn-danger m-2" id="removeReceiveLastFieldsButton">अन्तिम हटाउनुहोस्</button>
             <button type="submit" class="btn btn-primary">पेश गर्नुहोस्</button>
         </form>
         
