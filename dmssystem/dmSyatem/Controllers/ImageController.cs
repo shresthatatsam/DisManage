@@ -62,7 +62,12 @@ namespace dmSyatem.Controllers
                             Description = image.Description,  // Use the provided description
                             DisasterDate = image.DisasterDate != default ? image.DisasterDate : DateTime.Now,  // Use provided date or set default to now
                             VictimId = victimId,
-                            DisasterId = disasterId
+                            DisasterId = disasterId,
+                            WitnessName = image.WitnessName,
+                            WitnessAddress = image.WitnessAddress,
+                            WitnessGender = image.WitnessGender,
+                            WitnessPhonenumber = image.WitnessPhonenumber,
+                            
                         };
 
                         imageEntities.Add(imageEntity);
