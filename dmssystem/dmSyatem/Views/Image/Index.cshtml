@@ -24,22 +24,22 @@
         <h3>Witness Section</h3>
         <div class="form-group">
             <label for="WitnessName">Witness Name</label>
-            <input type="tel" class="shorttext" id="WitnessName" asp-for="WitnessName" readonly>
+            <input type="text" class="shorttext" id="WitnessName" asp-for="WitnessName">
         </div>
 
         <div class="form-group">
             <label for="WitnessAddress">Witness Address</label>
-            <input type="tel" class="form-control" id="WitnessAddress" asp-for="WitnessAddress" readonly>
+            <input type="text" class="form-control" id="WitnessAddress" asp-for="WitnessAddress">
         </div>
 
         <div class="form-group">
             <label for="WitnessPhonenumber">Witness Phonenumber</label>
-            <input type="tel" class="numb" id="WitnessPhonenumber" asp-for="WitnessPhonenumber" readonly>
+            <input type="text" class="numb" id="WitnessPhonenumber" asp-for="WitnessPhonenumber">
         </div>
 
         <div class="form-group">
-            <label for="gender" class="form-label">लिंग</label>
-            <select id="gender" name="gender" class="form-select" required>
+            <label for="WitnessGender" class="form-label">लिंग</label>
+            <select id="WitnessGender" asp-for="WitnessGender" class="form-select" required>
                 <option value="" selected>लिंग चयन गर्नुहोस्</option>
                 <option value="Male">पुरुष</option>
                 <option value="Female">महिला</option>
