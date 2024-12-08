@@ -147,6 +147,7 @@ namespace dmSyatem.Controllers.Admin
                 worksheet.Cell(1, 2).Value = "Phone Number";
                 worksheet.Cell(1, 3).Value = "Disaster Type";
                 worksheet.Cell(1, 4).Value = "Date";
+                worksheet.Cell(1, 5).Value = "Age";
 
                 // Add data
                 for (int i = 0; i < victims.Count; i++)
@@ -155,6 +156,7 @@ namespace dmSyatem.Controllers.Admin
                     worksheet.Cell(i + 2, 2).Value = victims[i].ContactNumber;
                     worksheet.Cell(i + 2, 3).Value = victims[i].Disaster?.DisasterType;
                     worksheet.Cell(i + 2, 4).Value = victims[i].Disaster?.DateReported;
+                    worksheet.Cell(i + 2, 5).Value = victims[i].Age;
                 }
 
                 using (var stream = new MemoryStream())
