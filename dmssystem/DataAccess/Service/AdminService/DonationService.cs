@@ -175,7 +175,7 @@ namespace DataAccess.Service.AdminService
             decimal amount = 0;
             foreach (var item in donationReceived)
             {
-                foreach (var amo in item.Quantity)
+                foreach (var amo in item.amount)
                 {
                     amount += Convert.ToDecimal(amo);
                 }

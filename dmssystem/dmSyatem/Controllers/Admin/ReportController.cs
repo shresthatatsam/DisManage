@@ -136,7 +136,9 @@ namespace dmSyatem.Controllers.Admin
 
         public IActionResult DownloadExcel()
         {
-            var victims = _context.Victims.Include(v => v.Disaster).ToList(); // Adjust according to your data fetching logic
+            var victims = _context.Victims.Include(v=>v.Location).Include(v => v.Disaster).ToList(); // Adjust according to your data fetching logic
+
+            
 
             using (var workbook = new XLWorkbook())
             {
@@ -144,17 +146,27 @@ namespace dmSyatem.Controllers.Admin
 
                 // Add headers
                 worksheet.Cell(1, 1).Value = "Name";
-                worksheet.Cell(1, 2).Value = "Phone Number";
-                worksheet.Cell(1, 3).Value = "Disaster Type";
-                worksheet.Cell(1, 4).Value = "Date";
+                worksheet.Cell(1, 2).Value = "Age";
+                worksheet.Cell(1, 3).Value = "Gender";
+                worksheet.Cell(1, 4).Value = "Contact NUmber";
+                worksheet.Cell(1, 5).Value = "Email";
+                worksheet.Cell(1, 6).Value = "SecretNumber";
+                worksheet.Cell(1, 7).Value = "DisasterName";
+                worksheet.Cell(1, 8).Value = "Date";
 
                 // Add data
                 for (int i = 0; i < victims.Count; i++)
                 {
+                    var disasterType = _context.disasterTypes.Where(x => x.Id == victims[i].DisasterId).FirstOrDefault();
+                    //var Provincelocation = _context.provinces.Where(x => x.Id == victims[i].Location.PermanentProvince).FirstOrDefault();
                     worksheet.Cell(i + 2, 1).Value = victims[i].Name;
-                    worksheet.Cell(i + 2, 2).Value = victims[i].ContactNumber;
-                    worksheet.Cell(i + 2, 3).Value = victims[i].Disaster?.DisasterType;
-                    worksheet.Cell(i + 2, 4).Value = victims[i].Disaster?.DateReported;
+                    worksheet.Cell(i + 2, 2).Value = victims[i].Age;
+                    worksheet.Cell(i + 2, 3).Value = victims[i].Gender;
+                    worksheet.Cell(i + 2, 4).Value = victims[i].ContactNumber;
+                    worksheet.Cell(i + 2, 5).Value = victims[i].Email;
+                    worksheet.Cell(i + 2, 6).Value = victims[i].Secret_Number;
+                    worksheet.Cell(i + 2, 7).Value = disasterType?.DisasterName ?? "No data"; 
+                    worksheet.Cell(i + 2, 8).Value = victims[i].Disaster?.DateReported;
                 }
 
                 using (var stream = new MemoryStream())
