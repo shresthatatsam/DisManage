@@ -1,0 +1,32 @@
+﻿@model Volunteer
+<form method="post" action="@Url.Action("GenerateVolunteerReport", "Report")">
+	<div class="row mt-2">
+
+
+		<div class="col-lg-3">
+			<div class="form-group">
+				<label for="ContactNumber">फोन नम्बर:</label>
+				<input type="text" class="form-control" id="ContactNumber" name="ContactNumber">
+			</div>
+		</div>
+
+		<div class="col-lg-3">
+			<div class="form-group">
+				<label for="Name">Name:</label>
+				<input type="text" class="form-control" id="Name" name="Name">
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="form-group">
+				<label for="Email">Email:</label>
+				<input type="text" class="form-control" id="Email" name="Email">
+			</div>
+		</div>
+
+
+	</div>
+
+
+
+	<button type="submit" class="btn btn-primary">रिपोर्ट सिर्जना गर्नुहोस्</button>
+</form>

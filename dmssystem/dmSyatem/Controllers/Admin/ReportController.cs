@@ -48,7 +48,23 @@ namespace dmSyatem.Controllers.Admin
 
         }
 
-        [HttpGet]
+		public IActionResult GenerateVolunteerReport()
+		{
+			return View();
+		}
+
+		[HttpPost]
+        public async Task<IActionResult> GenerateVolunteerReport(string Name, string ContactNumber, string Email)
+        {
+            var query = _context.volunteers.Where(x => x.Name == Name || x.ContactNumber == ContactNumber || x.Email == Email)
+					.AsQueryable();
+
+			var reports = await query.ToListAsync();
+			return View(reports);
+
+		}
+		
+		[HttpGet]
         public async Task<IActionResult> JinsiDetails(Guid id)
         {
             var jinsiDonations = await _context.jinsiDonations
