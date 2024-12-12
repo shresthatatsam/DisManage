@@ -157,7 +157,8 @@ namespace dmSyatem.Controllers.Admin
                 // Add data
                 for (int i = 0; i < victims.Count; i++)
                 {
-                    var disasterType = _context.disasterTypes.Where(x => x.Id == victims[i].DisasterId).FirstOrDefault();
+                    var disaster = _context.Disasters.Where(x => x.Id == victims[i].DisasterId).FirstOrDefault();
+                    var disasterType = _context.disasterTypes.Where(x => x.Id == Guid.Parse(disaster.DisasterType)).FirstOrDefault();
                     //var Provincelocation = _context.provinces.Where(x => x.Id == victims[i].Location.PermanentProvince).FirstOrDefault();
                     worksheet.Cell(i + 2, 1).Value = victims[i].Name;
                     worksheet.Cell(i + 2, 2).Value = victims[i].Age;
