@@ -11,7 +11,8 @@
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">विपत्तिको रिपोर्ट </button>
             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">दिनुहोस्</button>
-           
+            <button class="nav-link" id="nav-third-tab" data-bs-toggle="tab" data-bs-target="#third-profile" type="button" role="tab" aria-controls="third-profile" aria-selected="false">दिनुहोस्</button>
+
         </div>
     </nav>
     <div class="tab-content mt-2" id="nav-tabContent">
@@ -21,6 +22,9 @@
         </div>
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
              <partial name="donationReport.cshtml" /> 
+        </div>
+        <div class="tab-pane fade" id="third-profile" role="tabpanel" aria-labelledby="nav-third-tab">
+            <partial name="donationReport.cshtml" />
         </div>
 
        
