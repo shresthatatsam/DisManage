@@ -241,18 +241,22 @@
 
 <script>
 	function printPage() {
-		// Hide the header and button for printing
 		document.querySelectorAll('header, button').forEach(el => el.style.display = 'none');
+
 
 		window.print();
 
 		window.onbeforeprint = function () {
-			document.querySelectorAll('header, button').forEach(el => el.style.display = '');
+			document.querySelectorAll('header, button').forEach(el => el.style.display = 'block');
 		};
 
-		window.onafterprint = function () {
-			document.querySelectorAll('header, button').forEach(el => el.style.display = '');
-		};
+
 	}
+	window.onafterprint = function () {
+		alert("hit");
+		// Show the header and button after print dialog closes (either canceled or printed)
+		document.querySelectorAll('header, .print-btn').forEach(el => el.style.display = 'block');
+
+	};
 </script>
 

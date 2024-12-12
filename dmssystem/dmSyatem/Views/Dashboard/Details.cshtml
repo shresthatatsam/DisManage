@@ -235,7 +235,7 @@
 
 	</fieldset>
 
-	<button type="button" class="btn btn-primary" onclick="printPage()">प्रिन्ट पृष्ठ</button>
+	<button type="button" class="btn btn-primary print-btn" onclick="printPage()">प्रिन्ट पृष्ठ</button>
 </form>
 
 
@@ -243,10 +243,21 @@
 <script>
 	function printPage() {
 		 document.querySelectorAll('header, button').forEach(el => el.style.display = 'none');
+		
+
 		window.print();
-		window.onafterprint = function () {
+
+		window.onbeforeprint = function () {
 			document.querySelectorAll('header, button').forEach(el => el.style.display = 'block');
 		};
+
+		
 	}
+	window.onafterprint = function () {
+		alert("hit");
+		// Show the header and button after print dialog closes (either canceled or printed)
+		document.querySelectorAll('header, .print-btn').forEach(el => el.style.display = 'block');
+
+	};
 </script>
 
