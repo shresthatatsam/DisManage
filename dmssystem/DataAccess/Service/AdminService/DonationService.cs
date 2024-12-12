@@ -29,42 +29,23 @@ namespace DataAccess.Service.AdminService
                 _context.donations.Add(donation);
 
                 _context.SaveChanges();
-             
-                if (jinsiDonation != null && jinsiDonation.Any())
+                foreach (var j in jinsiDonation)
                 {
-                    // Now, add the corresponding JinsiDonation records if the list is not empty
-                    foreach (var j in jinsiDonation)
+                    // Set the DonationId for each JinsiDonation (assuming the foreign key is called 'DonationId')
+                    j.DonationId = donation.id;  // Assuming Donation has an Id field
+
+                    // Add the fields for JinsiDonation
+                    _context.jinsiDonations.Add(new JinsiDonation
                     {
-                        if (string.IsNullOrEmpty(j.jBrand) || string.IsNullOrEmpty(j.jCost) || string.IsNullOrEmpty(j.jname))
-                        {
-                            // Skip this entry and continue with the next iteration
-                            continue;
-                        }
-                        // Set the DonationId for each JinsiDonation (assuming the foreign key is called 'DonationId')
-                        j.DonationId = donation.id;  // Assuming Donation has an Id field
-
-                        // Add the fields for JinsiDonation
-                        _context.jinsiDonations.Add(new JinsiDonation
-                        {
-                            jname = j.jname,  // Copying the value of jname
-                            jCost = j.jCost,  // Nullable field, it can be null
-                            jBrand = j.jBrand,  // Copying the value of jBrand
-                            jQuantity = j.jQuantity,  // Copying the value of jQuantity
-                            jKaifayat = j.jKaifayat,  // Copying the value of jKaifayat
-                            jSource = j.jSource,  // Copying the value of jSource
-                            DonationId = donation.id // Set the foreign key relationship
-                        });
-                    }
-
-                    // Save changes to save JinsiDonations
-                    _context.SaveChanges();
+                        jname = j.jname,  // Copying the value of jname
+                        jCost = j.jCost,  // Nullable field, it can be null
+                        jBrand = j.jBrand,  // Copying the value of jBrand
+                        jQuantity = j.jQuantity,  // Copying the value of jQuantity
+                        jKaifayat = j.jKaifayat,  // Copying the value of jKaifayat
+                        jSource = j.jSource,  // Copying the value of jSource
+                        DonationId = donation.id  // Set the foreign key relationship
+                    });
                 }
-                else
-                {
-                    // Log or handle the case where the list is empty (if needed)
-                    Console.WriteLine("No JinsiDonation data to save.");
-                }
-
 
                 // Save changes to save JinsiDonations
                 _context.SaveChanges();
