@@ -59,10 +59,28 @@ else
 
     <script>
         $(document).ready(function () {
-            var table = $('.table').DataTable();
+            var table = $('.table').DataTable({
+                dom: 'Bfrtip',   buttons: [
+                    {
+                        extend: 'excelHtml5',  
+                        text: 'Download Excel',
+                        title: 'Filtered Disaster Report',  
+                        exportOptions: {
+                            modifier: {
+                                page: 'all', 
+                                order: 'current' 
+                            }
+                        }
+                    }
+                ],
+                initComplete: function () {
+                   
+                    $('.dt-buttons .buttons-excel').hide();
+                }
+            });
 
             $('#downloadExcel').on('click', function () {
-                window.location.href = '@Url.Action("DownloadExcel", "Report")';
+                table.button('.buttons-excel').trigger();  
             });
         });
     </script>
