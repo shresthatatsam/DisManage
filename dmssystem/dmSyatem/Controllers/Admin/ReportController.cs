@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using ClosedXML.Excel;
 using DataAccess.Data;
 using DataAccess.Migrations;
@@ -47,7 +48,23 @@ namespace dmSyatem.Controllers.Admin
 
         }
 
-        [HttpGet]
+		public IActionResult GenerateVolunteerReport()
+		{
+			return View();
+		}
+
+		[HttpPost]
+        public async Task<IActionResult> GenerateVolunteerReport(string Name, string ContactNumber, string Email)
+        {
+            var query = _context.volunteers.Where(x => x.Name == Name || x.ContactNumber == ContactNumber || x.Email == Email)
+					.AsQueryable();
+
+			var reports = await query.ToListAsync();
+			return View(reports);
+
+		}
+		
+		[HttpGet]
         public async Task<IActionResult> JinsiDetails(Guid id)
         {
             var jinsiDonations = await _context.jinsiDonations
@@ -127,6 +144,7 @@ namespace dmSyatem.Controllers.Admin
             }
 
             var reports = await query.ToListAsync();
+            //DownloadExcel(reports);
             // Return the reports or use them to generate a file
             return View(reports); // You can create a view to display the reports
         }
@@ -134,11 +152,11 @@ namespace dmSyatem.Controllers.Admin
 
         //using ClosedXML.Excel; // Add this if you're using ClosedXML
 
-        public IActionResult DownloadExcel()
+        public IActionResult DownloadExcel(List<Victim> reports)
         {
             var victims = _context.Victims.Include(v=>v.Location).Include(v => v.Disaster).ToList(); // Adjust according to your data fetching logic
 
-            
+            //var victims = reports.ToList();
 
             using (var workbook = new XLWorkbook())
             {
@@ -173,7 +191,7 @@ namespace dmSyatem.Controllers.Admin
                 using (var stream = new MemoryStream())
                 {
                     workbook.SaveAs(stream);
-                    var fileName = "DisasterReports.xlsx";
+                    var fileName = "FilteredDisasterReports.xlsx";
                     return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
                 }
             }
