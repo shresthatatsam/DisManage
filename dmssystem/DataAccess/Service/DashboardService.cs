@@ -126,6 +126,8 @@ namespace DataAccess.Service
         {
             Id = v.Id,
             Name = v.Name,
+            PassportNumber = v.PassportNumber,
+            Nationality=v.Nationality,
             Secret_Number = v.Secret_Number,
             Age = v.Age,
             Gender = v.Gender,
