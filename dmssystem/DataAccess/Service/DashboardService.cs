@@ -59,7 +59,7 @@ namespace DataAccess.Service
 
         public List<Victim> recentDisaster()
         {
-            var data = _context.Victims
+            var data = _context.Victims.Where(x=>x.LocationId != Guid.Empty && x.DisasterId !=null)
                 .Select(x => new Victim
                 {
                     Id = x.Id,

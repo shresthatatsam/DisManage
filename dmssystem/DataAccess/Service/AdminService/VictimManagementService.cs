@@ -32,6 +32,8 @@ namespace DataAccess.Service.AdminService
         //Gender = v.Gender,
         ContactNumber = v.ContactNumber,
         Email = v.Email,
+        LocationId = v.LocationId,
+        DisasterId = v.DisasterId,
         //PPSizePhoto = v.PPSizePhoto,
         //CitizenshipNumber = v.CitizenshipNumber,
         //NIDNumber = v.NIDNumber,
