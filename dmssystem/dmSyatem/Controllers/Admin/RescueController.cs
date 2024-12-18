@@ -1,4 +1,5 @@
-﻿using DataAccess.Data;
+﻿using System.Linq;
+using DataAccess.Data;
 using DataAccess.Service.AdminInterface;
 using DataAccess.Service.AdminService;
 using Microsoft.AspNetCore.Mvc;
@@ -76,25 +77,104 @@ namespace dmSyatem.Controllers.Admin
 
 		public IActionResult Edit(Guid id)
 		{
-			ViewBag.AvailableVolunteers = _context.volunteers.Where(x => x.isactive == true).ToList();
+            //var selectedvol = _context.rescueTeams.Where(x => x.Id == id).Select(x=>x.se);
+			ViewBag.AvailableVolunteers = _context.volunteers.Where(x => x.RescueTeamId == id || x.isactive).ToList();
+			//ViewBag.AvailableVolunteers = _context.volunteers.Where(x => x.isactive == true).ToList();
 			ViewBag.location = _context.provinces.ToList();
+
             RescueTeam rescueTeam = _rescueTeamService.GetTeamById(id);
-            return View(rescueTeam);
+			//ViewBag.SelectedVolunteerIds = rescueTeam.Volunteers.Select(v => v.Id).ToList();
+			return View(rescueTeam);
 		}
 
 
 
+
+		//[HttpPost]
+		//public IActionResult Edit(RescueTeam rescueTeam)
+		//{
+		//          // _context.rescueTeams.Where(x => x.Id == rescueTeam.Id).Select(x => x.SelectedVolunteerIds).ToList();
+		//          var existingRescueTeam = _context.volunteers.Where(x => rescueTeam.Id == x.RescueTeamId).Select(x=>x.Id).ToList();
+		//          var ExistingSelectedVolunteer = _context.rescueTeams.Where(x => x.Id == rescueTeam.Id).Select(x => x.SelectedVolunteerIds).ToList();
+
+		//          foreach(var item in existingRescueTeam)
+		//          {
+		//              if(!rescueTeam.SelectedVolunteerIds.Contains(item)){
+		//                  var vol =_context.volunteers.Where(x => x.Id == item).FirstOrDefault();
+		//                  vol.isactive = true;
+		//                  vol.RescueTeamId = null;
+		//                  _context.volunteers.Update(vol);
+		//                  _context.SaveChanges();
+		//              }
+		//          }
+
+		//	foreach (var volunteerId in rescueTeam.SelectedVolunteerIds)
+		//	{
+		//		var volunteer = _context.volunteers.Find(volunteerId);
+
+		//		if (volunteer != null)
+		//		{
+
+		//			rescueTeam.isactive = true;
+		//			rescueTeam.Volunteers.Add(volunteer);
+		//		}
+		//		volunteer.isactive = false;
+		//	}
+
+		//          _context.rescueTeams.Update(rescueTeam);
+
+		//	_context.SaveChanges();
+
+
+		//	//_rescueTeamService.EditRescueTeam(rescueTeam);
+		//	return RedirectToAction("Index");
+
+		//}
 
 		[HttpPost]
 		public IActionResult Edit(RescueTeam rescueTeam)
 		{
-			if (ModelState.IsValid)
+			// Fetch the existing volunteers assigned to the Rescue Team
+			var existingVolunteerIds = _context.volunteers
+											   .Where(v => v.RescueTeamId == rescueTeam.Id)
+											   .Select(v => v.Id)
+											   .ToList();
+
+			// 1. Mark volunteers as inactive and remove their RescueTeamId if they're no longer assigned
+			var volunteersToDeactivate = _context.volunteers
+												 .Where(v => existingVolunteerIds.Contains(v.Id) && !rescueTeam.SelectedVolunteerIds.Contains(v.Id))
+												 .ToList();
+
+			foreach (var volunteer in volunteersToDeactivate)
 			{
-				_rescueTeamService.EditRescueTeam(rescueTeam);
-				return RedirectToAction("Index");
+				volunteer.isactive = true;  // Set them as active again (because they're no longer assigned)
+				volunteer.RescueTeamId = null; // Remove them from the rescue team
 			}
-			return View();
+
+			// 2. Add new selected volunteers to the rescue team and mark them as active
+			var volunteersToAdd = _context.volunteers
+										  .Where(v => rescueTeam.SelectedVolunteerIds.Contains(v.Id) && !existingVolunteerIds.Contains(v.Id))
+										  .ToList();
+
+			foreach (var volunteer in volunteersToAdd)
+			{
+				volunteer.isactive = false; // Mark them as inactive since they are now assigned to a rescue team
+				rescueTeam.Volunteers.Add(volunteer); // Add them to the rescue team
+			}
+
+			// Ensure the rescue team itself is active
+			rescueTeam.isactive = true;
+
+			// 3. Update the RescueTeam record in the database
+			_context.rescueTeams.Update(rescueTeam);
+
+			// 4. Save all changes to the database in one transaction
+			_context.SaveChanges();
+
+			// Redirect to the Index page after saving the changes
+			return RedirectToAction("Index");
 		}
+
 
 
 		public async Task<IActionResult> Delete(RescueTeam RescueTeam)

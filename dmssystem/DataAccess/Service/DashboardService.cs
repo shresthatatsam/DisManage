@@ -59,7 +59,7 @@ namespace DataAccess.Service
 
         public List<Victim> recentDisaster()
         {
-            var data = _context.Victims
+            var data = _context.Victims.Where(x=>x.LocationId != Guid.Empty && x.DisasterId !=null)
                 .Select(x => new Victim
                 {
                     Id = x.Id,
@@ -126,6 +126,8 @@ namespace DataAccess.Service
         {
             Id = v.Id,
             Name = v.Name,
+            PassportNumber = v.PassportNumber,
+            Nationality=v.Nationality,
             Secret_Number = v.Secret_Number,
             Age = v.Age,
             Gender = v.Gender,

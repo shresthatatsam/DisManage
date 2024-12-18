@@ -28,7 +28,14 @@
                         <td>@disaster.created_at</td>
                         <td>@(disaster.isActive ? "Ongoing" : "Resolved")</td>
                         <td>
-                            <a asp-controller="Dashboard" asp-action="Details" asp-route-id="@disaster.Id" class="btn btn-primary btn-sm">हेर्नुहोस्</a>
+                            @{
+                                if(disaster.LocationId!=Guid.Empty && disaster.DisasterId != null)
+                                {
+                                    <a asp-controller="Dashboard" asp-action="Details" asp-route-id="@disaster.Id" class="btn btn-primary btn-sm">हेर्नुहोस्</a>
+                                    
+                                }
+                                
+                            }
                             <a asp-controller="Victim" asp-action="Edit" asp-route-id="@disaster.Id" class="btn btn-secondary btn-sm"> सम्पादन गर्नुहोस्</a>
                             @* <a asp-controller="Victim" asp-action="Delete" asp-route-id="@disaster.Id" class="btn btn-danger btn-sm">मेट्नुहोस्</a> *@
                             <form action="@Url.Action("Delete", "Victim", new { id = disaster.Id })" method="post" style="display:inline;">

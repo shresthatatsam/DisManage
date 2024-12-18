@@ -36,7 +36,7 @@ namespace DataAccess.Service.AdminService
             return _context.volunteers.Where(v => v.provinceId == null).ToList(); // Assuming available means not assigned
         }
 
-        public RescueTeam GetTeamById(Guid teamId)
+        public RescueTeam GetTeamById(Guid teamId) 
         {
             return _context.rescueTeams.Include(t => t.Volunteers).FirstOrDefault(t => t.Id == teamId);
         }

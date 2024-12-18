@@ -19,5 +19,8 @@ namespace Models
         public Guid? provinceId { get; set; }
         public province? province { get; set; }
 
-    }
+        public Guid? RescueTeamId { get; set; }
+		public RescueTeam? rescueTeam { get; set; }
+
+	}
 }

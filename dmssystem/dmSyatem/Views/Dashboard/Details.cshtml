@@ -35,49 +35,70 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label for="contactNumber">सम्पर्क नम्बर:</label>
-					<input type="tel" class="numb" id="contactNumber" asp-for="ContactNumber" readonly> 
+					<input type="text" class="form-control numb" id="contactNumber" asp-for="ContactNumber" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-3">
 				<div class="form-group">
 					<label for="Email">इमेल:</label>
-					<input type="tel" class="form-control" id="Email" asp-for="Email" readonly>
+					<input type="text" class="form-control" id="Email" asp-for="Email" readonly>
 				</div>
 			</div>
-
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="Citizenship Number">नागरिकता नम्बर:</label>
-					<input type="tel" class="form-control" id="CitizenshipNumber" asp-for="CitizenshipNumber" readonly>
+					<label for="Nationality">Nationality:</label>
+					<input type="text" class="form-control" id="Nationality" asp-for="Nationality" readonly>
 				</div>
 			</div>
+			@{
+				if (@Model.Nationality == "nepali")
+				{
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="Citizenship Number">नागरिकता नम्बर:</label>
+							<input type="text" class="form-control" id="CitizenshipNumber" asp-for="CitizenshipNumber" readonly>
+						</div>
+					</div>
 
-			<div class="col-md-2">
-				<div class="form-group">
-					<label for="NIDNumber">एनआईडी नम्बर:</label>
-					<input type="tel" class="form-control" id="NIDNumber" asp-for="NIDNumber" readonly>
-				</div>
-			</div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<label for="NIDNumber">एनआईडी नम्बर:</label>
+							<input type="text" class="form-control" id="NIDNumber" asp-for="NIDNumber" readonly>
+						</div>
+					</div>
+				}
+				else
+				{
+					<div class="col-md-2">
+						<div class="form-group">
+							<label for="NIDNumber">Passport Number:</label>
+							<input type="text" class="form-control" id="passport" asp-for="PassportNumber" readonly>
+						</div>
+					</div>
+				}
+			}
+
+		
 
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="FatherName">बुबाको नाम:</label>
-					<input type="tel" class="form-control" id="FatherName" asp-for="FatherName" readonly>
+					<input type="text" class="form-control" id="FatherName" asp-for="FatherName" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="MotherName">आमाको नाम:</label>
-					<input type="tel" class="form-control" id="MotherName" asp-for="MotherName" readonly>
+					<input type="text" class="form-control" id="MotherName" asp-for="MotherName" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="GrandFatherName">हजुरबुबाको नाम:</label>
-					<input type="tel" class="form-control" id="GrandFatherName" asp-for="GrandFatherName" readonly>
+					<input type="text" class="form-control" id="GrandFatherName" asp-for="GrandFatherName" readonly>
 				</div>
 			</div>
 
@@ -254,7 +275,7 @@
 		
 	}
 	window.onafterprint = function () {
-		alert("hit");
+	
 		// Show the header and button after print dialog closes (either canceled or printed)
 		document.querySelectorAll('header, .print-btn').forEach(el => el.style.display = 'block');
 

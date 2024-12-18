@@ -5,10 +5,11 @@
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="Secret_Number">Secret_Number:</label>
+					<label for="Secret_Number">गुप्त नम्बर:</label>
 					<input type="text" class="form-control" id="Secret_Number" asp-for="Secret_Number" readonly>
 				</div>
 			</div>
+
 			<div class="col-md-3">
 				<div class="form-group">
 					<label for="name">नाम:</label>
@@ -34,49 +35,70 @@
 			<div class="col-md-3">
 				<div class="form-group">
 					<label for="contactNumber">सम्पर्क नम्बर:</label>
-					<input type="tel" class="form-control" id="contactNumber" asp-for="ContactNumber" readonly>
+					<input type="text" class="form-control numb" id="contactNumber" asp-for="ContactNumber" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-3">
 				<div class="form-group">
 					<label for="Email">इमेल:</label>
-					<input type="tel" class="form-control" id="Email" asp-for="Email" readonly>
+					<input type="text" class="form-control" id="Email" asp-for="Email" readonly>
 				</div>
 			</div>
-
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="Citizenship Number">नागरिकता नम्बर:</label>
-					<input type="tel" class="form-control" id="CitizenshipNumber" asp-for="CitizenshipNumber" readonly>
+					<label for="Nationality">Nationality:</label>
+					<input type="text" class="form-control" id="Nationality" asp-for="Nationality" readonly>
 				</div>
 			</div>
+			@{
+				if (@Model.Nationality == "nepali")
+				{
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="Citizenship Number">नागरिकता नम्बर:</label>
+							<input type="text" class="form-control" id="CitizenshipNumber" asp-for="CitizenshipNumber" readonly>
+						</div>
+					</div>
 
-			<div class="col-md-2">
-				<div class="form-group">
-					<label for="NIDNumber">एनआईडी नम्बर:</label>
-					<input type="tel" class="form-control" id="NIDNumber" asp-for="NIDNumber" readonly>
-				</div>
-			</div>
+					<div class="col-md-2">
+						<div class="form-group">
+							<label for="NIDNumber">एनआईडी नम्बर:</label>
+							<input type="text" class="form-control" id="NIDNumber" asp-for="NIDNumber" readonly>
+						</div>
+					</div>
+				}
+				else
+				{
+					<div class="col-md-2">
+						<div class="form-group">
+							<label for="NIDNumber">Passport Number:</label>
+							<input type="text" class="form-control" id="passport" asp-for="PassportNumber" readonly>
+						</div>
+					</div>
+				}
+			}
+
+
 
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="FatherName">बुबाको नाम:</label>
-					<input type="tel" class="form-control" id="FatherName" asp-for="FatherName" readonly>
+					<input type="text" class="form-control" id="FatherName" asp-for="FatherName" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="MotherName">आमाको नाम:</label>
-					<input type="tel" class="form-control" id="MotherName" asp-for="MotherName" readonly>
+					<input type="text" class="form-control" id="MotherName" asp-for="MotherName" readonly>
 				</div>
 			</div>
 
 			<div class="col-md-2">
 				<div class="form-group">
 					<label for="GrandFatherName">हजुरबुबाको नाम:</label>
-					<input type="tel" class="form-control" id="GrandFatherName" asp-for="GrandFatherName" readonly>
+					<input type="text" class="form-control" id="GrandFatherName" asp-for="GrandFatherName" readonly>
 				</div>
 			</div>
 
@@ -90,7 +112,7 @@
 					}
 					else
 					{
-						<p>कुनै प्रोफाइल फोटो उपलब्ध छैन ।</p>
+						<p>प्रोफाइल छवि उपलब्ध छैन</p>
 					}
 				</div>
 			</div>
@@ -102,10 +124,10 @@
 	</fieldset>
 
 	<fieldset class="border p-4 mb-2 rounded shadow">
-		<legend class="w-auto font-weight-bold text-uppercase"><b><u> विपत्तिको सूचना</u></b></legend>
+		<legend class="w-auto font-weight-bold text-uppercase"><b><u> विपद् सूचना</u></b></legend>
 
 		<div class="row">
-		
+
 
 			<div class="col-md-3">
 				<div class="form-group">
@@ -120,10 +142,10 @@
 				</div>
 			</div>
 			@* <div class="col-md-6">
-				<div class="form-group">
-					<label for="dateOccured">Date Occurred:</label>
-					<input type="date" class="form-control" id="dateOccured" asp-for="created_at" readonly>
-				</div>
+			<div class="form-group">
+			<label for="dateOccured">Date Occurred:</label>
+			<input type="date" class="form-control" id="dateOccured" asp-for="created_at" readonly>
+			</div>
 			</div> *@
 		</div>
 
@@ -133,7 +155,7 @@
 	</fieldset>
 
 	<fieldset class="border p-4 mb-2 rounded shadow">
-		<legend class="w-auto font-weight-bold text-uppercase"><b><u> स्थानको जानकारी </u></b></legend>
+		<legend class="w-auto font-weight-bold text-uppercase"><b><u> स्थान सूचना </u></b></legend>
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -168,7 +190,7 @@
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
-					<label for="Tempprovince"> अस्थायी प्रदेश:</label>
+					<label for="Tempprovince">अस्थायी प्रदेश:</label>
 					<input type="text" class="form-control" id="Tempprovince" asp-for="Location.TemporaryProvince" readonly>
 				</div>
 			</div>
@@ -201,11 +223,11 @@
 	</fieldset>
 
 	<fieldset class="border p-4 mb-2 rounded shadow">
-		<legend class="w-auto font-weight-bold text-uppercase"><b><u> फोटोको जानकारी </u></b></legend>
+		<legend class="w-auto font-weight-bold text-uppercase"><b><u> फोटो सूचना </u></b></legend>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="image-gallery">
-					<h3>Uploaded Photos:</h3>
+					<h3>अपलोड गरिएका फोटोहरू:</h3>
 					<div id="imagePreviewContainer" class="d-flex flex-wrap">
 						@if (Model.Images != null && Model.Images.Any())
 						{
@@ -218,23 +240,23 @@
 						}
 						else
 						{
-							<p>कुनै फोटो अपलोड गरिएको छैन ।</p>
+							<p>कुनै छवि अपलोड गरिएको छैन ।</p>
 						}
 					</div>
 				</div>
 			</div>
-			 <div class="col-md-12">
+			<div class="col-md-12">
 				<div class="form-group">
 					<label for="Description">विवरण:</label>
 					<textarea class="form-control" id="description" asp-for="Disaster.Description" rows="4" readonly></textarea>
 				</div>
-			</div> 
+			</div>
 		</div>
 
 
 	</fieldset>
 
-	<button type="button" class="btn btn-primary" onclick="printPage()">प्रिन्ट पृष्ठ</button>
+	<button type="button" class="btn btn-primary print-btn" onclick="printPage()">प्रिन्ट पृष्ठ</button>
 </form>
 
 
@@ -253,7 +275,7 @@
 
 	}
 	window.onafterprint = function () {
-		
+
 		// Show the header and button after print dialog closes (either canceled or printed)
 		document.querySelectorAll('header, .print-btn').forEach(el => el.style.display = 'block');
 
